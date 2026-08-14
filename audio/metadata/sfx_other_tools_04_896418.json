@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_tools_04_896418",
+  "title": "Tools 04",
+  "file": "sfx/other/tools_04.ogg",
+  "url": "/audio/sfx/other/tools_04.ogg",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 19557,
+  "format": "ogg",
+  "sha256": "896418a29611907ab9ab96aa69748ffd829eaae8104ccecdf4f22c4ff05d87bb",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\tools_04.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786668877998
+}

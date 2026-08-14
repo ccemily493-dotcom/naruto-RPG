@@ -1,0 +1,32 @@
+{
+  "id": "sfx_metal_spring_08_443216",
+  "title": "Spring 08",
+  "file": "sfx/metal/spring_08.ogg",
+  "url": "/audio/sfx/metal/spring_08.ogg",
+  "type": "sfx",
+  "category": "metal",
+  "tags": [
+    "metal",
+    "weapon",
+    "slash"
+  ],
+  "duration": 0,
+  "fileSize": 64819,
+  "format": "ogg",
+  "sha256": "443216dab2471c373615a81c11c232270f55779a2d8beae75e504b820a7883b0",
+  "loopable": false,
+  "intensity": 0.75,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\spring_08.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668877681
+}

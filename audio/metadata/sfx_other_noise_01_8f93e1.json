@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_noise_01_8f93e1",
+  "title": "Noise 01",
+  "file": "sfx/other/noise_01.ogg",
+  "url": "/audio/sfx/other/noise_01.ogg",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 33713,
+  "format": "ogg",
+  "sha256": "8f93e11f6b95faf643c0a8869d1bf0e6f29073adb12416e99aa92aa6a2f4e8b8",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\noise_01.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786668876620
+}

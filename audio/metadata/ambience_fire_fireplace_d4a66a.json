@@ -1,0 +1,32 @@
+{
+  "id": "ambience_fire_fireplace_d4a66a",
+  "title": "Fireplace",
+  "file": "ambience/fire/fireplace.ogg",
+  "url": "/audio/ambience/fire/fireplace.ogg",
+  "type": "ambience",
+  "category": "fire",
+  "tags": [
+    "fire",
+    "campfire",
+    "heat"
+  ],
+  "duration": 0,
+  "fileSize": 2292050,
+  "format": "ogg",
+  "sha256": "d4a66a650c48ae83f60a8608c2fd4a58f99841e0b254c84f66c850fddbff6d40",
+  "loopable": true,
+  "intensity": 0.4,
+  "source": {
+    "source_repository": "https://github.com/Muges/ambientsounds",
+    "source_file": "fireplace.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero 1.0 (CC0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786670838706
+}

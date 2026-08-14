@@ -1,0 +1,32 @@
+{
+  "id": "sfx_impacts_wood_hit_03_25d4e9",
+  "title": "Wood Hit 03",
+  "file": "sfx/impacts/wood_hit_03.ogg",
+  "url": "/audio/sfx/impacts/wood_hit_03.ogg",
+  "type": "sfx",
+  "category": "impacts",
+  "tags": [
+    "impact",
+    "hit",
+    "combat"
+  ],
+  "duration": 0,
+  "fileSize": 27096,
+  "format": "ogg",
+  "sha256": "25d4e9a0f4683cdf01e39341f9078782711c6452f8810ad134153668136b6dfd",
+  "loopable": false,
+  "intensity": 0.8,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-wood-metal-SFX\\wood_hit_03.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668881060
+}

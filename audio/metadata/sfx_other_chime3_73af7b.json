@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_chime3_73af7b",
+  "title": "Chime3",
+  "file": "sfx/other/chime3.mp3",
+  "url": "/audio/sfx/other/chime3.mp3",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 11302,
+  "format": "mp3",
+  "sha256": "73af7bbceedc4e8c2712d30a0e5ab50501eb967cb6d9da0d0a38e4d2a8387486",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\chime3.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786670832006
+}

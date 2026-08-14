@@ -1,0 +1,31 @@
+{
+  "id": "sfx_water_splash1_47ceee",
+  "title": "Splash1",
+  "file": "sfx/water/splash1.mp3",
+  "url": "/audio/sfx/water/splash1.mp3",
+  "type": "sfx",
+  "category": "water",
+  "tags": [
+    "water",
+    "splash"
+  ],
+  "duration": 0,
+  "fileSize": 10974,
+  "format": "mp3",
+  "sha256": "47ceeeebe2b29c80ef4297826a0cff3c263b8f881595b11a64ab6273a7276955",
+  "loopable": false,
+  "intensity": 0.6,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\splash1.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786670837180
+}

@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_weird_01_381cd5",
+  "title": "Weird 01",
+  "file": "sfx/other/weird_01.ogg",
+  "url": "/audio/sfx/other/weird_01.ogg",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 21898,
+  "format": "ogg",
+  "sha256": "381cd59ba001f6f1d2b41c43c3dd7258ebaa1dd2737379562cf734ecfa63818f",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\weird_01.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786668878063
+}

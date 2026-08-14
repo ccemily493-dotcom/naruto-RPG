@@ -1,0 +1,32 @@
+{
+  "id": "sfx_wood_wooden_01_961763",
+  "title": "Wooden 01",
+  "file": "sfx/wood/wooden_01.ogg",
+  "url": "/audio/sfx/wood/wooden_01.ogg",
+  "type": "sfx",
+  "category": "wood",
+  "tags": [
+    "wood",
+    "crack",
+    "nature"
+  ],
+  "duration": 0,
+  "fileSize": 14983,
+  "format": "ogg",
+  "sha256": "96176358f9bea521a84c97a50ce416016892eaba2c53825f0862bb4bb844b867",
+  "loopable": false,
+  "intensity": 0.7,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\wooden_01.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668878257
+}

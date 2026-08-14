@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_cannon_03_c3690a",
+  "title": "Cannon 03",
+  "file": "sfx/other/cannon_03.ogg",
+  "url": "/audio/sfx/other/cannon_03.ogg",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 1,
+  "fileSize": 38818,
+  "format": "ogg",
+  "sha256": "c3690a013befc16be1432e6fe62422db71c7b606980ddfe62429e864c5caf1d2",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "25-CC0-bang-sfx/cannon_03.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero 1.0 (CC0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786666565303
+}

@@ -1,0 +1,32 @@
+{
+  "id": "sfx_movement_slide4_364287",
+  "title": "Slide4",
+  "file": "sfx/movement/slide4.mp3",
+  "url": "/audio/sfx/movement/slide4.mp3",
+  "type": "sfx",
+  "category": "movement",
+  "tags": [
+    "movement",
+    "footsteps",
+    "motion"
+  ],
+  "duration": 0,
+  "fileSize": 34737,
+  "format": "mp3",
+  "sha256": "364287b78955fc0bb5dcc860cb4cf8aacbb29a222d3d21a1215bbbd93d2c1745",
+  "loopable": false,
+  "intensity": 0.6,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\slide4.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786670836951
+}

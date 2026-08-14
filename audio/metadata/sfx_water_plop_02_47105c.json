@@ -1,0 +1,31 @@
+{
+  "id": "sfx_water_plop_02_47105c",
+  "title": "Plop 02",
+  "file": "sfx/water/plop_02.ogg",
+  "url": "/audio/sfx/water/plop_02.ogg",
+  "type": "sfx",
+  "category": "water",
+  "tags": [
+    "water",
+    "splash"
+  ],
+  "duration": 0,
+  "fileSize": 27849,
+  "format": "ogg",
+  "sha256": "47105c127e4a8cf347280ed2e06a79588860aeb2e3d356b78e6fc081ae9ec6b7",
+  "loopable": false,
+  "intensity": 0.6,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\plop_02.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668877046
+}

@@ -1,0 +1,33 @@
+{
+  "id": "ambience_storm_heavy-rain_e21cc0",
+  "title": "Heavy Rain",
+  "file": "ambience/storm/heavy-rain.ogg",
+  "url": "/audio/ambience/storm/heavy-rain.ogg",
+  "type": "ambience",
+  "category": "storm",
+  "tags": [
+    "storm",
+    "thunder",
+    "rain",
+    "lightning"
+  ],
+  "duration": 0,
+  "fileSize": 1828510,
+  "format": "ogg",
+  "sha256": "e21cc0d779e7d34732f5c35f526802cc7e2ddbb5b8fdd551e65fa7ff9284660c",
+  "loopable": true,
+  "intensity": 0.75,
+  "source": {
+    "source_repository": "https://github.com/Muges/ambientsounds",
+    "source_file": "heavy-rain.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero 1.0 (CC0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668881247
+}

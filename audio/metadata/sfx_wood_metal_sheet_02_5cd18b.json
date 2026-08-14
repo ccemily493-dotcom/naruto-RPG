@@ -1,0 +1,32 @@
+{
+  "id": "sfx_wood_metal_sheet_02_5cd18b",
+  "title": "Metal Sheet 02",
+  "file": "sfx/wood/metal_sheet_02.ogg",
+  "url": "/audio/sfx/wood/metal_sheet_02.ogg",
+  "type": "sfx",
+  "category": "wood",
+  "tags": [
+    "wood",
+    "crack",
+    "nature"
+  ],
+  "duration": 0,
+  "fileSize": 33855,
+  "format": "ogg",
+  "sha256": "5cd18bd5460f6b3854038e239ec5a9cddf681fb3f1ca76f07a99e6b6c7aef043",
+  "loopable": false,
+  "intensity": 0.7,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-wood-metal-SFX\\metal_sheet_02.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668879067
+}

@@ -1,0 +1,32 @@
+{
+  "id": "sfx_wood_misc_12_959d6d",
+  "title": "Misc 12",
+  "file": "sfx/wood/misc_12.ogg",
+  "url": "/audio/sfx/wood/misc_12.ogg",
+  "type": "sfx",
+  "category": "wood",
+  "tags": [
+    "wood",
+    "crack",
+    "nature"
+  ],
+  "duration": 0,
+  "fileSize": 26224,
+  "format": "ogg",
+  "sha256": "959d6d52d47a8ddeab269622403ac207e69f87c29e9db45ffc204a59c1acb603",
+  "loopable": false,
+  "intensity": 0.7,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-wood-metal-SFX\\misc_12.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668879699
+}

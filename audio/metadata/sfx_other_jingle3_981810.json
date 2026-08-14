@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_jingle3_981810",
+  "title": "Jingle3",
+  "file": "sfx/other/jingle3.mp3",
+  "url": "/audio/sfx/other/jingle3.mp3",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 206977,
+  "format": "mp3",
+  "sha256": "9818105efd723216b32cd148a5dc754f07b8a7b65dc0a9bed5c864e0f8b5ed05",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\jingle3.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786670834331
+}

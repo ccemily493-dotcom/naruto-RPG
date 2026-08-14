@@ -1,0 +1,32 @@
+{
+  "id": "sfx_movement_whoosh2_04d899",
+  "title": "Whoosh2",
+  "file": "sfx/movement/whoosh2.mp3",
+  "url": "/audio/sfx/movement/whoosh2.mp3",
+  "type": "sfx",
+  "category": "movement",
+  "tags": [
+    "movement",
+    "footsteps",
+    "motion"
+  ],
+  "duration": 0,
+  "fileSize": 38542,
+  "format": "mp3",
+  "sha256": "04d899395d05c990f353aa773e6edfa1a8472679dda239fc499895dabf12f402",
+  "loopable": false,
+  "intensity": 0.6,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\whoosh2.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786670838006
+}

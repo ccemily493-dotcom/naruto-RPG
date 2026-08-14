@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_other_03_a420b8",
+  "title": "Other 03",
+  "file": "sfx/other/other_03.ogg",
+  "url": "/audio/sfx/other/other_03.ogg",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 37110,
+  "format": "ogg",
+  "sha256": "a420b8d2fc68c2c276835000efc0bd47528634db1407436e36e70c82cdb31cf0",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\other_03.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786668876751
+}

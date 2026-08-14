@@ -1,0 +1,32 @@
+{
+  "id": "sfx_wood_tools_10_8f5066",
+  "title": "Tools 10",
+  "file": "sfx/wood/tools_10.ogg",
+  "url": "/audio/sfx/wood/tools_10.ogg",
+  "type": "sfx",
+  "category": "wood",
+  "tags": [
+    "wood",
+    "crack",
+    "nature"
+  ],
+  "duration": 0,
+  "fileSize": 38315,
+  "format": "ogg",
+  "sha256": "8f506699c2f4cf96737057f87d1496b802ba1fece7df662cbac82dc526843d88",
+  "loopable": false,
+  "intensity": 0.7,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-wood-metal-SFX\\tools_10.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668880236
+}

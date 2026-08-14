@@ -1,0 +1,32 @@
+{
+  "id": "sfx_movement_whoosh4_803f44",
+  "title": "Whoosh4",
+  "file": "sfx/movement/whoosh4.mp3",
+  "url": "/audio/sfx/movement/whoosh4.mp3",
+  "type": "sfx",
+  "category": "movement",
+  "tags": [
+    "movement",
+    "footsteps",
+    "motion"
+  ],
+  "duration": 0,
+  "fileSize": 7918,
+  "format": "mp3",
+  "sha256": "803f442ab9a6192b6102a1f493d9135120abec3085bf6de47eaae184810eac25",
+  "loopable": false,
+  "intensity": 0.6,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\whoosh4.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786670838125
+}

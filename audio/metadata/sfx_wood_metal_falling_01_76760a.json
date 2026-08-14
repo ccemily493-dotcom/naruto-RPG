@@ -1,0 +1,32 @@
+{
+  "id": "sfx_wood_metal_falling_01_76760a",
+  "title": "Metal Falling 01",
+  "file": "sfx/wood/metal_falling_01.ogg",
+  "url": "/audio/sfx/wood/metal_falling_01.ogg",
+  "type": "sfx",
+  "category": "wood",
+  "tags": [
+    "wood",
+    "crack",
+    "nature"
+  ],
+  "duration": 0,
+  "fileSize": 104252,
+  "format": "ogg",
+  "sha256": "76760ae4ac0d3318cf965ca083b5faf996c02e3f54661021921e57c2d9787c67",
+  "loopable": false,
+  "intensity": 0.7,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-wood-metal-SFX\\metal_falling_01.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668878775
+}

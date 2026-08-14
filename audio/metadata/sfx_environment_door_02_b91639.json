@@ -1,0 +1,31 @@
+{
+  "id": "sfx_environment_door_02_b91639",
+  "title": "Door 02",
+  "file": "sfx/environment/door_02.ogg",
+  "url": "/audio/sfx/environment/door_02.ogg",
+  "type": "sfx",
+  "category": "environment",
+  "tags": [
+    "environment",
+    "prop"
+  ],
+  "duration": 0,
+  "fileSize": 151329,
+  "format": "ogg",
+  "sha256": "b9163918a05506a6dc82aebf3cee5d591c5d0a0cca87a4f798217f43987e902a",
+  "loopable": false,
+  "intensity": 0.55,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\door_02.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668875594
+}

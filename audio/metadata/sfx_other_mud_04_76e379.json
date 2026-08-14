@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_mud_04_76e379",
+  "title": "Mud 04",
+  "file": "sfx/other/mud_04.ogg",
+  "url": "/audio/sfx/other/mud_04.ogg",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 1,
+  "fileSize": 33744,
+  "format": "ogg",
+  "sha256": "76e379bcb99931673c6cd8ecbdf8ec8d44e1bb843574b2800c0bbbb2b5224153",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "25-CC0-mud-sfx/mud_04.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero 1.0 (CC0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786666566701
+}

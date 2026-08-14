@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_key_open_01_4d4bb3",
+  "title": "Key Open 01",
+  "file": "sfx/other/key_open_01.ogg",
+  "url": "/audio/sfx/other/key_open_01.ogg",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 37591,
+  "format": "ogg",
+  "sha256": "4d4bb33d4b36e675d6d45f4c7fd134a935082fc0b81492af961e46762cd9a3a3",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\key_open_01.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786668876084
+}

@@ -1,0 +1,31 @@
+{
+  "id": "sfx_environment_microwave_door_open_4d1cb8",
+  "title": "Microwave Door Open",
+  "file": "sfx/environment/microwave_door_open.ogg",
+  "url": "/audio/sfx/environment/microwave_door_open.ogg",
+  "type": "sfx",
+  "category": "environment",
+  "tags": [
+    "environment",
+    "prop"
+  ],
+  "duration": 0,
+  "fileSize": 24471,
+  "format": "ogg",
+  "sha256": "4d1cb8fe690c1a5733a8a7eafb27c312d8a17669cdabf1d62c9239bba5cab473",
+  "loopable": false,
+  "intensity": 0.55,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\microwave_door_open.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668876593
+}

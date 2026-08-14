@@ -1,0 +1,31 @@
+{
+  "id": "sfx_water_splash_01_593866",
+  "title": "Splash 01",
+  "file": "sfx/water/splash_01.ogg",
+  "url": "/audio/sfx/water/splash_01.ogg",
+  "type": "sfx",
+  "category": "water",
+  "tags": [
+    "water",
+    "splash"
+  ],
+  "duration": 0,
+  "fileSize": 45522,
+  "format": "ogg",
+  "sha256": "5938661747ba777dc6e74e7465b08265000346ba32f8eaa2141adc45018fea3f",
+  "loopable": false,
+  "intensity": 0.6,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\splash_01.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668877408
+}

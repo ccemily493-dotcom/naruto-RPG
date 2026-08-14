@@ -1,0 +1,32 @@
+{
+  "id": "sfx_wood_metal_open_01_1123df",
+  "title": "Metal Open 01",
+  "file": "sfx/wood/metal_open_01.ogg",
+  "url": "/audio/sfx/wood/metal_open_01.ogg",
+  "type": "sfx",
+  "category": "wood",
+  "tags": [
+    "wood",
+    "crack",
+    "nature"
+  ],
+  "duration": 0,
+  "fileSize": 76589,
+  "format": "ogg",
+  "sha256": "1123df125c3f25ff99629debefd4f76249c2c670f3e25b377399a6989d36dd64",
+  "loopable": false,
+  "intensity": 0.7,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-wood-metal-SFX\\metal_open_01.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668879004
+}

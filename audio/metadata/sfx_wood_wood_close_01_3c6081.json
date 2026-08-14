@@ -1,0 +1,32 @@
+{
+  "id": "sfx_wood_wood_close_01_3c6081",
+  "title": "Wood Close 01",
+  "file": "sfx/wood/wood_close_01.ogg",
+  "url": "/audio/sfx/wood/wood_close_01.ogg",
+  "type": "sfx",
+  "category": "wood",
+  "tags": [
+    "wood",
+    "crack",
+    "nature"
+  ],
+  "duration": 0,
+  "fileSize": 29720,
+  "format": "ogg",
+  "sha256": "3c6081ac0eff46e18f28a1f2f343bcd3e9c231f3ada2a690f599a68643c28d22",
+  "loopable": false,
+  "intensity": 0.7,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-wood-metal-SFX\\wood_close_01.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668880443
+}

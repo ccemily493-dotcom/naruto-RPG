@@ -1,0 +1,2220 @@
+[
+  {
+    "id": "sfx_kenney_kunai_draw",
+    "file": "/audio/sfx/kenney/kunai_draw.ogg",
+    "title": "Desenvainado de Acero Real (Kenney CC0)",
+    "artist": "Kenney Assets (CC0 1.0)",
+    "category": "sfx",
+    "layer": "action",
+    "events": [
+      "kunai_throw",
+      "knife_slice",
+      "weapon_draw",
+      "metal_clash"
+    ],
+    "materials": [
+      "metal",
+      "steel"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "Sasuke",
+      "Itachi",
+      "Desenvainar katana",
+      "Preparar kunai",
+      "Alerta de combate"
+    ]
+  },
+  {
+    "id": "sfx_kenney_wood_creak",
+    "file": "/audio/sfx/kenney/wood_creak.ogg",
+    "title": "Mokuton / Tensión y Fractura de Madera (Kenney CC0)",
+    "artist": "Kenney Assets (CC0 1.0)",
+    "category": "sfx",
+    "layer": "action",
+    "events": [
+      "wood_growth",
+      "wood_formation",
+      "wood_crack",
+      "mokuton_activation"
+    ],
+    "materials": [
+      "wood",
+      "organic"
+    ],
+    "intensity": "medium",
+    "duration": 2,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "Yamato",
+      "Hashirama",
+      "Jutsu Mokuton",
+      "Crecimiento de raíces",
+      "Trampas de madera"
+    ]
+  },
+  {
+    "id": "sfx_kenney_heavy_impact",
+    "file": "/audio/sfx/kenney/heavy_impact.ogg",
+    "title": "Impacto Contundente Real (Kenney CC0)",
+    "artist": "Kenney Assets (CC0 1.0)",
+    "category": "sfx",
+    "layer": "impact",
+    "events": [
+      "heavy_hit",
+      "wood_impact",
+      "impact_heavy",
+      "weapon_clash"
+    ],
+    "materials": [
+      "metal",
+      "wood",
+      "physical"
+    ],
+    "intensity": "high",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "Naruto",
+      "Kakashi",
+      "Impacto pesado",
+      "Choque de armas",
+      "Golpe directo"
+    ]
+  },
+  {
+    "id": "sfx_kenney_kunai_slice",
+    "file": "/audio/sfx/kenney/kunai_slice.ogg",
+    "title": "Kunai / Tajo de Acero Real (Kenney CC0)",
+    "artist": "Kenney Assets (CC0 1.0)",
+    "category": "sfx",
+    "layer": "action",
+    "events": [
+      "kunai_throw",
+      "knife_slice",
+      "weapon_draw",
+      "metal_clash"
+    ],
+    "materials": [
+      "metal",
+      "steel"
+    ],
+    "intensity": "high",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "Sasuke",
+      "Itachi",
+      "Kakashi",
+      "Ataque con kunai",
+      "Corte de katana",
+      "Lanzamiento de shuriken"
+    ]
+  },
+  {
+    "id": "track_naruto_glued_state",
+    "file": "/audio-files/glued_state.mp3",
+    "title": "Glued State",
+    "artist": "Naruto OST — Toshio Masuda",
+    "category": "combat",
+    "layer": "music",
+    "events": [
+      "track_naruto_glued_state"
+    ],
+    "materials": [],
+    "intensity": "high",
+    "duration": 164,
+    "combat": true,
+    "tags": [
+      "Rin",
+      "Itachi",
+      "Orochimaru",
+      "Sasuke",
+      "Kakashi",
+      "Enfrentamiento estratégico y táctico",
+      "Análisis de recursos y red de tenketsu",
+      "Trampas de Mokuton y sellos",
+      "Posicionamiento táctico y sustitución (Kawarimi)",
+      "Combate planificado y emboscadas"
+    ]
+  },
+  {
+    "id": "track_naruto_nervous",
+    "file": "/audio-files/nervous.mp3",
+    "title": "Nervous",
+    "artist": "Naruto OST — Toshio Masuda",
+    "category": "tension",
+    "layer": "music",
+    "events": [
+      "track_naruto_nervous"
+    ],
+    "materials": [],
+    "intensity": "medium",
+    "duration": 106,
+    "combat": true,
+    "tags": [
+      "Rin",
+      "Orochimaru",
+      "Itachi",
+      "Sasuke",
+      "Tensión previa a un enfrentamiento",
+      "Detección de presencia enemiga",
+      "Peligro inminente",
+      "Silencio antes del ataque",
+      "Acecho en las sombras"
+    ]
+  },
+  {
+    "id": "track_naruto_confrontment",
+    "file": "/audio-files/confrontment.mp3",
+    "title": "Confrontment",
+    "artist": "Naruto OST — Toshio Masuda",
+    "category": "combat",
+    "layer": "music",
+    "events": [
+      "track_naruto_confrontment"
+    ],
+    "materials": [],
+    "intensity": "high",
+    "duration": 162,
+    "combat": true,
+    "tags": [
+      "Rin",
+      "Itachi",
+      "Orochimaru",
+      "Sasuke",
+      "Madara",
+      "Confrontación directa entre personajes importantes",
+      "Aparición del enemigo frente a frente",
+      "Duelo directo",
+      "Inicio del combate frontal",
+      "Percusión de batalla shinobi"
+    ]
+  },
+  {
+    "id": "track_naruto_bad_situation",
+    "file": "/audio-files/bad_situation.mp3",
+    "title": "Bad Situation",
+    "artist": "Naruto OST — Toshio Masuda",
+    "category": "tension",
+    "layer": "music",
+    "events": [
+      "track_naruto_bad_situation"
+    ],
+    "materials": [],
+    "intensity": "high",
+    "duration": 86,
+    "combat": true,
+    "tags": [
+      "Rin",
+      "Itachi",
+      "Sasuke",
+      "Kakashi",
+      "Deterioro grave de la situación",
+      "Posición desfavorable o acorralamiento",
+      "Rin herida o con chakra drenado",
+      "Superioridad aplastante del rival",
+      "Quiebre defensivo"
+    ]
+  },
+  {
+    "id": "track_naruto_survival_examination",
+    "file": "/audio-files/survival_examination.mp3",
+    "title": "Survival Examination",
+    "artist": "Naruto OST — Toshio Masuda",
+    "category": "combat",
+    "layer": "music",
+    "events": [
+      "track_naruto_survival_examination"
+    ],
+    "materials": [],
+    "intensity": "high",
+    "duration": 111,
+    "combat": true,
+    "tags": [
+      "Rin",
+      "Sasuke",
+      "Naruto",
+      "Sakura",
+      "Orochimaru",
+      "Supervivencia en el Bosque de la Muerte",
+      "Persecución prolongada entre ramas",
+      "Entorno hostil activo",
+      "Huida táctica y emboscadas continuas"
+    ]
+  },
+  {
+    "id": "track_naruto_avenger",
+    "file": "/audio-files/avenger.mp3",
+    "title": "Avenger 2 (Clash of Hatred)",
+    "artist": "Naruto OST — Toshio Masuda",
+    "category": "climax",
+    "layer": "music",
+    "events": [
+      "track_naruto_avenger"
+    ],
+    "materials": [],
+    "intensity": "epic",
+    "duration": 105,
+    "combat": true,
+    "tags": [
+      "Sasuke",
+      "Itachi",
+      "Kālī",
+      "Rin",
+      "Clímax de combate y choque violento a muerte",
+      "Liberación de odio y rencor desbordado",
+      "Agresividad máxima y desesperación",
+      "Enfrentamiento fratricida o de alto poder"
+    ]
+  },
+  {
+    "id": "track_naruto_avenger_2",
+    "file": "/audio-files/default/avenger_2.mp3",
+    "title": "Avenger 2 (Clash of Hatred)",
+    "artist": "Naruto OST — Toshio Masuda",
+    "category": "climax",
+    "layer": "music",
+    "events": [
+      "track_naruto_avenger_2"
+    ],
+    "materials": [],
+    "intensity": "epic",
+    "duration": 105,
+    "combat": true,
+    "tags": [
+      "Sasuke",
+      "Itachi",
+      "Kālī",
+      "Rin",
+      "Clímax de combate y choque violento a muerte",
+      "Liberación de odio y rencor desbordado",
+      "Agresividad máxima y desesperación",
+      "Enfrentamiento fratricida o de alto poder"
+    ]
+  },
+  {
+    "id": "track_naruto_orochimaru_theme",
+    "file": "/audio-files/orochimaru_theme.mp3",
+    "title": "Evil / Dark Omen",
+    "artist": "Naruto OST — Toshio Masuda",
+    "category": "tension",
+    "layer": "music",
+    "events": [
+      "track_naruto_orochimaru_theme"
+    ],
+    "materials": [],
+    "intensity": "high",
+    "duration": 248,
+    "combat": true,
+    "tags": [
+      "Orochimaru",
+      "Kālī",
+      "Rin",
+      "Amenazas oscuras y perturbadoras",
+      "Efectos de sellos malditos y experimentos siniestros",
+      "Presencia de sombras hostiles desconocidas"
+    ]
+  },
+  {
+    "id": "track_naruto_sasuke_theme",
+    "file": "/audio-files/sasuke_theme.mp3",
+    "title": "Sasuke - Destiny",
+    "artist": "Naruto OST — Toshio Masuda",
+    "category": "emotional",
+    "layer": "music",
+    "events": [
+      "track_naruto_sasuke_theme"
+    ],
+    "materials": [],
+    "intensity": "high",
+    "duration": 99,
+    "combat": false,
+    "tags": [
+      "Sasuke",
+      "Itachi",
+      "Rin",
+      "Decisión trascendental de Sasuke",
+      "Revelación de verdades del clan y lazos rotos",
+      "Soledad, pesadumbre y destino ineludible",
+      "Despedidas cruciales y encrucijadas morales"
+    ]
+  },
+  {
+    "id": "track_naruto_sasuke_destiny",
+    "file": "/audio-files/sasuke_destiny.mp3",
+    "title": "Sasuke - Destiny",
+    "artist": "Naruto OST — Toshio Masuda",
+    "category": "emotional",
+    "layer": "music",
+    "events": [
+      "track_naruto_sasuke_destiny"
+    ],
+    "materials": [],
+    "intensity": "high",
+    "duration": 170,
+    "combat": false,
+    "tags": [
+      "Sasuke",
+      "Itachi",
+      "Rin",
+      "Conflictos relacionados con Sasuke y su destino",
+      "Decisiones trascendentales de vida o muerte",
+      "Revelaciones familiares Uchiha",
+      "Ruptura de lazos y aislamiento"
+    ]
+  },
+  {
+    "id": "track_naruto_nine_tail_demon_fox",
+    "file": "/audio-files/nine_tail_demon_fox.mp3",
+    "title": "Nine Tail Demon Fox (Kyūbi no Yōko)",
+    "artist": "Naruto OST — Toshio Masuda",
+    "category": "climax",
+    "layer": "music",
+    "events": [
+      "track_naruto_nine_tail_demon_fox"
+    ],
+    "materials": [],
+    "intensity": "epic",
+    "duration": 137,
+    "combat": true,
+    "tags": [
+      "Naruto",
+      "Rin",
+      "Kālī",
+      "Manifestación del chakra rojo del Kyūbi",
+      "Rugido colosal y liberación de manto de chakra",
+      "Pérdida de control y peligro inminente de destrucción masiva",
+      "Clímax de poder de un Jinchūriki"
+    ]
+  },
+  {
+    "id": "track_naruto_evil",
+    "file": "/audio-files/evil.mp3",
+    "title": "Evil",
+    "artist": "Naruto OST — Toshio Masuda",
+    "category": "tension",
+    "layer": "music",
+    "events": [
+      "track_naruto_evil"
+    ],
+    "materials": [],
+    "intensity": "high",
+    "duration": 150,
+    "combat": true,
+    "tags": [
+      "Orochimaru",
+      "Itachi",
+      "Madara",
+      "Rin",
+      "Amenazas oscuras y perturbadoras",
+      "Presencias malévolas y rituales prohibidos",
+      "Sello maldito extendiéndose",
+      "Terror psicológico y oscuridad"
+    ]
+  },
+  {
+    "id": "track_ambient_rin_meditation",
+    "file": "/audio-files/rin_theme_ambient.mp3",
+    "title": "Yūrei no Keimyaku (Meditación & Tenketsu)",
+    "artist": "Música Ambiental Original",
+    "category": "ambient",
+    "layer": "music",
+    "events": [
+      "track_ambient_rin_meditation"
+    ],
+    "materials": [],
+    "intensity": "low",
+    "duration": 210,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "Exploración tranquila",
+      "Meditación de chakra",
+      "Análisis silencioso",
+      "Descanso y reposo",
+      "Viajes cotidianos"
+    ]
+  },
+  {
+    "id": "track_ambient_forest_peace",
+    "file": "/audio-files/forest_peace.mp3",
+    "title": "Susurros del Bosque de Fuego",
+    "artist": "Paisaje Sonoro & Melodía Tradicional",
+    "category": "ambient",
+    "layer": "music",
+    "events": [
+      "track_ambient_forest_peace"
+    ],
+    "materials": [],
+    "intensity": "low",
+    "duration": 240,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "Naruto",
+      "Sasuke",
+      "Sakura",
+      "Kakashi",
+      "Exploración tranquila",
+      "Paseo entre los árboles",
+      "Viajes",
+      "Conversaciones normales",
+      "Descanso en campamento"
+    ]
+  },
+  {
+    "id": "track_ambient_village_morning",
+    "file": "/audio-files/village_peace.mp3",
+    "title": "Vida en Konohagakure",
+    "artist": "Melodía Tradicional Shinobi",
+    "category": "village",
+    "layer": "music",
+    "events": [
+      "track_ambient_village_morning"
+    ],
+    "materials": [],
+    "intensity": "low",
+    "duration": 190,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "Naruto",
+      "Sakura",
+      "Kakashi",
+      "Calles de la aldea",
+      "Ichiraku Ramen",
+      "Conversaciones normales",
+      "Escenas cotidianas",
+      "Academia ninja"
+    ]
+  },
+  {
+    "id": "track_1786669321839_npm71",
+    "file": "/audio-files/default/track_1786669321839_npm71.mp3",
+    "title": "Pista de Audio Importada",
+    "artist": "Naruto OST — Toshio Masuda",
+    "category": "combat",
+    "layer": "music",
+    "events": [
+      "track_1786669321839_npm71"
+    ],
+    "materials": [],
+    "intensity": "high",
+    "duration": 154,
+    "combat": true,
+    "tags": [
+      "Rin",
+      "Combate y tensión"
+    ]
+  },
+  {
+    "id": "sfx_other_alarm1_1b1c4c",
+    "file": "/audio/sfx/other/alarm1.mp3",
+    "title": "Alarm1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_alarm2_d223ef",
+    "file": "/audio/sfx/other/alarm2.mp3",
+    "title": "Alarm2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_alarm3_5391c5",
+    "file": "/audio/sfx/other/alarm3.mp3",
+    "title": "Alarm3",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_alarm4_162017",
+    "file": "/audio/sfx/other/alarm4.mp3",
+    "title": "Alarm4",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_beep1_7691cc",
+    "file": "/audio/sfx/other/beep1.mp3",
+    "title": "Beep1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_beep2_c471b9",
+    "file": "/audio/sfx/other/beep2.mp3",
+    "title": "Beep2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_beep3_bb7175",
+    "file": "/audio/sfx/other/beep3.mp3",
+    "title": "Beep3",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_beep4_6d8a2c",
+    "file": "/audio/sfx/other/beep4.mp3",
+    "title": "Beep4",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_beep5_8d2b71",
+    "file": "/audio/sfx/other/beep5.mp3",
+    "title": "Beep5",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_beep6_c82f1e",
+    "file": "/audio/sfx/other/beep6.mp3",
+    "title": "Beep6",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_bling1_69e5ff",
+    "file": "/audio/sfx/other/bling1.mp3",
+    "title": "Bling1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_bling2_e0d775",
+    "file": "/audio/sfx/other/bling2.mp3",
+    "title": "Bling2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_bling3_d0ac80",
+    "file": "/audio/sfx/other/bling3.mp3",
+    "title": "Bling3",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_bling4_df2945",
+    "file": "/audio/sfx/other/bling4.mp3",
+    "title": "Bling4",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_bling5_afed8f",
+    "file": "/audio/sfx/other/bling5.mp3",
+    "title": "Bling5",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_cannon1_673190",
+    "file": "/audio/sfx/other/cannon1.mp3",
+    "title": "Cannon1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_cannon2_f8416e",
+    "file": "/audio/sfx/other/cannon2.mp3",
+    "title": "Cannon2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_chime1_f99a33",
+    "file": "/audio/sfx/other/chime1.mp3",
+    "title": "Chime1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_chime2_4df19b",
+    "file": "/audio/sfx/other/chime2.mp3",
+    "title": "Chime2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_chime3_73af7b",
+    "file": "/audio/sfx/other/chime3.mp3",
+    "title": "Chime3",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_chime4_9da3f1",
+    "file": "/audio/sfx/other/chime4.mp3",
+    "title": "Chime4",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_chime5_b3be78",
+    "file": "/audio/sfx/other/chime5.mp3",
+    "title": "Chime5",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_click1_0d45bf",
+    "file": "/audio/sfx/other/click1.mp3",
+    "title": "Click1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_click2_63910a",
+    "file": "/audio/sfx/other/click2.mp3",
+    "title": "Click2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_click3_ca7b9d",
+    "file": "/audio/sfx/other/click3.mp3",
+    "title": "Click3",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_click4_71d654",
+    "file": "/audio/sfx/other/click4.mp3",
+    "title": "Click4",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_click5_caa3b3",
+    "file": "/audio/sfx/other/click5.mp3",
+    "title": "Click5",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_click6_bf0378",
+    "file": "/audio/sfx/other/click6.mp3",
+    "title": "Click6",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_click7_43e460",
+    "file": "/audio/sfx/other/click7.mp3",
+    "title": "Click7",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_error1_9543d7",
+    "file": "/audio/sfx/other/error1.mp3",
+    "title": "Error1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_error2_4ded1b",
+    "file": "/audio/sfx/other/error2.mp3",
+    "title": "Error2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_error3_dd016e",
+    "file": "/audio/sfx/other/error3.mp3",
+    "title": "Error3",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_error4_49fd95",
+    "file": "/audio/sfx/other/error4.mp3",
+    "title": "Error4",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_fanfare1_3fc8be",
+    "file": "/audio/sfx/other/fanfare1.mp3",
+    "title": "Fanfare1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_fanfare2_7d015a",
+    "file": "/audio/sfx/other/fanfare2.mp3",
+    "title": "Fanfare2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_jingle1_84c6f5",
+    "file": "/audio/sfx/other/jingle1.mp3",
+    "title": "Jingle1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_jingle2_5e5335",
+    "file": "/audio/sfx/other/jingle2.mp3",
+    "title": "Jingle2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_jingle3_981810",
+    "file": "/audio/sfx/other/jingle3.mp3",
+    "title": "Jingle3",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_laugh1_1107d1",
+    "file": "/audio/sfx/other/laugh1.mp3",
+    "title": "Laugh1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_laugh2_784002",
+    "file": "/audio/sfx/other/laugh2.mp3",
+    "title": "Laugh2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_impacts_punch1_420f44",
+    "file": "/audio/sfx/impacts/punch1.mp3",
+    "title": "Punch1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "impact",
+    "events": [
+      "light_hit",
+      "medium_hit",
+      "heavy_hit",
+      "punch"
+    ],
+    "materials": [
+      "physical",
+      "flesh"
+    ],
+    "intensity": "high",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "impact",
+      "hit",
+      "combat"
+    ]
+  },
+  {
+    "id": "sfx_impacts_punch2_f19f18",
+    "file": "/audio/sfx/impacts/punch2.mp3",
+    "title": "Punch2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "impact",
+    "events": [
+      "light_hit",
+      "medium_hit",
+      "heavy_hit",
+      "punch"
+    ],
+    "materials": [
+      "physical",
+      "flesh"
+    ],
+    "intensity": "high",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "impact",
+      "hit",
+      "combat"
+    ]
+  },
+  {
+    "id": "sfx_impacts_punch3_abe0a7",
+    "file": "/audio/sfx/impacts/punch3.mp3",
+    "title": "Punch3",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "impact",
+    "events": [
+      "light_hit",
+      "medium_hit",
+      "heavy_hit",
+      "punch"
+    ],
+    "materials": [
+      "physical",
+      "flesh"
+    ],
+    "intensity": "high",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "impact",
+      "hit",
+      "combat"
+    ]
+  },
+  {
+    "id": "sfx_other_resonance1_b9d63c",
+    "file": "/audio/sfx/other/resonance1.mp3",
+    "title": "Resonance1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_resonance2_24f53d",
+    "file": "/audio/sfx/other/resonance2.mp3",
+    "title": "Resonance2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_resonance3_9ecec0",
+    "file": "/audio/sfx/other/resonance3.mp3",
+    "title": "Resonance3",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_resonance4_c375b8",
+    "file": "/audio/sfx/other/resonance4.mp3",
+    "title": "Resonance4",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_scale1_a72f42",
+    "file": "/audio/sfx/other/scale1.mp3",
+    "title": "Scale1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_scale2_6f8b53",
+    "file": "/audio/sfx/other/scale2.mp3",
+    "title": "Scale2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_scale3_5b2c43",
+    "file": "/audio/sfx/other/scale3.mp3",
+    "title": "Scale3",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_movement_slide1_9aa2b3",
+    "file": "/audio/sfx/movement/slide1.mp3",
+    "title": "Slide1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "action",
+    "events": [
+      "dash",
+      "whoosh",
+      "body_collapse",
+      "footstep"
+    ],
+    "materials": [
+      "air",
+      "body"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "movement",
+      "footsteps",
+      "motion"
+    ]
+  },
+  {
+    "id": "sfx_movement_slide2_c5de3d",
+    "file": "/audio/sfx/movement/slide2.mp3",
+    "title": "Slide2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "action",
+    "events": [
+      "dash",
+      "whoosh",
+      "body_collapse",
+      "footstep"
+    ],
+    "materials": [
+      "air",
+      "body"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "movement",
+      "footsteps",
+      "motion"
+    ]
+  },
+  {
+    "id": "sfx_movement_slide3_9e8bff",
+    "file": "/audio/sfx/movement/slide3.mp3",
+    "title": "Slide3",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "action",
+    "events": [
+      "dash",
+      "whoosh",
+      "body_collapse",
+      "footstep"
+    ],
+    "materials": [
+      "air",
+      "body"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "movement",
+      "footsteps",
+      "motion"
+    ]
+  },
+  {
+    "id": "sfx_movement_slide4_364287",
+    "file": "/audio/sfx/movement/slide4.mp3",
+    "title": "Slide4",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "action",
+    "events": [
+      "dash",
+      "whoosh",
+      "body_collapse",
+      "footstep"
+    ],
+    "materials": [
+      "air",
+      "body"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "movement",
+      "footsteps",
+      "motion"
+    ]
+  },
+  {
+    "id": "sfx_movement_slide5_84a8a2",
+    "file": "/audio/sfx/movement/slide5.mp3",
+    "title": "Slide5",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "action",
+    "events": [
+      "dash",
+      "whoosh",
+      "body_collapse",
+      "footstep"
+    ],
+    "materials": [
+      "air",
+      "body"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "movement",
+      "footsteps",
+      "motion"
+    ]
+  },
+  {
+    "id": "sfx_movement_slide6_29ea92",
+    "file": "/audio/sfx/movement/slide6.mp3",
+    "title": "Slide6",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "action",
+    "events": [
+      "dash",
+      "whoosh",
+      "body_collapse",
+      "footstep"
+    ],
+    "materials": [
+      "air",
+      "body"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "movement",
+      "footsteps",
+      "motion"
+    ]
+  },
+  {
+    "id": "sfx_water_splash1_47ceee",
+    "file": "/audio/sfx/water/splash1.mp3",
+    "title": "Splash1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "music",
+    "events": [
+      "sfx_water_splash1_47ceee"
+    ],
+    "materials": [],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "water",
+      "splash"
+    ]
+  },
+  {
+    "id": "sfx_water_splash2_cd90c0",
+    "file": "/audio/sfx/water/splash2.mp3",
+    "title": "Splash2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "music",
+    "events": [
+      "sfx_water_splash2_cd90c0"
+    ],
+    "materials": [],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "water",
+      "splash"
+    ]
+  },
+  {
+    "id": "sfx_other_throw1_8e8050",
+    "file": "/audio/sfx/other/throw1.mp3",
+    "title": "Throw1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_throw2_444a48",
+    "file": "/audio/sfx/other/throw2.mp3",
+    "title": "Throw2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_throw3_b66f27",
+    "file": "/audio/sfx/other/throw3.mp3",
+    "title": "Throw3",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_other_throw4_aa8c56",
+    "file": "/audio/sfx/other/throw4.mp3",
+    "title": "Throw4",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "sfx_movement_whoosh1_86bfb2",
+    "file": "/audio/sfx/movement/whoosh1.mp3",
+    "title": "Whoosh1",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "action",
+    "events": [
+      "dash",
+      "whoosh",
+      "body_collapse",
+      "footstep"
+    ],
+    "materials": [
+      "air",
+      "body"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "movement",
+      "footsteps",
+      "motion"
+    ]
+  },
+  {
+    "id": "sfx_movement_whoosh2_04d899",
+    "file": "/audio/sfx/movement/whoosh2.mp3",
+    "title": "Whoosh2",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "action",
+    "events": [
+      "dash",
+      "whoosh",
+      "body_collapse",
+      "footstep"
+    ],
+    "materials": [
+      "air",
+      "body"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "movement",
+      "footsteps",
+      "motion"
+    ]
+  },
+  {
+    "id": "sfx_movement_whoosh3_7425e8",
+    "file": "/audio/sfx/movement/whoosh3.mp3",
+    "title": "Whoosh3",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "action",
+    "events": [
+      "dash",
+      "whoosh",
+      "body_collapse",
+      "footstep"
+    ],
+    "materials": [
+      "air",
+      "body"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "movement",
+      "footsteps",
+      "motion"
+    ]
+  },
+  {
+    "id": "sfx_movement_whoosh4_803f44",
+    "file": "/audio/sfx/movement/whoosh4.mp3",
+    "title": "Whoosh4",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "action",
+    "events": [
+      "dash",
+      "whoosh",
+      "body_collapse",
+      "footstep"
+    ],
+    "materials": [
+      "air",
+      "body"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "movement",
+      "footsteps",
+      "motion"
+    ]
+  },
+  {
+    "id": "sfx_movement_whoosh5_99d1af",
+    "file": "/audio/sfx/movement/whoosh5.mp3",
+    "title": "Whoosh5",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "action",
+    "events": [
+      "dash",
+      "whoosh",
+      "body_collapse",
+      "footstep"
+    ],
+    "materials": [
+      "air",
+      "body"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "movement",
+      "footsteps",
+      "motion"
+    ]
+  },
+  {
+    "id": "sfx_other_soundfx_data-sprite_fa2956",
+    "file": "/audio/sfx/other/soundfx_data-sprite.mp3",
+    "title": "Soundfx.Data Sprite",
+    "artist": "Public Domain / Open Source Community",
+    "category": "jutsu",
+    "layer": "ui",
+    "events": [
+      "ui_click",
+      "ui_notification"
+    ],
+    "materials": [
+      "synthetic"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "sfx"
+    ]
+  },
+  {
+    "id": "ambience_fire_fireplace_d4a66a",
+    "file": "/audio/ambience/fire/fireplace.ogg",
+    "title": "Fireplace",
+    "artist": "Public Domain / Open Source Community",
+    "category": "ambient",
+    "layer": "world",
+    "events": [
+      "fireplace"
+    ],
+    "materials": [
+      "nature"
+    ],
+    "intensity": "low",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "fire",
+      "campfire",
+      "heat"
+    ]
+  },
+  {
+    "id": "ambience_forest_forest-rain_c2a6cb",
+    "file": "/audio/ambience/forest/forest-rain.ogg",
+    "title": "Forest Rain",
+    "artist": "Public Domain / Open Source Community",
+    "category": "ambient",
+    "layer": "world",
+    "events": [
+      "forest-rain"
+    ],
+    "materials": [
+      "nature"
+    ],
+    "intensity": "low",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "forest",
+      "nature",
+      "birds",
+      "wind"
+    ]
+  },
+  {
+    "id": "ambience_storm_heavy-rain_3fdda0",
+    "file": "/audio/ambience/storm/heavy-rain.ogg",
+    "title": "Heavy Rain",
+    "artist": "Public Domain / Open Source Community",
+    "category": "ambient",
+    "layer": "world",
+    "events": [
+      "heavy-rain"
+    ],
+    "materials": [
+      "nature"
+    ],
+    "intensity": "high",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "storm",
+      "thunder",
+      "rain",
+      "lightning"
+    ]
+  },
+  {
+    "id": "ambience_river_stream_42c5e7",
+    "file": "/audio/ambience/river/stream.ogg",
+    "title": "Stream",
+    "artist": "Public Domain / Open Source Community",
+    "category": "ambient",
+    "layer": "world",
+    "events": [
+      "stream"
+    ],
+    "materials": [
+      "nature"
+    ],
+    "intensity": "medium",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "river",
+      "water",
+      "stream"
+    ]
+  },
+  {
+    "id": "ambience_storm_thunderstorm_fa810b",
+    "file": "/audio/ambience/storm/thunderstorm.ogg",
+    "title": "Thunderstorm",
+    "artist": "Public Domain / Open Source Community",
+    "category": "ambient",
+    "layer": "world",
+    "events": [
+      "thunderstorm"
+    ],
+    "materials": [
+      "nature"
+    ],
+    "intensity": "high",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "storm",
+      "thunder",
+      "rain",
+      "lightning"
+    ]
+  },
+  {
+    "id": "ambience_wind_wind_debd59",
+    "file": "/audio/ambience/wind/wind.ogg",
+    "title": "Wind",
+    "artist": "Public Domain / Open Source Community",
+    "category": "ambient",
+    "layer": "world",
+    "events": [
+      "wind"
+    ],
+    "materials": [
+      "nature"
+    ],
+    "intensity": "low",
+    "duration": 1,
+    "combat": false,
+    "tags": [
+      "Rin",
+      "wind",
+      "weather",
+      "air"
+    ]
+  }
+]

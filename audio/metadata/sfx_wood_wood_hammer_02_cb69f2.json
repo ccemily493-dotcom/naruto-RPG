@@ -1,0 +1,32 @@
+{
+  "id": "sfx_wood_wood_hammer_02_cb69f2",
+  "title": "Wood Hammer 02",
+  "file": "sfx/wood/wood_hammer_02.ogg",
+  "url": "/audio/sfx/wood/wood_hammer_02.ogg",
+  "type": "sfx",
+  "category": "wood",
+  "tags": [
+    "wood",
+    "crack",
+    "nature"
+  ],
+  "duration": 0,
+  "fileSize": 21760,
+  "format": "ogg",
+  "sha256": "cb69f2b53af6f8c9f3f46a16eb9d1492759c8504474d8396b9fef6a4f28072d6",
+  "loopable": false,
+  "intensity": 0.7,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-wood-metal-SFX\\wood_hammer_02.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668880952
+}

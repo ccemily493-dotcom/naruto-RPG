@@ -1,0 +1,31 @@
+{
+  "id": "sfx_environment_door_open_52d47d",
+  "title": "Door Open",
+  "file": "sfx/environment/door_open.ogg",
+  "url": "/audio/sfx/environment/door_open.ogg",
+  "type": "sfx",
+  "category": "environment",
+  "tags": [
+    "environment",
+    "prop"
+  ],
+  "duration": 0,
+  "fileSize": 29768,
+  "format": "ogg",
+  "sha256": "52d47dcb2c65545903006f2f6ba7cd30c8d727a6db0ee5cf80edaa51b9971bd9",
+  "loopable": false,
+  "intensity": 0.55,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\door_open.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668875729
+}

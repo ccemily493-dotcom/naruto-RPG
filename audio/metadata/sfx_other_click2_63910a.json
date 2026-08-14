@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_click2_63910a",
+  "title": "Click2",
+  "file": "sfx/other/click2.mp3",
+  "url": "/audio/sfx/other/click2.mp3",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 9229,
+  "format": "mp3",
+  "sha256": "63910aa15e4186c11579730a27a4df50a2033b71f2cc12d22a764a30231e981f",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\click2.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786670832343
+}

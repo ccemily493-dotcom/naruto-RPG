@@ -1,0 +1,32 @@
+{
+  "id": "sfx_wood_metal_spring_02_2db502",
+  "title": "Metal Spring 02",
+  "file": "sfx/wood/metal_spring_02.ogg",
+  "url": "/audio/sfx/wood/metal_spring_02.ogg",
+  "type": "sfx",
+  "category": "wood",
+  "tags": [
+    "wood",
+    "crack",
+    "nature"
+  ],
+  "duration": 0,
+  "fileSize": 44660,
+  "format": "ogg",
+  "sha256": "2db502f438956285958e37bace1aec78ab49977ca89d9dba2b1f83a13c32d2e1",
+  "loopable": false,
+  "intensity": 0.7,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-wood-metal-SFX\\metal_spring_02.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668879289
+}

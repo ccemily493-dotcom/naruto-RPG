@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_resonance1_b9d63c",
+  "title": "Resonance1",
+  "file": "sfx/other/resonance1.mp3",
+  "url": "/audio/sfx/other/resonance1.mp3",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 109215,
+  "format": "mp3",
+  "sha256": "b9d63cbd2c19fb37da4926d90141a8e2eba8bca746abd8e3069a9206ce23a733",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\resonance1.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786670834736
+}

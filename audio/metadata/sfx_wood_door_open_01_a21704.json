@@ -1,0 +1,32 @@
+{
+  "id": "sfx_wood_door_open_01_a21704",
+  "title": "Door Open 01",
+  "file": "sfx/wood/door_open_01.ogg",
+  "url": "/audio/sfx/wood/door_open_01.ogg",
+  "type": "sfx",
+  "category": "wood",
+  "tags": [
+    "wood",
+    "crack",
+    "nature"
+  ],
+  "duration": 0,
+  "fileSize": 28073,
+  "format": "ogg",
+  "sha256": "a21704b97fe25f58a045b19309d3f8d6cd2b4f5f40c36284c222c2ec3dfa61bb",
+  "loopable": false,
+  "intensity": 0.7,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-wood-metal-SFX\\door_open_01.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668878344
+}

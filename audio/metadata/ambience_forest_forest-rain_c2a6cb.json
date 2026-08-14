@@ -1,0 +1,33 @@
+{
+  "id": "ambience_forest_forest-rain_c2a6cb",
+  "title": "Forest Rain",
+  "file": "ambience/forest/forest-rain.ogg",
+  "url": "/audio/ambience/forest/forest-rain.ogg",
+  "type": "ambience",
+  "category": "forest",
+  "tags": [
+    "forest",
+    "nature",
+    "birds",
+    "wind"
+  ],
+  "duration": 0,
+  "fileSize": 2929230,
+  "format": "ogg",
+  "sha256": "c2a6cb3cdd6b538664d3820ad88336459fe46da29e900944854a9ea48364819b",
+  "loopable": true,
+  "intensity": 0.4,
+  "source": {
+    "source_repository": "https://github.com/Muges/ambientsounds",
+    "source_file": "forest-rain.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero 1.0 (CC0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786670838810
+}

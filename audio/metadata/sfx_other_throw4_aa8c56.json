@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_throw4_aa8c56",
+  "title": "Throw4",
+  "file": "sfx/other/throw4.mp3",
+  "url": "/audio/sfx/other/throw4.mp3",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 17483,
+  "format": "mp3",
+  "sha256": "aa8c5601684b25b5b0a0a41233495e280ad4cdfea608390a89352c3d28569077",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\throw4.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786670837856
+}

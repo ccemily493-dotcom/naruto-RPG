@@ -1,0 +1,32 @@
+{
+  "id": "sfx_metal_metal_01_1f4e97",
+  "title": "Metal 01",
+  "file": "sfx/metal/metal_01.ogg",
+  "url": "/audio/sfx/metal/metal_01.ogg",
+  "type": "sfx",
+  "category": "metal",
+  "tags": [
+    "metal",
+    "weapon",
+    "slash"
+  ],
+  "duration": 0,
+  "fileSize": 43900,
+  "format": "ogg",
+  "sha256": "1f4e972181120358a42c811306cf004cbb12188639e779773eb6591811cc4643",
+  "loopable": false,
+  "intensity": 0.75,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\metal_01.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668876223
+}

@@ -1,0 +1,31 @@
+{
+  "id": "sfx_environment_door_close_02_f5955f",
+  "title": "Door Close 02",
+  "file": "sfx/environment/door_close_02.ogg",
+  "url": "/audio/sfx/environment/door_close_02.ogg",
+  "type": "sfx",
+  "category": "environment",
+  "tags": [
+    "environment",
+    "prop"
+  ],
+  "duration": 0,
+  "fileSize": 62680,
+  "format": "ogg",
+  "sha256": "f5955fbe55125ee2440e19f7098fc724b42941d8e350437afd918038c133c28b",
+  "loopable": false,
+  "intensity": 0.55,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\door_close_02.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668875645
+}

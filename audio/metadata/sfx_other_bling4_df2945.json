@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_bling4_df2945",
+  "title": "Bling4",
+  "file": "sfx/other/bling4.mp3",
+  "url": "/audio/sfx/other/bling4.mp3",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 79698,
+  "format": "mp3",
+  "sha256": "df2945289e8fb745f37f685456c9c8fe17f592a6414848265ccd33977a328f14",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\bling4.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786670831043
+}

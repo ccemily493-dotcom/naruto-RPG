@@ -1,0 +1,32 @@
+{
+  "id": "ambience_wind_wind_debd59",
+  "title": "Wind",
+  "file": "ambience/wind/wind.ogg",
+  "url": "/audio/ambience/wind/wind.ogg",
+  "type": "ambience",
+  "category": "wind",
+  "tags": [
+    "wind",
+    "weather",
+    "air"
+  ],
+  "duration": 0,
+  "fileSize": 3200466,
+  "format": "ogg",
+  "sha256": "debd59186e58b751eba29de80e1368c3234526f1efc89a91b40ce469cffb1479",
+  "loopable": true,
+  "intensity": 0.4,
+  "source": {
+    "source_repository": "https://github.com/Muges/ambientsounds",
+    "source_file": "wind.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero 1.0 (CC0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786670839449
+}

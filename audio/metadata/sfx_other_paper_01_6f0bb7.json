@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_paper_01_6f0bb7",
+  "title": "Paper 01",
+  "file": "sfx/other/paper_01.ogg",
+  "url": "/audio/sfx/other/paper_01.ogg",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 42145,
+  "format": "ogg",
+  "sha256": "6f0bb721c1cbd70f9a555f4de0543180d67278478913a49b69e63c79759b7311",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\paper_01.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786668876899
+}

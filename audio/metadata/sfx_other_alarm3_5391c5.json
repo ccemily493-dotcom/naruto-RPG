@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_alarm3_5391c5",
+  "title": "Alarm3",
+  "file": "sfx/other/alarm3.mp3",
+  "url": "/audio/sfx/other/alarm3.mp3",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 68798,
+  "format": "mp3",
+  "sha256": "5391c528a7b141935a4225b8d82ff60b6daa8b1f6822dc299bfe80174c40009e",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\alarm3.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786670828546
+}

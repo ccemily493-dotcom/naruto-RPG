@@ -1,0 +1,32 @@
+{
+  "id": "sfx_impacts_slam_01_e49eea",
+  "title": "Slam 01",
+  "file": "sfx/impacts/slam_01.ogg",
+  "url": "/audio/sfx/impacts/slam_01.ogg",
+  "type": "sfx",
+  "category": "impacts",
+  "tags": [
+    "impact",
+    "hit",
+    "combat"
+  ],
+  "duration": 0,
+  "fileSize": 40015,
+  "format": "ogg",
+  "sha256": "e49eeabf9acd9fcf6a85672ef77e54b7872b8e498a1e1a4c8bfbe67640624c90",
+  "loopable": false,
+  "intensity": 0.8,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\slam_01.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668877205
+}

@@ -1,0 +1,32 @@
+{
+  "id": "sfx_impacts_hit_02_997613",
+  "title": "Hit 02",
+  "file": "sfx/impacts/hit_02.ogg",
+  "url": "/audio/sfx/impacts/hit_02.ogg",
+  "type": "sfx",
+  "category": "impacts",
+  "tags": [
+    "impact",
+    "hit",
+    "combat"
+  ],
+  "duration": 0,
+  "fileSize": 28088,
+  "format": "ogg",
+  "sha256": "997613a2f9561723f99c6b04e73a6fbc1232a4141f1370c4ed84fb8ef59f3191",
+  "loopable": false,
+  "intensity": 0.8,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\hit_02.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668876002
+}

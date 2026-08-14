@@ -1,0 +1,31 @@
+{
+  "id": "sfx_environment_bell_02_40f9de",
+  "title": "Bell 02",
+  "file": "sfx/environment/bell_02.ogg",
+  "url": "/audio/sfx/environment/bell_02.ogg",
+  "type": "sfx",
+  "category": "environment",
+  "tags": [
+    "environment",
+    "prop"
+  ],
+  "duration": 0,
+  "fileSize": 30800,
+  "format": "ogg",
+  "sha256": "40f9defd2439c8a611486866b6ed78d2ddf2fe375d16fe5c26b8c852e25de097",
+  "loopable": false,
+  "intensity": 0.55,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\bell_02.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668875379
+}

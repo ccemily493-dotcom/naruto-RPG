@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_click6_bf0378",
+  "title": "Click6",
+  "file": "sfx/other/click6.mp3",
+  "url": "/audio/sfx/other/click6.mp3",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 1506,
+  "format": "mp3",
+  "sha256": "bf0378aed5021c75d991311491f06aaeb6690c0d42f60d2c9619ab420170ec22",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\click6.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786670832569
+}

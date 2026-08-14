@@ -1,0 +1,32 @@
+{
+  "id": "ambience_river_stream_42c5e7",
+  "title": "Stream",
+  "file": "ambience/river/stream.ogg",
+  "url": "/audio/ambience/river/stream.ogg",
+  "type": "ambience",
+  "category": "river",
+  "tags": [
+    "river",
+    "water",
+    "stream"
+  ],
+  "duration": 0,
+  "fileSize": 1777247,
+  "format": "ogg",
+  "sha256": "42c5e7e70dbe7d0f9153004f675a33135a144f667f3a8417c11b9019b49092ce",
+  "loopable": true,
+  "intensity": 0.45,
+  "source": {
+    "source_repository": "https://github.com/Muges/ambientsounds",
+    "source_file": "stream.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero 1.0 (CC0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786670839141
+}

@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_error3_dd016e",
+  "title": "Error3",
+  "file": "sfx/other/error3.mp3",
+  "url": "/audio/sfx/other/error3.mp3",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 33827,
+  "format": "mp3",
+  "sha256": "dd016e1c155be4e3666535e139302115d04142f12ca144de387fdaca878b9d38",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\error3.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786670833104
+}

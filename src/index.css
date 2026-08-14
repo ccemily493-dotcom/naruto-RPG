@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-title: 'Cinzel', 'Source Serif 4', Georgia, serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #ffffff;
+  color: #37352f;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Notion-style subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(55, 53, 47, 0.15);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(55, 53, 47, 0.28);
+}
+
+/* Markdown styling in conversation */
+.notion-prose p {
+  margin-bottom: 0.875rem;
+  line-height: 1.68;
+}
+.notion-prose p:last-child {
+  margin-bottom: 0;
+}
+.notion-prose strong {
+  font-weight: 600;
+  color: #1a1a19;
+}
+.notion-prose em {
+  font-style: italic;
+  color: #4a4844;
+}
+.notion-prose blockquote {
+  border-left: 2px solid #e3e2e0;
+  padding-left: 0.875rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  color: #6b6a65;
+  font-style: italic;
+}
+.notion-prose ul {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+.notion-prose ol {
+  list-style-type: decimal;
+  padding-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+.notion-prose li {
+  margin-bottom: 0.35rem;
+  line-height: 1.6;
+}
+.notion-prose h1, .notion-prose h2, .notion-prose h3 {
+  font-weight: 600;
+  color: #1f1f1e;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.notion-prose h1 { font-size: 1.25rem; }
+.notion-prose h2 { font-size: 1.125rem; }
+.notion-prose h3 { font-size: 1rem; }
+.notion-prose hr {
+  border: 0;
+  border-top: 1px solid #eeedea;
+  margin: 1.25rem 0;
+}

@@ -1,0 +1,32 @@
+{
+  "id": "sfx_wood_keys_01_7c4e8e",
+  "title": "Keys 01",
+  "file": "sfx/wood/keys_01.ogg",
+  "url": "/audio/sfx/wood/keys_01.ogg",
+  "type": "sfx",
+  "category": "wood",
+  "tags": [
+    "wood",
+    "crack",
+    "nature"
+  ],
+  "duration": 0,
+  "fileSize": 29717,
+  "format": "ogg",
+  "sha256": "7c4e8ebf4483cdccc03c96cb0d5baad082b51f09cdfb4515d49db8b34337d34c",
+  "loopable": false,
+  "intensity": 0.7,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-wood-metal-SFX\\keys_01.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786668878494
+}

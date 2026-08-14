@@ -1,0 +1,33 @@
+{
+  "id": "ambience_storm_thunderstorm_fa810b",
+  "title": "Thunderstorm",
+  "file": "ambience/storm/thunderstorm.ogg",
+  "url": "/audio/ambience/storm/thunderstorm.ogg",
+  "type": "ambience",
+  "category": "storm",
+  "tags": [
+    "storm",
+    "thunder",
+    "rain",
+    "lightning"
+  ],
+  "duration": 0,
+  "fileSize": 4167282,
+  "format": "ogg",
+  "sha256": "fa810bcf1559ae1b9517dd95895d7a2a8767a7c077463eaaae8e50e675411387",
+  "loopable": true,
+  "intensity": 0.75,
+  "source": {
+    "source_repository": "https://github.com/Muges/ambientsounds",
+    "source_file": "thunderstorm.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero 1.0 (CC0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "ACTIVE",
+  "createdAt": 1786670839233
+}

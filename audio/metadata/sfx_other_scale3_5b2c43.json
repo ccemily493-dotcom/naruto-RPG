@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_scale3_5b2c43",
+  "title": "Scale3",
+  "file": "sfx/other/scale3.mp3",
+  "url": "/audio/sfx/other/scale3.mp3",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 33430,
+  "format": "mp3",
+  "sha256": "5b2c43ed7e0f0b326c57cfe1b408dfeb68b27c4a6e918530514a17c1525e0fbe",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\scale3.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786670836729
+}

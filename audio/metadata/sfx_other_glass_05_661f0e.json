@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_glass_05_661f0e",
+  "title": "Glass 05",
+  "file": "sfx/other/glass_05.ogg",
+  "url": "/audio/sfx/other/glass_05.ogg",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 63139,
+  "format": "ogg",
+  "sha256": "661f0e599247c3647fed067d9d283b0ce55ee86ff9bb97991475de428deb41be",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\glass_05.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786668875887
+}

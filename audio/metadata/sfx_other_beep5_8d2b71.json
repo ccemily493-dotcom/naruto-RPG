@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_beep5_8d2b71",
+  "title": "Beep5",
+  "file": "sfx/other/beep5.mp3",
+  "url": "/audio/sfx/other/beep5.mp3",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 4197,
+  "format": "mp3",
+  "sha256": "8d2b71e894ca762fb04f7d74d9ab2184c3bc73decad9bd147460aa98acac3300",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/rse/soundfx",
+    "source_file": "soundfx.d\\beep5.mp3",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Attribution (CC-BY)",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution_required": true,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786670829848
+}

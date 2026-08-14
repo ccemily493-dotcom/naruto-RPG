@@ -1,0 +1,30 @@
+{
+  "id": "sfx_other_dishes_04_220892",
+  "title": "Dishes 04",
+  "file": "sfx/other/dishes_04.ogg",
+  "url": "/audio/sfx/other/dishes_04.ogg",
+  "type": "sfx",
+  "category": "other",
+  "tags": [
+    "sfx"
+  ],
+  "duration": 0,
+  "fileSize": 45170,
+  "format": "ogg",
+  "sha256": "220892e829c783a7acd1d61cbeb21106e892ec64dc5c8620a3cc1327d225797c",
+  "loopable": false,
+  "intensity": 0.5,
+  "source": {
+    "source_repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+    "source_file": "100-CC0-SFX\\dishes_04.ogg",
+    "author": "Public Domain / Open Source Community",
+    "license": "Creative Commons Zero v1.0 Universal (CC0 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "commercial_use": true,
+    "redistribution_allowed": true,
+    "license_status": "VERIFIED"
+  },
+  "status": "NEEDS_REVIEW",
+  "createdAt": 1786668875528
+}

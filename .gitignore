@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Executables & Large Binaries
+bin/
+*.exe
+
+# Python Virtual Environments & Caches
+.venv/
+models/woosh/.venv/
+__pycache__/
+*.pyc
+
+# Large Model Checkpoints & Large Safetensors
+models/woosh/checkpoints/
+*.safetensors
+*.bin
+*.pth
+*.pt
+
+# Generated Audio Files & Output Zips
+data/audio/generated/
+data/audio/generated/test/
+*.zip
+
+# Environment & Build Files
+dist/
+build/
+.env
+.env.local
+.DS_Store
+Thumbs.db
