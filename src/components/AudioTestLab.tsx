@@ -13,6 +13,10 @@ import {
   HardDrive,
 } from 'lucide-react';
 
+import { AudioTestLabDSP } from '../utils/audioTestLabDSP';
+import { VisualizersSuite } from './VisualizersSuite';
+import { DSPRackControls } from './DSPRackControls';
+
 export interface AudioTestPreset {
   id: string;
   name: string;
@@ -129,12 +133,59 @@ export const AudioTestLab: React.FC = () => {
     isAssetizing: false,
     isAssetized: false,
   });
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const activeAudioRef = useRef<HTMLAudioElement | null>(null);
+  const dspRef = useRef<AudioTestLabDSP | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isExportingWav, setIsExportingWav] = useState(false);
+
+  useEffect(() => {
+    dspRef.current = new AudioTestLabDSP();
+    return () => {
+      dspRef.current?.stop();
+    };
+  }, []);
 
   useEffect(() => {
     handleGenerateWoosh(selectedPreset);
   }, [selectedPreset]);
+
+  const handlePlay = async () => {
+    const activeUrl = activeMode === 'woosh' ? wooshResult?.generatedFile : assetResult?.audioUrl;
+    if (!activeUrl || !dspRef.current) return;
+
+    try {
+      setIsPlaying(true);
+      await dspRef.current.loadAudioFromUrl(activeUrl);
+      dspRef.current.playBuffer(undefined, false, () => {
+        setIsPlaying(false);
+      });
+    } catch (err) {
+      console.error('Play error:', err);
+      setIsPlaying(false);
+    }
+  };
+
+  const handleStop = () => {
+    dspRef.current?.stop();
+    setIsPlaying(false);
+  };
+
+  const handleExportWav = async () => {
+    if (!dspRef.current) return;
+    setIsExportingWav(true);
+    try {
+      const blob = await dspRef.current.renderProcessedWav();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `dsp_processed_${selectedPreset.event}_${Date.now()}.wav`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err: any) {
+      alert(`Error al exportar WAV: ${err.message}`);
+    } finally {
+      setIsExportingWav(false);
+    }
+  };
 
   const handleAssetizeSound = async () => {
     const activeUrl = activeMode === 'woosh' ? wooshResult?.generatedFile : assetResult?.audioUrl;
@@ -252,65 +303,8 @@ export const AudioTestLab: React.FC = () => {
       if (res.ok) {
         const data = await res.json();
         setAnalysis(data);
-        drawWaveform(url);
       }
     } catch (e) {}
-  };
-
-  const drawWaveform = (url: string) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    fetch(url)
-      .then((res) => res.arrayBuffer())
-      .then((ab) => {
-        const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
-        const audioCtx = new AudioCtx();
-        return audioCtx.decodeAudioData(ab);
-      })
-      .then((audioBuffer) => {
-        const rawData = audioBuffer.getChannelData(0);
-        const samples = 200;
-        const blockSize = Math.floor(rawData.length / samples);
-        const filteredData = [];
-        for (let i = 0; i < samples; i++) {
-          const blockStart = blockSize * i;
-          let sum = 0;
-          for (let j = 0; j < blockSize; j++) {
-            sum = sum + Math.abs(rawData[blockStart + j]);
-          }
-          filteredData.push(sum / blockSize);
-        }
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = activeMode === 'woosh' ? '#10b981' : '#3b82f6';
-        const width = canvas.width / filteredData.length;
-        for (let i = 0; i < filteredData.length; i++) {
-          const x = i * width;
-          const height = filteredData[i] * canvas.height * 2.5;
-          ctx.fillRect(x, (canvas.height - height) / 2, width - 1, height);
-        }
-      })
-      .catch(() => {});
-  };
-
-  const handlePlay = () => {
-    const activeUrl = activeMode === 'woosh' ? wooshResult?.generatedFile : assetResult?.audioUrl;
-    if (activeUrl) {
-      if (activeAudioRef.current) activeAudioRef.current.pause();
-      const a = new Audio(activeUrl);
-      activeAudioRef.current = a;
-      a.play().catch(() => {});
-    }
-  };
-
-  const handleStop = () => {
-    if (activeAudioRef.current) {
-      activeAudioRef.current.pause();
-      activeAudioRef.current.currentTime = 0;
-    }
   };
 
   return (
@@ -492,15 +486,18 @@ export const AudioTestLab: React.FC = () => {
               </p>
             </div>
 
-            {/* Waveform Visualizer */}
-            <div className="bg-black/60 border border-neutral-800 rounded-lg p-3">
-              <canvas
-                ref={canvasRef}
-                width={600}
-                height={80}
-                className="w-full h-20 bg-black/40 rounded"
-              />
-            </div>
+            {/* 60 FPS Real-time Visualizers Suite */}
+            <VisualizersSuite
+              analyserNode={dspRef.current?.analyserNode || null}
+              isPlaying={isPlaying}
+            />
+
+            {/* DSP Signal Processor & Audio Effects Rack V6.0 */}
+            <DSPRackControls
+              dsp={dspRef.current}
+              onExportWav={handleExportWav}
+              isExporting={isExportingWav}
+            />
 
             {/* DIRECT CLI DIAGNOSTICS DISPLAY */}
             {activeMode === 'woosh' && wooshResult && (
