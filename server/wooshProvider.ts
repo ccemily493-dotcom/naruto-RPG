@@ -165,6 +165,8 @@ export class WooshSFXProvider {
     return {
       providerName: 'SonyResearch/Woosh',
       modelName: this.modelName,
+      isLocal: true,
+      supportedFormats: ['wav'],
       repoPath: this.repoPath,
       pythonPath: this.pythonPath,
       checkpointPath: this.checkpointPath,
@@ -391,5 +393,20 @@ export class WooshSFXProvider {
         diagnostics,
       };
     }
+  }
+
+  public async generateSFX(prompt: string, options: SFXGenerateOptions): Promise<SFXGenerateResult> {
+    const res = await this.generateWooshDirect(prompt, options);
+    return {
+      audioUrl: res.generatedFile || '',
+      fileHash: '',
+      duration: res.duration || 0,
+      provider: 'Woosh',
+      model: this.modelName,
+      isCached: res.isCached,
+      generationTimeMs: res.generationTimeMs,
+      acousticPrompt: prompt,
+      status: res.aiGenerationConfirmed ? 'AI_GENERATED' : 'FAILED',
+    };
   }
 }

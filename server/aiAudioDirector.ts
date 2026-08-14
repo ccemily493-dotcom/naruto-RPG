@@ -258,7 +258,7 @@ export async function evaluateAIAudioDirector(
   let musicTrackKey = 'rin_theme_ambient';
   if (sceneType === 'strategic_combat') {
     musicTrackKey = 'glued_state';
-  } else if (sceneType === 'combat' || sceneType === 'boss_combat') {
+  } else if (sceneType === 'combat' || (sceneType as string) === 'boss_combat') {
     musicTrackKey = 'confrontment';
   } else if (sceneType === 'tension') {
     musicTrackKey = 'nervous';

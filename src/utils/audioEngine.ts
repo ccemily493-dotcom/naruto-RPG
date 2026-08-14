@@ -172,7 +172,7 @@ class AudioEngineV2 {
     matchedFile: string | null,
     confidence: number,
     reason: string,
-    fallbackUsed: boolean
+    fallbackUsed: boolean,
   ) {
     const timeStr = new Date().toLocaleTimeString();
     const entry: DebugEntry = {
@@ -218,7 +218,11 @@ class AudioEngineV2 {
 
   // --- LAYER 3: MUSIC ---
 
-  public async playTrack(track: AudioTrack, transition: 'continue' | 'crossfade' | 'fade_in' = 'crossfade', intensity = 0.7) {
+  public async playTrack(
+    track: AudioTrack,
+    transition: 'continue' | 'crossfade' | 'fade_in' = 'crossfade',
+    intensity = 0.7,
+  ) {
     soundManager.init();
     const incoming = this.activeMusicChannel === 'A' ? this.musicAudioB : this.musicAudioA;
     const currentAudio = this.getMusicAudio();
@@ -241,7 +245,7 @@ class AudioEngineV2 {
       incoming.volume = 0;
       await incoming.play().catch(() => {});
       this.activeMusicChannel = this.activeMusicChannel === 'A' ? 'B' : 'A';
-      
+
       const fadeTime = 1500;
       const steps = 15;
       const interval = fadeTime / steps;
@@ -274,7 +278,7 @@ class AudioEngineV2 {
     event: string,
     url: string | null,
     intensity = 0.8,
-    offsetMs = 0
+    offsetMs = 0,
   ) {
     if (this.isSfxMuted || !url) return;
 
@@ -338,6 +342,32 @@ class AudioEngineV2 {
     this.notify();
   }
 
+  public pause() {
+    this.togglePlay();
+  }
+
+  public stop() {
+    this.stopAll();
+  }
+
+  public stopMusic() {
+    const active = this.getMusicAudio();
+    active.pause();
+    active.currentTime = 0;
+    this.isPlaying = false;
+    this.currentTrack = null;
+    this.notify();
+  }
+
+  public stopAll() {
+    this.stopMusic();
+    this.worldAudio.pause();
+    this.worldAudio.currentTime = 0;
+    this.atmosphereAudio.pause();
+    this.atmosphereAudio.currentTime = 0;
+    this.notify();
+  }
+
   public setMusicVolume(val: number) {
     this.musicVolume = Math.max(0, Math.min(1, val));
     this.getMusicAudio().volume = this.isMusicMuted ? 0 : this.musicVolume;
@@ -379,35 +409,59 @@ class AudioEngineV2 {
 
       if (res.ok) {
         const evaluation = await res.json();
-        
+
         // 1. World Layer (L1)
         if (evaluation.worldMatch?.matchedItem) {
           const wItem = evaluation.worldMatch.matchedItem;
-          this.setWorldLayer(evaluation.intent.world.environment, wItem.file, evaluation.intent.world.intensity);
-          this.logDebug('world', evaluation.intent.world.environment, wItem.file, evaluation.worldMatch.confidence, evaluation.worldMatch.reason, false);
+          this.setWorldLayer(
+            evaluation.intent.world.environment,
+            wItem.file,
+            evaluation.intent.world.intensity,
+          );
+          this.logDebug(
+            'world',
+            evaluation.intent.world.environment,
+            wItem.file,
+            evaluation.worldMatch.confidence,
+            evaluation.worldMatch.reason,
+            false,
+          );
         } else {
-          this.logDebug('world', evaluation.intent.world.environment, null, 0, evaluation.worldMatch?.reason || 'NO_RESOURCE', true);
+          this.logDebug(
+            'world',
+            evaluation.intent.world.environment,
+            null,
+            0,
+            evaluation.worldMatch?.reason || 'NO_RESOURCE',
+            true,
+          );
         }
 
         // 2. Music Layer (L3)
         if (evaluation.musicMatch?.matchedItem) {
           const mItem = evaluation.musicMatch.matchedItem;
           this.playTrack(
-            {
-              id: mItem.id,
-              title: mItem.title,
-              artist: mItem.artist,
-              duration: mItem.duration,
-              url: mItem.file,
-              filename: mItem.file.split('/').pop() || 'music.mp3',
-              category: mItem.category,
-            },
+            mItem as any,
             evaluation.intent.music.transition,
-            evaluation.intent.music.intensity
+            evaluation.intent.music.intensity,
           );
-          this.logDebug('music', evaluation.intent.music.trackKey, mItem.file, evaluation.musicMatch.confidence, evaluation.musicMatch.reason, false);
+          this.logDebug(
+            'music',
+            evaluation.intent.music.trackKey,
+            mItem.file,
+            evaluation.musicMatch.confidence,
+            evaluation.musicMatch.reason,
+            false,
+          );
         } else {
-          this.logDebug('music', evaluation.intent.music.trackKey, null, 0, evaluation.musicMatch?.reason || 'NO_RESOURCE', true);
+          this.logDebug(
+            'music',
+            evaluation.intent.music.trackKey,
+            null,
+            0,
+            evaluation.musicMatch?.reason || 'NO_RESOURCE',
+            true,
+          );
         }
 
         // 3. Action (L4) & Impact (L5) SFX Layers (AI SFX & Timing Offset Slicing)
@@ -422,18 +476,31 @@ class AudioEngineV2 {
 
             if (targetUrl) {
               const providerInfo = gen ? `AI SFX (${gen.provider})` : 'Catalog';
-              this.triggerSFX(ev.type || ev.layer, ev.event, targetUrl, ev.intensity || 0.8, offsetMs);
+              this.triggerSFX(
+                ev.type || ev.layer,
+                ev.event,
+                targetUrl,
+                ev.intensity || 0.8,
+                offsetMs,
+              );
               this.logDebug(
                 ev.type || ev.layer || 'action',
                 ev.event,
                 targetUrl,
                 gen ? 100 : match.confidence,
                 `${providerInfo}: ${ev.description || match.reason}`,
-                false
+                false,
               );
             } else {
               // NO_COMPATIBLE_RESOURCE: Maintain clean acoustic silence
-              this.logDebug(ev.type || ev.layer || 'action', ev.event, null, 0, match?.reason || 'NO_COMPATIBLE_RESOURCE: Pure silence maintained', true);
+              this.logDebug(
+                ev.type || ev.layer || 'action',
+                ev.event,
+                null,
+                0,
+                match?.reason || 'NO_COMPATIBLE_RESOURCE: Pure silence maintained',
+                true,
+              );
             }
           });
         }
