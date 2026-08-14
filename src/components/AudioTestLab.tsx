@@ -1,5 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Square, RefreshCw, CheckCircle, XCircle, Activity, Sparkles, Sliders, AlertTriangle, Terminal, HardDrive } from 'lucide-react';
+import {
+  Play,
+  Square,
+  RefreshCw,
+  CheckCircle,
+  XCircle,
+  Activity,
+  Sparkles,
+  Sliders,
+  AlertTriangle,
+  Terminal,
+  HardDrive,
+} from 'lucide-react';
 
 export interface AudioTestPreset {
   id: string;
@@ -11,16 +23,93 @@ export interface AudioTestPreset {
 }
 
 const PRESETS: AudioTestPreset[] = [
-  { id: 'chakra', name: 'CHAKRA', type: 'action', event: 'chakra_charge', material: 'energy', prompt: 'Supernatural energy charging. Low resonant chakra hum gradually increasing, subtle vibrating energy pulse.' },
-  { id: 'kunai_throw', name: 'KUNAI THROW', type: 'action', event: 'kunai_throw', material: 'metal', prompt: 'Short cinematic game foley. Sharp steel projectile rapidly slicing through air.' },
-  { id: 'metal_wood_impact', name: 'METAL-WOOD IMPACT', type: 'impact', event: 'metal_wood_impact', material: 'metal_wood', prompt: 'Heavy cinematic game impact foley. Sharp steel kunai blade violently slamming into wooden tree trunk.' },
-  { id: 'wood_root_growth', name: 'WOOD ROOT GROWTH', type: 'action', event: 'wood_root_growth', material: 'wood', prompt: 'Organic supernatural wood growth. Thick roots rapidly emerging from soil, fibrous wood cracking.' },
-  { id: 'wood_impact', name: 'WOOD IMPACT', type: 'impact', event: 'wood_impact', material: 'wood', prompt: 'Heavy massive wooden root slamming violently into target with deep organic thud.' },
-  { id: 'mokuton_activation', name: 'MOKUTON ACTIVATION', type: 'action', event: 'mokuton_activation', material: 'wood', prompt: 'Mokuton wood release secret technique activation. Deep wooden vibration and root expansion.' },
-  { id: 'inton', name: 'INTON', type: 'action', event: 'inton_activation', material: 'chakra', prompt: 'Yin release Inton spiritual activation. Ethereal perception distortion and subtle mind pulse.' },
-  { id: 'third_eye', name: 'THIRD EYE', type: 'action', event: 'third_eye_activation', material: 'chakra', prompt: 'Tenketsu third eye dōjutsu sensory pulse. Subtle high-frequency perception resonance.' },
-  { id: 'kali_manifestation', name: 'KALI MANIFESTATION', type: 'action', event: 'kali_manifestation', material: 'energy', prompt: 'Imposing spectral multi-armed entity manifestation with deep ethereal resonance and layered energy.' },
-  { id: 'shiva_manifestation', name: 'SHIVA MANIFESTATION', type: 'action', event: 'shiva_manifestation', material: 'energy', prompt: 'Divine destruction aura manifestation. Deep spiritual pressure pulse and massive energy aura.' },
+  {
+    id: 'chakra',
+    name: 'CHAKRA',
+    type: 'action',
+    event: 'chakra_charge',
+    material: 'energy',
+    prompt:
+      'Supernatural energy charging. Low resonant chakra hum gradually increasing, subtle vibrating energy pulse.',
+  },
+  {
+    id: 'kunai_throw',
+    name: 'KUNAI THROW',
+    type: 'action',
+    event: 'kunai_throw',
+    material: 'metal',
+    prompt: 'Short cinematic game foley. Sharp steel projectile rapidly slicing through air.',
+  },
+  {
+    id: 'metal_wood_impact',
+    name: 'METAL-WOOD IMPACT',
+    type: 'impact',
+    event: 'metal_wood_impact',
+    material: 'metal_wood',
+    prompt:
+      'Heavy cinematic game impact foley. Sharp steel kunai blade violently slamming into wooden tree trunk.',
+  },
+  {
+    id: 'wood_root_growth',
+    name: 'WOOD ROOT GROWTH',
+    type: 'action',
+    event: 'wood_root_growth',
+    material: 'wood',
+    prompt:
+      'Organic supernatural wood growth. Thick roots rapidly emerging from soil, fibrous wood cracking.',
+  },
+  {
+    id: 'wood_impact',
+    name: 'WOOD IMPACT',
+    type: 'impact',
+    event: 'wood_impact',
+    material: 'wood',
+    prompt: 'Heavy massive wooden root slamming violently into target with deep organic thud.',
+  },
+  {
+    id: 'mokuton_activation',
+    name: 'MOKUTON ACTIVATION',
+    type: 'action',
+    event: 'mokuton_activation',
+    material: 'wood',
+    prompt:
+      'Mokuton wood release secret technique activation. Deep wooden vibration and root expansion.',
+  },
+  {
+    id: 'inton',
+    name: 'INTON',
+    type: 'action',
+    event: 'inton_activation',
+    material: 'chakra',
+    prompt:
+      'Yin release Inton spiritual activation. Ethereal perception distortion and subtle mind pulse.',
+  },
+  {
+    id: 'third_eye',
+    name: 'THIRD EYE',
+    type: 'action',
+    event: 'third_eye_activation',
+    material: 'chakra',
+    prompt: 'Tenketsu third eye dōjutsu sensory pulse. Subtle high-frequency perception resonance.',
+  },
+  {
+    id: 'kali_manifestation',
+    name: 'KALI MANIFESTATION',
+    type: 'action',
+    event: 'kali_manifestation',
+    material: 'energy',
+    prompt:
+      'Imposing spectral multi-armed entity manifestation with deep ethereal resonance and layered energy.',
+  },
+  {
+    id: 'shiva_manifestation',
+    name: 'SHIVA MANIFESTATION',
+    type: 'action',
+    event: 'shiva_manifestation',
+    material: 'energy',
+    prompt:
+      'Divine destruction aura manifestation. Deep spiritual pressure pulse and massive energy aura.',
+  },
 ];
 
 export const AudioTestLab: React.FC = () => {
@@ -31,12 +120,56 @@ export const AudioTestLab: React.FC = () => {
   const [activeMode, setActiveMode] = useState<'woosh' | 'asset'>('woosh');
   const [analysis, setAnalysis] = useState<any>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [assetizeState, setAssetizeState] = useState<{
+    isAssetizing: boolean;
+    isAssetized: boolean;
+    assetUrl?: string;
+    message?: string;
+  }>({
+    isAssetizing: false,
+    isAssetized: false,
+  });
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const activeAudioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     handleGenerateWoosh(selectedPreset);
   }, [selectedPreset]);
+
+  const handleAssetizeSound = async () => {
+    const activeUrl = activeMode === 'woosh' ? wooshResult?.generatedFile : assetResult?.audioUrl;
+    if (!activeUrl) return;
+
+    setAssetizeState({ isAssetizing: true, isAssetized: false });
+    try {
+      const res = await fetch('/api/audio/assetize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fileUrl: activeUrl,
+          title: `${selectedPreset.name} (IA Assetizado)`,
+          event: selectedPreset.event,
+          material: selectedPreset.material,
+          layer: selectedPreset.type,
+          intensity: 'high',
+          tags: [selectedPreset.event, selectedPreset.material, 'woosh_ai', 'user_liked'],
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setAssetizeState({
+          isAssetizing: false,
+          isAssetized: true,
+          assetUrl: data.assetUrl,
+          message: data.message,
+        });
+      } else {
+        setAssetizeState({ isAssetizing: false, isAssetized: false, message: data.error });
+      }
+    } catch (e: any) {
+      setAssetizeState({ isAssetizing: false, isAssetized: false, message: e.message });
+    }
+  };
 
   /**
    * DIRECT WOOSH GENERATION MODE (NO FALLBACKS ALLOWED)
@@ -45,6 +178,7 @@ export const AudioTestLab: React.FC = () => {
     setIsLoading(true);
     setActiveMode('woosh');
     setStatusMessage(null);
+    setAssetizeState({ isAssetizing: false, isAssetized: false });
     try {
       const res = await fetch('/api/audio/generate-woosh-direct', {
         method: 'POST',
@@ -142,7 +276,7 @@ export const AudioTestLab: React.FC = () => {
         const blockSize = Math.floor(rawData.length / samples);
         const filteredData = [];
         for (let i = 0; i < samples; i++) {
-          let blockStart = blockSize * i;
+          const blockStart = blockSize * i;
           let sum = 0;
           for (let j = 0; j < blockSize; j++) {
             sum = sum + Math.abs(rawData[blockStart + j]);
@@ -186,8 +320,12 @@ export const AudioTestLab: React.FC = () => {
         <div className="flex items-center gap-3">
           <Activity className="w-7 h-7 text-cyan-400" />
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-neutral-100">AI AUDIO PROVIDER AUDIT LAB V5.0</h1>
-            <p className="text-xs text-neutral-400">Verificación Física de Inferencia SonyResearch/Woosh & Aislamiento de Respaldo</p>
+            <h1 className="text-xl font-bold tracking-tight text-neutral-100">
+              AI AUDIO PROVIDER AUDIT LAB V5.0
+            </h1>
+            <p className="text-xs text-neutral-400">
+              Verificación Física de Inferencia SonyResearch/Woosh & Aislamiento de Respaldo
+            </p>
           </div>
         </div>
 
@@ -313,17 +451,55 @@ export const AudioTestLab: React.FC = () => {
               >
                 <Square className="w-4 h-4" /> STOP
               </button>
+
+              <button
+                onClick={handleAssetizeSound}
+                disabled={
+                  assetizeState.isAssetizing ||
+                  (activeMode === 'woosh' && !wooshResult?.aiGenerationConfirmed) ||
+                  (activeMode === 'asset' && !assetResult?.audioUrl)
+                }
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-lg font-semibold text-xs border transition-all shadow-md ml-auto ${
+                  assetizeState.isAssetized
+                    ? 'bg-purple-950 text-purple-200 border-purple-600 ring-1 ring-purple-500/50'
+                    : 'bg-rose-950 hover:bg-rose-900 text-rose-200 border-rose-700'
+                }`}
+                title="Promueve este sonido generado por IA a la Biblioteca de Assets Permanente"
+              >
+                {assetizeState.isAssetizing ? (
+                  <>
+                    <RefreshCw className="w-4 h-4 animate-spin text-amber-300" /> Asseteando...
+                  </>
+                ) : assetizeState.isAssetized ? (
+                  <>
+                    <CheckCircle className="w-4 h-4 text-purple-400" /> ⭐ ¡Assetizado en Catálogo!
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-4 h-4 text-amber-300" /> ❤️ Guardar como Asset Permanente
+                  </>
+                )}
+              </button>
             </div>
 
             {/* Acoustic Prompt Display */}
             <div className="bg-neutral-900/80 border border-neutral-800 rounded-lg p-3 text-xs font-mono text-neutral-300">
-              <span className="text-neutral-500 font-sans block mb-1">Prompt Acústico para Woosh:</span>
-              <p className="text-cyan-300 leading-relaxed">"{wooshResult?.acousticPrompt || selectedPreset.prompt}"</p>
+              <span className="text-neutral-500 font-sans block mb-1">
+                Prompt Acústico para Woosh:
+              </span>
+              <p className="text-cyan-300 leading-relaxed">
+                "{wooshResult?.acousticPrompt || selectedPreset.prompt}"
+              </p>
             </div>
 
             {/* Waveform Visualizer */}
             <div className="bg-black/60 border border-neutral-800 rounded-lg p-3">
-              <canvas ref={canvasRef} width={600} height={80} className="w-full h-20 bg-black/40 rounded" />
+              <canvas
+                ref={canvasRef}
+                width={600}
+                height={80}
+                className="w-full h-20 bg-black/40 rounded"
+              />
             </div>
 
             {/* DIRECT CLI DIAGNOSTICS DISPLAY */}
@@ -345,24 +521,52 @@ export const AudioTestLab: React.FC = () => {
                   </div>
                   <div>
                     <span className="text-neutral-500 block">PHYSICAL WAV PATH:</span>
-                    <span className="text-amber-300 block truncate">{wooshResult.generatedFile || 'N/A'}</span>
+                    <span className="text-amber-300 block truncate">
+                      {wooshResult.generatedFile || 'N/A'}
+                    </span>
                   </div>
                   <div>
                     <span className="text-neutral-500 block">AI GENERATION CONFIRMED:</span>
-                    <span className={wooshResult.aiGenerationConfirmed ? 'text-emerald-400 font-bold block' : 'text-red-400 font-bold block'}>
-                      {wooshResult.aiGenerationConfirmed ? 'TRUE ✅ (Brand-New WAV Created)' : 'FALSE ❌ (No WAV Created)'}
+                    <span
+                      className={
+                        wooshResult.aiGenerationConfirmed
+                          ? 'text-emerald-400 font-bold block'
+                          : 'text-red-400 font-bold block'
+                      }
+                    >
+                      {wooshResult.aiGenerationConfirmed
+                        ? 'TRUE ✅ (Brand-New WAV Created)'
+                        : 'FALSE ❌ (No WAV Created)'}
                     </span>
                   </div>
                 </div>
 
                 <div className="bg-purple-950/40 p-2.5 rounded border border-purple-900/40 space-y-1.5">
                   <span className="text-neutral-400 text-[10px] block">COMMAND EXECUTED:</span>
-                  <div className="text-amber-200 text-[10px] font-mono break-all">{wooshResult.command}</div>
+                  <div className="text-amber-200 text-[10px] font-mono break-all">
+                    {wooshResult.command}
+                  </div>
                   <div className="flex flex-wrap gap-4 text-[10px] text-purple-300 pt-1">
-                    <span>Exit Code: <strong className={wooshResult.exitCode === 0 ? 'text-emerald-400' : 'text-red-400'}>{wooshResult.exitCode}</strong></span>
-                    <span>Generation Time: <strong>{wooshResult.generationTimeMs} ms</strong></span>
-                    <span>File Size: <strong>{(wooshResult.fileSize / 1024).toFixed(2)} KB</strong></span>
-                    <span>GPU/CUDA Status: <strong className="text-cyan-300">CPU (WOOSH_GPU_STATUS = UNAVAILABLE)</strong></span>
+                    <span>
+                      Exit Code:{' '}
+                      <strong
+                        className={wooshResult.exitCode === 0 ? 'text-emerald-400' : 'text-red-400'}
+                      >
+                        {wooshResult.exitCode}
+                      </strong>
+                    </span>
+                    <span>
+                      Generation Time: <strong>{wooshResult.generationTimeMs} ms</strong>
+                    </span>
+                    <span>
+                      File Size: <strong>{(wooshResult.fileSize / 1024).toFixed(2)} KB</strong>
+                    </span>
+                    <span>
+                      GPU/CUDA Status:{' '}
+                      <strong className="text-cyan-300">
+                        CPU (WOOSH_GPU_STATUS = UNAVAILABLE)
+                      </strong>
+                    </span>
                   </div>
                 </div>
 
