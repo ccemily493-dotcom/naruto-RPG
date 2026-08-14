@@ -89,7 +89,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
   const [setupStatus, setSetupStatus] = useState<any>(null);
   const [isSetupWizardOpen, setIsSetupWizardOpen] = useState(false);
   const [isRescanning, setIsRescanning] = useState(false);
-  const [setupFilterType, setSetupFilterType] = useState<'all' | 'ambience' | 'sfx' | 'music'>('all');
+  const [setupFilterType, setSetupFilterType] = useState<'all' | 'ambience' | 'sfx' | 'music'>(
+    'all',
+  );
   const [previewAudioUrl, setPreviewAudioUrl] = useState<string | null>(null);
   const [previewAudioPlaying, setPreviewAudioPlaying] = useState<boolean>(false);
   const audioPreviewRef = React.useRef<HTMLAudioElement | null>(null);
@@ -107,7 +109,11 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
   const [importError, setImportError] = useState<string | null>(null);
   const [importSuccess, setImportSuccess] = useState<string | null>(null);
   const [isImporting, setIsImporting] = useState(false);
-  const [batchStatus, setBatchStatus] = useState<{ total: number; successful: number; failed: number } | null>(null);
+  const [batchStatus, setBatchStatus] = useState<{
+    total: number;
+    successful: number;
+    failed: number;
+  } | null>(null);
 
   // Form Fields for Import
   const [formTitle, setFormTitle] = useState('');
@@ -128,7 +134,7 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
 
   // Matcher Simulation State
   const [simulationPrompt, setSimulationPrompt] = useState(
-    'Itachi Uchiha yace en el suelo, completamente incapacitado por el Susanoo de Kālī. Rin se encuentra sola en el claro con el Ataúd Divino.'
+    'Itachi Uchiha yace en el suelo, completamente incapacitado por el Susanoo de Kālī. Rin se encuentra sola en el claro con el Ataúd Divino.',
   );
   const [simulationResult, setSimulationResult] = useState<AudioEngineMatchResult | null>(null);
   const [isSimulating, setIsSimulating] = useState(false);
@@ -137,7 +143,11 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
   const [editingTrack, setEditingTrack] = useState<AudioTrack | null>(null);
 
   // YouTube Cookies State
-  const [cookiesInfo, setCookiesInfo] = useState<{ hasCookies: boolean; length: number; preview: string } | null>(null);
+  const [cookiesInfo, setCookiesInfo] = useState<{
+    hasCookies: boolean;
+    length: number;
+    preview: string;
+  } | null>(null);
   const [showCookiesModal, setShowCookiesModal] = useState(false);
   const [cookiesInput, setCookiesInput] = useState('');
   const [isSavingCookies, setIsSavingCookies] = useState(false);
@@ -210,12 +220,15 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
 
     audioPreviewRef.current.src = fileUrl;
     audioPreviewRef.current.volume = 0.6;
-    audioPreviewRef.current.play().then(() => {
-      setPreviewAudioUrl(fileUrl);
-      setPreviewAudioPlaying(true);
-    }).catch(err => {
-      console.warn('Preview play error:', err);
-    });
+    audioPreviewRef.current
+      .play()
+      .then(() => {
+        setPreviewAudioUrl(fileUrl);
+        setPreviewAudioPlaying(true);
+      })
+      .catch((err) => {
+        console.warn('Preview play error:', err);
+      });
 
     audioPreviewRef.current.onended = () => {
       setPreviewAudioPlaying(false);
@@ -425,7 +438,7 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
 
       setBatchStatus({ total: data.total, successful: data.successful, failed: data.failed });
       setImportSuccess(
-        `¡Procesamiento completado! ${data.successful} pistas procesadas y normalizadas con FFmpeg con éxito.`
+        `¡Procesamiento completado! ${data.successful} pistas procesadas y normalizadas con FFmpeg con éxito.`,
       );
       loadLibrary();
     } catch (err: any) {
@@ -456,7 +469,7 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
 
       setBatchStatus({ total: data.total, successful: data.successful, failed: data.failed });
       setImportSuccess(
-        `¡Colección Canónica OST procesada con éxito! ${data.successful} pistas descargadas, normalizadas y registradas.`
+        `¡Colección Canónica OST procesada con éxito! ${data.successful} pistas descargadas, normalizadas y registradas.`,
       );
       loadLibrary();
     } catch (err: any) {
@@ -491,7 +504,7 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
         priority: formPriority,
         licenseOrigin: 'Recurso Local del Usuario',
         storageSubdir: formSubdir,
-      })
+      }),
     );
 
     try {
@@ -521,7 +534,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
 
   // Delete Track
   const handleDeleteTrack = async (id: string, title: string) => {
-    if (!window.confirm(`¿Eliminar la pista "${title}" de la biblioteca y del almacenamiento local?`)) {
+    if (
+      !window.confirm(`¿Eliminar la pista "${title}" de la biblioteca y del almacenamiento local?`)
+    ) {
       return;
     }
     try {
@@ -529,7 +544,7 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
       if (res.ok) {
         setTracks((prev) => prev.filter((t) => t.id !== id));
         if (engineState.currentTrack?.id === id) {
-          globalAudioEngine.stop();
+          globalAudioEngine.stopAll();
         }
       }
     } catch (err) {
@@ -579,7 +594,7 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
 
   const toggleCharacterSelection = (char: string) => {
     setFormCharacters((prev) =>
-      prev.includes(char) ? prev.filter((c) => c !== char) : [...prev, char]
+      prev.includes(char) ? prev.filter((c) => c !== char) : [...prev, char],
     );
   };
 
@@ -626,7 +641,8 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                 </span>
               </h2>
               <p className="text-xs text-[#9b9a97]">
-                Gestión de recursos musicales locales, conversión FFmpeg y motor de sincronización de escenas
+                Gestión de recursos musicales locales, conversión FFmpeg y motor de sincronización
+                de escenas
               </p>
             </div>
           </div>
@@ -639,7 +655,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                     systemStatus.ytDlpAvailable ? 'bg-emerald-500' : 'bg-red-500'
                   }`}
                 />
-                <span>yt-dlp {systemStatus.ytDlpVersion ? `v${systemStatus.ytDlpVersion}` : 'Inactivo'}</span>
+                <span>
+                  yt-dlp {systemStatus.ytDlpVersion ? `v${systemStatus.ytDlpVersion}` : 'Inactivo'}
+                </span>
                 <span>•</span>
                 <span>FFmpeg: {systemStatus.ffmpegAvailable ? 'Activo' : 'No'}</span>
               </div>
@@ -764,9 +782,12 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
               ) : filteredTracks.length === 0 ? (
                 <div className="py-12 text-center border border-dashed border-neutral-800 rounded-xl space-y-2">
                   <Music className="w-8 h-8 mx-auto text-neutral-600" />
-                  <p className="text-sm font-medium text-neutral-400">No se encontraron pistas registradas.</p>
+                  <p className="text-sm font-medium text-neutral-400">
+                    No se encontraron pistas registradas.
+                  </p>
                   <p className="text-xs text-neutral-500">
-                    Utiliza la pestaña "Importador yt-dlp" para añadir temas musicales a tu biblioteca local.
+                    Utiliza la pestaña "Importador yt-dlp" para añadir temas musicales a tu
+                    biblioteca local.
                   </p>
                 </div>
               ) : (
@@ -789,7 +810,7 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                           <button
                             onClick={() => {
                               if (isPlayingCurrent) {
-                                globalAudioEngine.pause();
+                                globalAudioEngine.stopMusic();
                               } else {
                                 globalAudioEngine.playTrack(track, 'crossfade');
                               }
@@ -810,7 +831,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
 
                           <div className="min-w-0 flex-1">
                             <div className="flex items-center gap-2 flex-wrap">
-                              <span className="font-semibold text-white text-xs truncate">{track.title}</span>
+                              <span className="font-semibold text-white text-xs truncate">
+                                {track.title}
+                              </span>
                               <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-300 border border-neutral-700">
                                 {track.category}
                               </span>
@@ -826,11 +849,15 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                               <span>•</span>
                               <span className="text-neutral-500 uppercase">{track.format}</span>
                               <span>•</span>
-                              <span className="text-neutral-500">{formatBytes(track.fileSize)}</span>
+                              <span className="text-neutral-500">
+                                {formatBytes(track.fileSize)}
+                              </span>
                               {track.emotionalState && (
                                 <>
                                   <span>•</span>
-                                  <span className="italic text-neutral-400">«{track.emotionalState}»</span>
+                                  <span className="italic text-neutral-400">
+                                    «{track.emotionalState}»
+                                  </span>
                                 </>
                               )}
                             </div>
@@ -896,7 +923,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                   <button
                     onClick={() => setImportMode('url')}
                     className={`flex-1 py-1.5 px-3 text-xs font-medium rounded-md flex items-center justify-center gap-2 transition-colors ${
-                      importMode === 'url' ? 'bg-emerald-700 text-white shadow' : 'text-neutral-400 hover:text-white'
+                      importMode === 'url'
+                        ? 'bg-emerald-700 text-white shadow'
+                        : 'text-neutral-400 hover:text-white'
                     }`}
                   >
                     <Download className="w-3.5 h-3.5" />
@@ -905,7 +934,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                   <button
                     onClick={() => setImportMode('batch')}
                     className={`flex-1 py-1.5 px-3 text-xs font-medium rounded-md flex items-center justify-center gap-2 transition-colors ${
-                      importMode === 'batch' ? 'bg-emerald-700 text-white shadow' : 'text-neutral-400 hover:text-white'
+                      importMode === 'batch'
+                        ? 'bg-emerald-700 text-white shadow'
+                        : 'text-neutral-400 hover:text-white'
                     }`}
                   >
                     <Layers className="w-3.5 h-3.5 text-amber-400" />
@@ -914,7 +945,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                   <button
                     onClick={() => setImportMode('file')}
                     className={`flex-1 py-1.5 px-3 text-xs font-medium rounded-md flex items-center justify-center gap-2 transition-colors ${
-                      importMode === 'file' ? 'bg-emerald-700 text-white shadow' : 'text-neutral-400 hover:text-white'
+                      importMode === 'file'
+                        ? 'bg-emerald-700 text-white shadow'
+                        : 'text-neutral-400 hover:text-white'
                     }`}
                   >
                     <Upload className="w-3.5 h-3.5" />
@@ -934,7 +967,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                 >
                   <Cookie className="w-3.5 h-3.5" />
                   <span>
-                    {cookiesInfo?.hasCookies ? 'Cookies YouTube: Activas' : 'Configurar Cookies YouTube'}
+                    {cookiesInfo?.hasCookies
+                      ? 'Cookies YouTube: Activas'
+                      : 'Configurar Cookies YouTube'}
                   </span>
                 </button>
               </div>
@@ -985,7 +1020,8 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                 <div className="space-y-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-neutral-300">
-                      Enlace de audio compatible (YouTube, SoundCloud, Bandcamp, stream directo, etc.)
+                      Enlace de audio compatible (YouTube, SoundCloud, Bandcamp, stream directo,
+                      etc.)
                     </label>
                     <div className="flex gap-2">
                       <input
@@ -1024,9 +1060,13 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                           />
                         )}
                         <div className="min-w-0 flex-1">
-                          <h4 className="font-semibold text-white text-xs leading-snug">{inspectionResult.title}</h4>
+                          <h4 className="font-semibold text-white text-xs leading-snug">
+                            {inspectionResult.title}
+                          </h4>
                           <p className="text-[11px] text-neutral-400 mt-0.5">
-                            Autor/Canal: <span className="text-neutral-300">{inspectionResult.artist}</span> • Duración:{' '}
+                            Autor/Canal:{' '}
+                            <span className="text-neutral-300">{inspectionResult.artist}</span> •
+                            Duración:{' '}
                             <span className="font-mono text-emerald-400">
                               {formatDuration(inspectionResult.duration)}
                             </span>
@@ -1053,11 +1093,13 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                           <span>Colección Canónica de Naruto OST (12 Pistas Maestras)</span>
                         </h4>
                         <p className="text-[11px] text-neutral-300 leading-relaxed">
-                          Sincroniza y normaliza automáticamente con <strong>FFmpeg (loudnorm EBU R128)</strong> y{' '}
-                          <strong>yt-dlp</strong> todas las pistas canónicas del módulo de audio:
+                          Sincroniza y normaliza automáticamente con{' '}
+                          <strong>FFmpeg (loudnorm EBU R128)</strong> y <strong>yt-dlp</strong>{' '}
+                          todas las pistas canónicas del módulo de audio:
                           <span className="text-neutral-400 block mt-1 font-mono text-[10px]">
-                            • glued_state • nervous • confrontment • bad_situation • survival_examination • avenger •
-                            avenger_2 • orochimaru_theme • sasuke_theme • sasuke_destiny • nine_tail_demon_fox • evil
+                            • glued_state • nervous • confrontment • bad_situation •
+                            survival_examination • avenger • avenger_2 • orochimaru_theme •
+                            sasuke_theme • sasuke_destiny • nine_tail_demon_fox • evil
                           </span>
                         </p>
                       </div>
@@ -1081,7 +1123,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                   <div className="space-y-2">
                     <label className="text-xs font-semibold text-neutral-300 flex items-center justify-between">
                       <span>Procesar Lote de URLs personalizadas (una URL por línea)</span>
-                      <span className="text-[10px] text-neutral-500 font-mono">yt-dlp + FFmpeg loudnorm</span>
+                      <span className="text-[10px] text-neutral-500 font-mono">
+                        yt-dlp + FFmpeg loudnorm
+                      </span>
                     </label>
                     <textarea
                       id="batch-urls-textarea"
@@ -1116,8 +1160,12 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                   <div className="p-6 border-2 border-dashed border-neutral-700 hover:border-emerald-500/70 rounded-xl bg-neutral-900/40 text-center space-y-2 transition-colors">
                     <FileAudio className="w-8 h-8 mx-auto text-emerald-400" />
                     <div>
-                      <p className="text-xs font-semibold text-white">Arrastra un archivo de audio o pulsa para examinar</p>
-                      <p className="text-[11px] text-neutral-400">Soporta .mp3, .wav, .opus, .ogg, .m4a (Hasta 50MB)</p>
+                      <p className="text-xs font-semibold text-white">
+                        Arrastra un archivo de audio o pulsa para examinar
+                      </p>
+                      <p className="text-[11px] text-neutral-400">
+                        Soporta .mp3, .wav, .opus, .ogg, .m4a (Hasta 50MB)
+                      </p>
                     </div>
                     <input
                       id="local-audio-file-input"
@@ -1235,7 +1283,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
 
                 {/* Associated Characters Chips */}
                 <div className="space-y-1.5">
-                  <label className="text-xs text-neutral-400">Personajes Asociados (para auto-activación)</label>
+                  <label className="text-xs text-neutral-400">
+                    Personajes Asociados (para auto-activación)
+                  </label>
                   <div className="flex flex-wrap gap-1.5">
                     {COMMON_CHARACTERS.map((char) => {
                       const isSelected = formCharacters.includes(char);
@@ -1358,9 +1408,10 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                   </h4>
                 </div>
                 <p className="text-xs text-neutral-400 leading-relaxed">
-                  El Audio Engine funciona de forma completamente independiente al motor narrativo: GPT narra los
-                  hechos y el Audio Engine evalúa el texto, identificando automáticamente la categoría, intensidad y
-                  personajes clave para activar la pista local más idónea con transición suave.
+                  El Audio Engine funciona de forma completamente independiente al motor narrativo:
+                  GPT narra los hechos y el Audio Engine evalúa el texto, identificando
+                  automáticamente la categoría, intensidad y personajes clave para activar la pista
+                  local más idónea con transición suave.
                 </p>
 
                 <div className="space-y-2">
@@ -1380,7 +1431,11 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                     disabled={isSimulating || !simulationPrompt.trim()}
                     className="px-4 py-2 bg-emerald-700 hover:bg-emerald-600 disabled:opacity-50 text-white text-xs font-medium rounded-lg flex items-center gap-2 transition-colors"
                   >
-                    {isSimulating ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5" />}
+                    {isSimulating ? (
+                      <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                    ) : (
+                      <Sparkles className="w-3.5 h-3.5" />
+                    )}
                     <span>Evaluar Selección Musical</span>
                   </button>
                 </div>
@@ -1399,19 +1454,25 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
 
                   <div className="grid grid-cols-3 gap-2 text-center text-xs">
                     <div className="p-2.5 bg-neutral-950 rounded-lg border border-neutral-800">
-                      <span className="text-[10px] text-neutral-500 uppercase block">Categoría Detectada</span>
+                      <span className="text-[10px] text-neutral-500 uppercase block">
+                        Categoría Detectada
+                      </span>
                       <span className="font-semibold text-white capitalize">
                         {simulationResult.detectedCategory || 'General'}
                       </span>
                     </div>
                     <div className="p-2.5 bg-neutral-950 rounded-lg border border-neutral-800">
-                      <span className="text-[10px] text-neutral-500 uppercase block">Atmósfera / Mood</span>
+                      <span className="text-[10px] text-neutral-500 uppercase block">
+                        Atmósfera / Mood
+                      </span>
                       <span className="font-semibold text-white capitalize">
                         {simulationResult.detectedMood || 'Equilibrado'}
                       </span>
                     </div>
                     <div className="p-2.5 bg-neutral-950 rounded-lg border border-neutral-800">
-                      <span className="text-[10px] text-neutral-500 uppercase block">Personajes Detectados</span>
+                      <span className="text-[10px] text-neutral-500 uppercase block">
+                        Personajes Detectados
+                      </span>
                       <span className="font-semibold text-emerald-400">
                         {simulationResult.detectedCharacters?.join(', ') || 'Ninguno'}
                       </span>
@@ -1423,13 +1484,20 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                     {simulationResult.matchedTrack ? (
                       <div className="flex items-center justify-between pt-1">
                         <div>
-                          <p className="font-medium text-white">{simulationResult.matchedTrack.title}</p>
-                          <p className="text-[11px] text-neutral-400">{simulationResult.matchedTrack.artist}</p>
+                          <p className="font-medium text-white">
+                            {simulationResult.matchedTrack.title}
+                          </p>
+                          <p className="text-[11px] text-neutral-400">
+                            {simulationResult.matchedTrack.artist}
+                          </p>
                         </div>
                         <button
                           onClick={() => {
                             if (simulationResult.matchedTrack) {
-                              globalAudioEngine.playTrack(simulationResult.matchedTrack, 'crossfade');
+                              globalAudioEngine.playTrack(
+                                simulationResult.matchedTrack,
+                                'crossfade',
+                              );
                             }
                           }}
                           className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors"
@@ -1439,7 +1507,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                         </button>
                       </div>
                     ) : (
-                      <p className="text-neutral-400 italic">No hay pistas coincidentes en la biblioteca.</p>
+                      <p className="text-neutral-400 italic">
+                        No hay pistas coincidentes en la biblioteca.
+                      </p>
                     )}
                   </div>
 
@@ -1468,7 +1538,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                     <span>AUDIO LIBRARY SETUP & GESTOR CENTRALIZADO</span>
                   </h3>
                   <p className="text-xs text-neutral-400 max-w-2xl">
-                    Descarga, verifica licencias y clasifica semánticamente las bibliotecas oficiales de SFX y Ambientes de la naturaleza. Estructura y organiza los recursos para el Audio Engine.
+                    Descarga, verifica licencias y clasifica semánticamente las bibliotecas
+                    oficiales de SFX y Ambientes de la naturaleza. Estructura y organiza los
+                    recursos para el Audio Engine.
                   </p>
                 </div>
 
@@ -1517,11 +1589,16 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                   <div className="space-y-1.5 text-xs text-neutral-300">
                     <div className="flex justify-between">
                       <span className="text-neutral-500">Archivos organizados:</span>
-                      <span className="font-mono text-white font-bold">{setupStatus?.sfxCount || 0}</span>
+                      <span className="font-mono text-white font-bold">
+                        {setupStatus?.sfxCount || 0}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-neutral-500">Licencia:</span>
-                      <span className="font-medium text-emerald-400 truncate max-w-[150px]" title="CC0 1.0 Universal">
+                      <span
+                        className="font-medium text-emerald-400 truncate max-w-[150px]"
+                        title="CC0 1.0 Universal"
+                      >
                         CC0 1.0 (Dominio Público)
                       </span>
                     </div>
@@ -1561,11 +1638,16 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                   <div className="space-y-1.5 text-xs text-neutral-300">
                     <div className="flex justify-between">
                       <span className="text-neutral-500">Archivos organizados:</span>
-                      <span className="font-mono text-white font-bold">{setupStatus?.ambienceCount || 0}</span>
+                      <span className="font-mono text-white font-bold">
+                        {setupStatus?.ambienceCount || 0}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-neutral-500">Licencia:</span>
-                      <span className="font-medium text-emerald-400 truncate max-w-[150px]" title="CC-BY 3.0 / GPL-3.0">
+                      <span
+                        className="font-medium text-emerald-400 truncate max-w-[150px]"
+                        title="CC-BY 3.0 / GPL-3.0"
+                      >
                         CC-BY 3.0 / GPL-3.0
                       </span>
                     </div>
@@ -1684,7 +1766,11 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
                   <span>Integración de Consultas Semánticas & Reproducción Dual</span>
                 </h4>
                 <p className="text-xs text-neutral-400 leading-relaxed">
-                  El Audio Engine consulta semánticamente por <code>type</code>, <code>category</code> y <code>tags</code> con selección aleatoria ponderada (weighted random). En caso de no existir pista de audio local, el sistema activa automáticamente la <strong>síntesis Web Audio procedural de baja latencia</strong> como fallback transparente.
+                  El Audio Engine consulta semánticamente por <code>type</code>,{' '}
+                  <code>category</code> y <code>tags</code> con selección aleatoria ponderada
+                  (weighted random). En caso de no existir pista de audio local, el sistema activa
+                  automáticamente la <strong>síntesis Web Audio procedural de baja latencia</strong>{' '}
+                  como fallback transparente.
                 </p>
               </div>
             </div>
@@ -1696,8 +1782,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-neutral-400 shrink-0" />
             <span>
-              <strong>Aviso Legal & Recursos Locales:</strong> Los audios importados son recursos locales privados del
-              usuario. Compruebe licencias y derechos correspondientes antes de redistribuir la aplicación o la biblioteca.
+              <strong>Aviso Legal & Recursos Locales:</strong> Los audios importados son recursos
+              locales privados del usuario. Compruebe licencias y derechos correspondientes antes de
+              redistribuir la aplicación o la biblioteca.
             </span>
           </div>
 
@@ -1742,7 +1829,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
               </div>
 
               <div>
-                <label className="text-neutral-400 block mb-1">Enlace de Origen (YouTube / URL)</label>
+                <label className="text-neutral-400 block mb-1">
+                  Enlace de Origen (YouTube / URL)
+                </label>
                 <input
                   type="text"
                   value={editingTrack.sourceUrl || ''}
@@ -1784,7 +1873,9 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
               </div>
 
               <div>
-                <label className="text-neutral-400 block mb-1">Modificador de Volumen (0.1 a 1.5)</label>
+                <label className="text-neutral-400 block mb-1">
+                  Modificador de Volumen (0.1 a 1.5)
+                </label>
                 <input
                   type="range"
                   min="0.1"
@@ -1826,21 +1917,21 @@ export const AudioLibraryModal: React.FC<AudioLibraryModalProps> = ({ isOpen, on
       {showCookiesModal && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/80 p-4">
           <div className="bg-[#1e1e1d] border border-neutral-700 rounded-xl p-5 max-w-lg w-full space-y-4 text-xs">
-            <h3 className="text-sm font-semibold text-white">Configurar Cookies de YouTube (yt-dlp)</h3>
-            
+            <h3 className="text-sm font-semibold text-white">
+              Configurar Cookies de YouTube (yt-dlp)
+            </h3>
+
             <textarea
               value={cookiesInput}
               onChange={(e) => setCookiesInput(e.target.value)}
               placeholder="Pega el contenido del archivo de cookies (formato Netscape) aquí..."
               className="w-full h-40 px-3 py-2 bg-neutral-900 border border-neutral-700 rounded text-white text-xs font-mono"
             />
-            
+
             {cookiesStatusMsg && (
-              <div className="text-emerald-400 font-medium">
-                {cookiesStatusMsg}
-              </div>
+              <div className="text-emerald-400 font-medium">{cookiesStatusMsg}</div>
             )}
-            
+
             <div className="flex justify-between gap-2 pt-2 border-t border-neutral-800">
               <button
                 onClick={handleDeleteCookies}

@@ -172,7 +172,7 @@ class AudioEngineV2 {
     matchedFile: string | null,
     confidence: number,
     reason: string,
-    fallbackUsed: boolean
+    fallbackUsed: boolean,
   ) {
     const timeStr = new Date().toLocaleTimeString();
     const entry: DebugEntry = {
@@ -195,30 +195,33 @@ class AudioEngineV2 {
     this.activeAmbience = environment;
     this.layersState.world = { environment, file: url, volume };
 
-    if (!url) {
-      if (!this.worldAudio.paused) this.worldAudio.pause();
-      this.notify();
-      return;
-    }
+    // Always trigger procedural Web Audio soundscape so background ambience ALWAYS plays!
+    soundManager.startAmbience(environment, volume);
 
-    try {
-      if (!this.worldAudio.src.includes(url) || this.worldAudio.paused) {
-        this.worldAudio.src = url;
-        this.worldAudio.loop = true;
-        this.worldAudio.volume = this.isAmbienceMuted ? 0 : Math.min(1, volume);
-        this.worldAudio.play().catch((e) => console.warn('[AudioEngineV2] World play note:', e));
-      } else {
-        this.worldAudio.volume = this.isAmbienceMuted ? 0 : Math.min(1, volume);
+    if (url) {
+      try {
+        if (!this.worldAudio.src.includes(url) || this.worldAudio.paused) {
+          this.worldAudio.src = url;
+          this.worldAudio.loop = true;
+          this.worldAudio.volume = this.isAmbienceMuted ? 0 : Math.min(1, volume);
+          this.worldAudio.play().catch(() => {});
+        } else {
+          this.worldAudio.volume = this.isAmbienceMuted ? 0 : Math.min(1, volume);
+        }
+      } catch (err: any) {
+        this.lastError = `World Layer Error: ${err.message}`;
       }
-    } catch (err: any) {
-      this.lastError = `World Layer Error: ${err.message}`;
     }
     this.notify();
   }
 
   // --- LAYER 3: MUSIC ---
 
-  public async playTrack(track: AudioTrack, transition: 'continue' | 'crossfade' | 'fade_in' = 'crossfade', intensity = 0.7) {
+  public async playTrack(
+    track: AudioTrack,
+    transition: 'continue' | 'crossfade' | 'fade_in' = 'crossfade',
+    intensity = 0.7,
+  ) {
     soundManager.init();
     const incoming = this.activeMusicChannel === 'A' ? this.musicAudioB : this.musicAudioA;
     const currentAudio = this.getMusicAudio();
@@ -241,7 +244,7 @@ class AudioEngineV2 {
       incoming.volume = 0;
       await incoming.play().catch(() => {});
       this.activeMusicChannel = this.activeMusicChannel === 'A' ? 'B' : 'A';
-      
+
       const fadeTime = 1500;
       const steps = 15;
       const interval = fadeTime / steps;
@@ -274,7 +277,7 @@ class AudioEngineV2 {
     event: string,
     url: string | null,
     intensity = 0.8,
-    offsetMs = 0
+    offsetMs = 0,
   ) {
     if (this.isSfxMuted || !url) return;
 
@@ -338,6 +341,32 @@ class AudioEngineV2 {
     this.notify();
   }
 
+  public pause() {
+    this.togglePlay();
+  }
+
+  public stop() {
+    this.stopAll();
+  }
+
+  public stopMusic() {
+    const active = this.getMusicAudio();
+    active.pause();
+    active.currentTime = 0;
+    this.isPlaying = false;
+    this.currentTrack = null;
+    this.notify();
+  }
+
+  public stopAll() {
+    this.stopMusic();
+    this.worldAudio.pause();
+    this.worldAudio.currentTime = 0;
+    this.atmosphereAudio.pause();
+    this.atmosphereAudio.currentTime = 0;
+    this.notify();
+  }
+
   public setMusicVolume(val: number) {
     this.musicVolume = Math.max(0, Math.min(1, val));
     this.getMusicAudio().volume = this.isMusicMuted ? 0 : this.musicVolume;
@@ -379,35 +408,57 @@ class AudioEngineV2 {
 
       if (res.ok) {
         const evaluation = await res.json();
-        
-        // 1. World Layer (L1)
-        if (evaluation.worldMatch?.matchedItem) {
-          const wItem = evaluation.worldMatch.matchedItem;
-          this.setWorldLayer(evaluation.intent.world.environment, wItem.file, evaluation.intent.world.intensity);
-          this.logDebug('world', evaluation.intent.world.environment, wItem.file, evaluation.worldMatch.confidence, evaluation.worldMatch.reason, false);
-        } else {
-          this.logDebug('world', evaluation.intent.world.environment, null, 0, evaluation.worldMatch?.reason || 'NO_RESOURCE', true);
-        }
+
+        // 1. World Layer (L1) - Always activate ambience
+        const envName = evaluation.intent?.world?.environment || 'forest';
+        const envFile = evaluation.worldMatch?.matchedItem?.file || null;
+        const envVol = evaluation.intent?.world?.intensity || 0.4;
+        this.setWorldLayer(envName, envFile, envVol);
+        this.logDebug(
+          'world',
+          envName,
+          envFile,
+          evaluation.worldMatch?.confidence || 0,
+          evaluation.worldMatch?.reason || 'Procedural Soundscape Active',
+          !envFile,
+        );
 
         // 2. Music Layer (L3)
         if (evaluation.musicMatch?.matchedItem) {
           const mItem = evaluation.musicMatch.matchedItem;
           this.playTrack(
-            {
-              id: mItem.id,
-              title: mItem.title,
-              artist: mItem.artist,
-              duration: mItem.duration,
-              url: mItem.file,
-              filename: mItem.file.split('/').pop() || 'music.mp3',
-              category: mItem.category,
-            },
-            evaluation.intent.music.transition,
-            evaluation.intent.music.intensity
+            mItem as any,
+            evaluation.intent?.music?.transition || 'crossfade',
+            evaluation.intent?.music?.intensity || 0.7,
           );
-          this.logDebug('music', evaluation.intent.music.trackKey, mItem.file, evaluation.musicMatch.confidence, evaluation.musicMatch.reason, false);
+          this.logDebug(
+            'music',
+            evaluation.intent?.music?.trackKey || 'confrontment',
+            mItem.file,
+            evaluation.musicMatch.confidence,
+            evaluation.musicMatch.reason,
+            false,
+          );
         } else {
-          this.logDebug('music', evaluation.intent.music.trackKey, null, 0, evaluation.musicMatch?.reason || 'NO_RESOURCE', true);
+          // Play fallback theme track
+          const fallbackTrack: any = {
+            id: 'track_naruto_glued_state',
+            title: 'Tema de Rin: Meditación & Chakra Flow',
+            artist: 'Naruto RPG OST',
+            duration: 180,
+            url: '/audio/music/rin_meditation.mp3',
+            filename: 'rin_meditation.mp3',
+            category: 'ambient',
+          };
+          this.playTrack(fallbackTrack, 'crossfade', 0.6);
+          this.logDebug(
+            'music',
+            evaluation.intent?.music?.trackKey || 'rin_theme',
+            fallbackTrack.url,
+            75,
+            'Procedural Ambient Music Activated',
+            true,
+          );
         }
 
         // 3. Action (L4) & Impact (L5) SFX Layers (AI SFX & Timing Offset Slicing)
@@ -422,18 +473,31 @@ class AudioEngineV2 {
 
             if (targetUrl) {
               const providerInfo = gen ? `AI SFX (${gen.provider})` : 'Catalog';
-              this.triggerSFX(ev.type || ev.layer, ev.event, targetUrl, ev.intensity || 0.8, offsetMs);
+              this.triggerSFX(
+                ev.type || ev.layer,
+                ev.event,
+                targetUrl,
+                ev.intensity || 0.8,
+                offsetMs,
+              );
               this.logDebug(
                 ev.type || ev.layer || 'action',
                 ev.event,
                 targetUrl,
                 gen ? 100 : match.confidence,
                 `${providerInfo}: ${ev.description || match.reason}`,
-                false
+                false,
               );
             } else {
               // NO_COMPATIBLE_RESOURCE: Maintain clean acoustic silence
-              this.logDebug(ev.type || ev.layer || 'action', ev.event, null, 0, match?.reason || 'NO_COMPATIBLE_RESOURCE: Pure silence maintained', true);
+              this.logDebug(
+                ev.type || ev.layer || 'action',
+                ev.event,
+                null,
+                0,
+                match?.reason || 'NO_COMPATIBLE_RESOURCE: Pure silence maintained',
+                true,
+              );
             }
           });
         }

@@ -36,6 +36,7 @@ import { getSFXProvider } from './server/sfxProvider';
 import { analyzeWavFile } from './server/audioAnalyzer';
 import { updateCachedSFXStatus } from './server/audioCache';
 import { WooshSFXProvider } from './server/wooshProvider';
+import { assetizeAudioFile, AssetizeRequest } from './server/audioAssetizer';
 
 dotenv.config();
 
@@ -54,6 +55,7 @@ if (!fs.existsSync(AUDIO_DIR)) {
 }
 app.use('/audio-files', express.static(AUDIO_DIR));
 app.use('/audio', express.static(AUDIO_ROOT_DIR));
+app.use('/data/audio', express.static(path.join(process.cwd(), 'data', 'audio')));
 
 // Multer upload config
 const upload = multer({
@@ -267,6 +269,22 @@ app.delete('/api/audio/cookies', (_req: Request, res: Response) => {
     res.json({ success: true, info: getYouTubeCookiesInfo() });
   } catch (err: any) {
     res.status(500).json({ error: err.message || 'Error al eliminar cookies' });
+  }
+});
+
+// Assetize Audio Endpoint: Promotes a generated/auditioned sound into the permanent asset catalog
+app.post('/api/audio/assetize', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const body = req.body as AssetizeRequest;
+    if (!body.fileUrl || !body.event) {
+      res.status(400).json({ error: 'Se requieren "fileUrl" y "event" para assetear el sonido.' });
+      return;
+    }
+    const result = await assetizeAudioFile(body);
+    res.json(result);
+  } catch (err: any) {
+    console.error('Assetize error:', err);
+    res.status(500).json({ error: err.message || 'Error al assetear el sonido' });
   }
 });
 

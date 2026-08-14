@@ -893,7 +893,7 @@ export async function executeAudioLibrarySetup(
       step: 'error',
       percent: 0,
       message: `Error en la instalación de la biblioteca: ${lastSetupError}`,
-      details: { error: lastSetupError },
+      details: { error: lastSetupError || undefined },
     });
     throw err;
   } finally {

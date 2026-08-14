@@ -24,7 +24,7 @@ import {
   Bug,
   CheckCircle2,
   XCircle,
-  Clock
+  Clock,
 } from 'lucide-react';
 import { globalAudioEngine } from '../utils/audioEngine';
 
@@ -33,13 +33,48 @@ interface AudioEngineBarProps {
 }
 
 const ENVIRONMENTS = [
-  { id: 'forest', label: 'Bosque', icon: Trees, color: 'text-emerald-400 border-emerald-500/40 bg-emerald-950/40' },
-  { id: 'forest_night', label: 'Bosque Nocturno', icon: Wind, color: 'text-blue-400 border-blue-500/40 bg-blue-950/40' },
-  { id: 'village', label: 'Aldea', icon: Home, color: 'text-amber-400 border-amber-500/40 bg-amber-950/40' },
-  { id: 'cave', label: 'Cueva / Gruta', icon: Mountain, color: 'text-stone-400 border-stone-500/40 bg-stone-900/60' },
-  { id: 'rain', label: 'Lluvia', icon: Droplets, color: 'text-cyan-400 border-cyan-500/40 bg-cyan-950/40' },
-  { id: 'ruins', label: 'Ruinas', icon: Flame, color: 'text-orange-400 border-orange-500/40 bg-orange-950/40' },
-  { id: 'silence', label: 'Silencio', icon: VolumeX, color: 'text-neutral-400 border-neutral-700 bg-neutral-900/40' },
+  {
+    id: 'forest',
+    label: 'Bosque',
+    icon: Trees,
+    color: 'text-emerald-400 border-emerald-500/40 bg-emerald-950/40',
+  },
+  {
+    id: 'forest_night',
+    label: 'Bosque Nocturno',
+    icon: Wind,
+    color: 'text-blue-400 border-blue-500/40 bg-blue-950/40',
+  },
+  {
+    id: 'village',
+    label: 'Aldea',
+    icon: Home,
+    color: 'text-amber-400 border-amber-500/40 bg-amber-950/40',
+  },
+  {
+    id: 'cave',
+    label: 'Cueva / Gruta',
+    icon: Mountain,
+    color: 'text-stone-400 border-stone-500/40 bg-stone-900/60',
+  },
+  {
+    id: 'rain',
+    label: 'Lluvia',
+    icon: Droplets,
+    color: 'text-cyan-400 border-cyan-500/40 bg-cyan-950/40',
+  },
+  {
+    id: 'ruins',
+    label: 'Ruinas',
+    icon: Flame,
+    color: 'text-orange-400 border-orange-500/40 bg-orange-950/40',
+  },
+  {
+    id: 'silence',
+    label: 'Silencio',
+    icon: VolumeX,
+    color: 'text-neutral-400 border-neutral-700 bg-neutral-900/40',
+  },
 ];
 
 export const AudioEngineBar: React.FC<AudioEngineBarProps> = ({ onOpenLibrary }) => {
@@ -97,13 +132,19 @@ export const AudioEngineBar: React.FC<AudioEngineBarProps> = ({ onOpenLibrary })
                 : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700'
             }`}
           >
-            {engineState.isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}
+            {engineState.isPlaying ? (
+              <Pause className="w-4 h-4" />
+            ) : (
+              <Play className="w-4 h-4 ml-0.5" />
+            )}
           </button>
 
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <span className="font-semibold text-neutral-100 truncate text-xs sm:text-sm">
-                {current ? current.title : 'Audio Engine V2 — 5 Capas Activas (World, Atmosphere, Music, Action, Impact)'}
+                {current
+                  ? current.title
+                  : 'Audio Engine V2 — 5 Capas Activas (World, Atmosphere, Music, Action, Impact)'}
               </span>
               {current && (
                 <span className="text-[9px] uppercase font-mono px-1.5 py-0.5 rounded border bg-neutral-800 text-emerald-400 border-emerald-800/60 shrink-0">
@@ -113,7 +154,9 @@ export const AudioEngineBar: React.FC<AudioEngineBarProps> = ({ onOpenLibrary })
             </div>
 
             <div className="flex items-center gap-2 text-[11px] text-neutral-400">
-              <span className="truncate">{current ? current.artist : 'Sin reproducción de música activa'}</span>
+              <span className="truncate">
+                {current ? current.artist : 'Sin reproducción de música activa'}
+              </span>
               {current && (
                 <>
                   <span className="text-neutral-600">•</span>
@@ -133,15 +176,25 @@ export const AudioEngineBar: React.FC<AudioEngineBarProps> = ({ onOpenLibrary })
             <span>5 Capas:</span>
           </div>
 
-          <span className="text-cyan-400 font-mono" title="Layer 1: World">L1:{layers.world.environment}</span>
+          <span className="text-cyan-400 font-mono" title="Layer 1: World">
+            L1:{layers.world.environment}
+          </span>
           <span className="text-neutral-700">|</span>
-          <span className="text-blue-400 font-mono" title="Layer 2: Atmosphere">L2:{layers.atmosphere.detail}</span>
+          <span className="text-blue-400 font-mono" title="Layer 2: Atmosphere">
+            L2:{layers.atmosphere.detail}
+          </span>
           <span className="text-neutral-700">|</span>
-          <span className="text-emerald-400 font-mono" title="Layer 3: Music">L3:{current ? 'OST' : 'Amb'}</span>
+          <span className="text-emerald-400 font-mono" title="Layer 3: Music">
+            L3:{current ? 'OST' : 'Amb'}
+          </span>
           <span className="text-neutral-700">|</span>
-          <span className="text-amber-400 font-mono" title="Layer 4: Action">L4:{layers.action.currentEvent || 'idle'}</span>
+          <span className="text-amber-400 font-mono" title="Layer 4: Action">
+            L4:{layers.action.currentEvent || 'idle'}
+          </span>
           <span className="text-neutral-700">|</span>
-          <span className="text-red-400 font-mono" title="Layer 5: Impact">L5:{layers.impact.currentEvent || 'idle'}</span>
+          <span className="text-red-400 font-mono" title="Layer 5: Impact">
+            L5:{layers.impact.currentEvent || 'idle'}
+          </span>
         </div>
 
         {/* Right Controls */}
@@ -211,14 +264,20 @@ export const AudioEngineBar: React.FC<AudioEngineBarProps> = ({ onOpenLibrary })
                     });
                     const gen = await res.json();
                     if (gen.aiGenerationConfirmed && gen.generatedFile) {
-                      globalAudioEngine.triggerSFX('action', 'kunai_throw', gen.generatedFile, 0.85, 0);
+                      globalAudioEngine.triggerSFX(
+                        'action',
+                        'kunai_throw',
+                        gen.generatedFile,
+                        0.85,
+                        0,
+                      );
                       globalAudioEngine.logDebug(
                         'action',
                         'kunai_throw',
                         gen.generatedFile,
                         100,
                         `🟢 [AI GENERATED - Woosh] File: ${gen.generatedFile} (${(gen.fileSize / 1024).toFixed(1)} KB) | ${gen.generationTimeMs}ms`,
-                        false
+                        false,
                       );
                     } else {
                       globalAudioEngine.logDebug(
@@ -227,7 +286,7 @@ export const AudioEngineBar: React.FC<AudioEngineBarProps> = ({ onOpenLibrary })
                         '',
                         0,
                         `🔴 [AI GENERATION FAILED] ${gen.errorReason || 'Woosh Unavailable'} | ExitCode: ${gen.exitCode}`,
-                        false
+                        false,
                       );
                     }
                   } catch (e: any) {
@@ -240,41 +299,94 @@ export const AudioEngineBar: React.FC<AudioEngineBarProps> = ({ onOpenLibrary })
                 <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
                 <span>[GENERATE WITH WOOSH]</span>
               </button>
-              <span>Provider: <strong className="text-cyan-300">SonyResearch/Woosh</strong></span>
-              <span>Glued State: <strong className="text-amber-400">{engineState.currentTrack?.id === 'track_naruto_glued_state' ? 'ACTIVE (Combat Strategy)' : 'PROTECTED'}</strong></span>
+              <span>
+                Provider: <strong className="text-cyan-300">SonyResearch/Woosh</strong>
+              </span>
+              <span>
+                Glued State:{' '}
+                <strong className="text-amber-400">
+                  {engineState.currentTrack?.id === 'track_naruto_glued_state'
+                    ? 'ACTIVE (Combat Strategy)'
+                    : 'PROTECTED'}
+                </strong>
+              </span>
             </div>
           </div>
 
           {/* Real-Time Debug Logs List */}
           <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
             {engineState.debugLogs.length === 0 ? (
-              <div className="text-neutral-500 italic text-[10px]">Esperando evaluación de escena narrativa por AI Audio Director...</div>
+              <div className="text-neutral-500 italic text-[10px]">
+                Esperando evaluación de escena narrativa por AI Audio Director...
+              </div>
             ) : (
               engineState.debugLogs.map((log) => (
-                <div key={log.id} className="flex flex-col gap-1 bg-purple-950/30 p-2 rounded border border-purple-900/30">
+                <div
+                  key={log.id}
+                  className="flex flex-col gap-1 bg-purple-950/30 p-2 rounded border border-purple-900/30"
+                >
                   <div className="flex items-center gap-2">
                     <span className="text-[10px] text-neutral-500 shrink-0">{log.timestamp}</span>
-                    <span className={`px-1 rounded text-[9px] uppercase font-bold shrink-0 ${
-                      log.layer === 'world' ? 'bg-cyan-950 text-cyan-400 border border-cyan-800' :
-                      log.layer === 'music' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' :
-                      log.layer === 'action' ? 'bg-amber-950 text-amber-400 border border-amber-800' :
-                      'bg-red-950 text-red-400 border border-red-800'
-                    }`}>
+                    <span
+                      className={`px-1 rounded text-[9px] uppercase font-bold shrink-0 ${
+                        log.layer === 'world'
+                          ? 'bg-cyan-950 text-cyan-400 border border-cyan-800'
+                          : log.layer === 'music'
+                            ? 'bg-emerald-950 text-emerald-400 border border-emerald-800'
+                            : log.layer === 'action'
+                              ? 'bg-amber-950 text-amber-400 border border-amber-800'
+                              : 'bg-red-950 text-red-400 border border-red-800'
+                      }`}
+                    >
                       {log.layer}
                     </span>
                     <span className="font-semibold text-purple-200 shrink-0">[{log.event}]</span>
                     <span className="text-neutral-300 flex-1 truncate">{log.reason}</span>
                     <div className="flex items-center gap-1 shrink-0 font-bold">
                       {log.confidence >= 50 ? (
-                        <span className="text-emerald-400 flex items-center gap-0.5"><CheckCircle2 className="w-3 h-3" /> {log.confidence}%</span>
+                        <span className="text-emerald-400 flex items-center gap-0.5">
+                          <CheckCircle2 className="w-3 h-3" /> {log.confidence}%
+                        </span>
                       ) : (
-                        <span className="text-red-400 flex items-center gap-0.5" title="Score < 0.85 -> Silencio mantenido. NINGÚN sonido incorrecto ni aleatorio."><XCircle className="w-3 h-3" /> SILENCE (Score &lt; 0.85)</span>
+                        <span
+                          className="text-red-400 flex items-center gap-0.5"
+                          title="Score < 0.85 -> Silencio mantenido. NINGÚN sonido incorrecto ni aleatorio."
+                        >
+                          <XCircle className="w-3 h-3" /> SILENCE (Score &lt; 0.85)
+                        </span>
                       )}
                     </div>
                   </div>
                   {log.matchedFile && (
-                    <div className="text-[10px] text-purple-300/80 font-mono truncate pl-14">
-                      File: <span className="text-cyan-300">{log.matchedFile}</span>
+                    <div className="text-[10px] text-cyan-300 font-mono flex items-center justify-between gap-2 pl-4">
+                      <span className="truncate">Resource: {log.matchedFile}</span>
+                      <button
+                        onClick={async () => {
+                          try {
+                            const res = await fetch('/api/audio/assetize', {
+                              method: 'POST',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({
+                                fileUrl: log.matchedFile,
+                                title: `Asset IA: ${log.event}`,
+                                event: log.event,
+                                layer: log.layer,
+                                tags: [log.event, log.layer, 'user_liked'],
+                              }),
+                            });
+                            const data = await res.json();
+                            if (data.success) {
+                              alert(`⭐ ${data.message}: ${data.title}`);
+                            }
+                          } catch (e: any) {
+                            console.error('Assetize error:', e);
+                          }
+                        }}
+                        className="px-2 py-0.5 rounded bg-rose-950 hover:bg-rose-900 text-rose-200 border border-rose-700 text-[9px] font-semibold transition-colors flex items-center gap-1 shrink-0 cursor-pointer"
+                        title="Promover sonido a Asset Permanente de la Biblioteca"
+                      >
+                        <Sparkles className="w-3 h-3 text-amber-300" /> ❤️ Assetear
+                      </button>
                     </div>
                   )}
                 </div>
@@ -300,9 +412,16 @@ export const AudioEngineBar: React.FC<AudioEngineBarProps> = ({ onOpenLibrary })
                 return (
                   <button
                     key={env.id}
-                    onClick={() => globalAudioEngine.setWorldLayer(env.id, env.id === 'silence' ? null : `/audio/ambience/${env.id}/${env.id}.ogg`)}
+                    onClick={() =>
+                      globalAudioEngine.setWorldLayer(
+                        env.id,
+                        env.id === 'silence' ? null : `/audio/ambience/${env.id}/${env.id}.ogg`,
+                      )
+                    }
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border font-medium transition-all ${
-                      isActive ? `${env.color} ring-1 ring-emerald-500/50 shadow-md` : 'bg-neutral-900 border-neutral-800 text-neutral-400'
+                      isActive
+                        ? `${env.color} ring-1 ring-emerald-500/50 shadow-md`
+                        : 'bg-neutral-900 border-neutral-800 text-neutral-400'
                     }`}
                   >
                     <Icon className="w-3.5 h-3.5" />
