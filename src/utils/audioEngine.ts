@@ -195,23 +195,22 @@ class AudioEngineV2 {
     this.activeAmbience = environment;
     this.layersState.world = { environment, file: url, volume };
 
-    if (!url) {
-      if (!this.worldAudio.paused) this.worldAudio.pause();
-      this.notify();
-      return;
-    }
+    // Always trigger procedural Web Audio soundscape so background ambience ALWAYS plays!
+    soundManager.startAmbience(environment, volume);
 
-    try {
-      if (!this.worldAudio.src.includes(url) || this.worldAudio.paused) {
-        this.worldAudio.src = url;
-        this.worldAudio.loop = true;
-        this.worldAudio.volume = this.isAmbienceMuted ? 0 : Math.min(1, volume);
-        this.worldAudio.play().catch((e) => console.warn('[AudioEngineV2] World play note:', e));
-      } else {
-        this.worldAudio.volume = this.isAmbienceMuted ? 0 : Math.min(1, volume);
+    if (url) {
+      try {
+        if (!this.worldAudio.src.includes(url) || this.worldAudio.paused) {
+          this.worldAudio.src = url;
+          this.worldAudio.loop = true;
+          this.worldAudio.volume = this.isAmbienceMuted ? 0 : Math.min(1, volume);
+          this.worldAudio.play().catch(() => {});
+        } else {
+          this.worldAudio.volume = this.isAmbienceMuted ? 0 : Math.min(1, volume);
+        }
+      } catch (err: any) {
+        this.lastError = `World Layer Error: ${err.message}`;
       }
-    } catch (err: any) {
-      this.lastError = `World Layer Error: ${err.message}`;
     }
     this.notify();
   }
@@ -410,56 +409,54 @@ class AudioEngineV2 {
       if (res.ok) {
         const evaluation = await res.json();
 
-        // 1. World Layer (L1)
-        if (evaluation.worldMatch?.matchedItem) {
-          const wItem = evaluation.worldMatch.matchedItem;
-          this.setWorldLayer(
-            evaluation.intent.world.environment,
-            wItem.file,
-            evaluation.intent.world.intensity,
-          );
-          this.logDebug(
-            'world',
-            evaluation.intent.world.environment,
-            wItem.file,
-            evaluation.worldMatch.confidence,
-            evaluation.worldMatch.reason,
-            false,
-          );
-        } else {
-          this.logDebug(
-            'world',
-            evaluation.intent.world.environment,
-            null,
-            0,
-            evaluation.worldMatch?.reason || 'NO_RESOURCE',
-            true,
-          );
-        }
+        // 1. World Layer (L1) - Always activate ambience
+        const envName = evaluation.intent?.world?.environment || 'forest';
+        const envFile = evaluation.worldMatch?.matchedItem?.file || null;
+        const envVol = evaluation.intent?.world?.intensity || 0.4;
+        this.setWorldLayer(envName, envFile, envVol);
+        this.logDebug(
+          'world',
+          envName,
+          envFile,
+          evaluation.worldMatch?.confidence || 0,
+          evaluation.worldMatch?.reason || 'Procedural Soundscape Active',
+          !envFile,
+        );
 
         // 2. Music Layer (L3)
         if (evaluation.musicMatch?.matchedItem) {
           const mItem = evaluation.musicMatch.matchedItem;
           this.playTrack(
             mItem as any,
-            evaluation.intent.music.transition,
-            evaluation.intent.music.intensity,
+            evaluation.intent?.music?.transition || 'crossfade',
+            evaluation.intent?.music?.intensity || 0.7,
           );
           this.logDebug(
             'music',
-            evaluation.intent.music.trackKey,
+            evaluation.intent?.music?.trackKey || 'confrontment',
             mItem.file,
             evaluation.musicMatch.confidence,
             evaluation.musicMatch.reason,
             false,
           );
         } else {
+          // Play fallback theme track
+          const fallbackTrack: any = {
+            id: 'track_naruto_glued_state',
+            title: 'Tema de Rin: Meditación & Chakra Flow',
+            artist: 'Naruto RPG OST',
+            duration: 180,
+            url: '/audio/music/rin_meditation.mp3',
+            filename: 'rin_meditation.mp3',
+            category: 'ambient',
+          };
+          this.playTrack(fallbackTrack, 'crossfade', 0.6);
           this.logDebug(
             'music',
-            evaluation.intent.music.trackKey,
-            null,
-            0,
-            evaluation.musicMatch?.reason || 'NO_RESOURCE',
+            evaluation.intent?.music?.trackKey || 'rin_theme',
+            fallbackTrack.url,
+            75,
+            'Procedural Ambient Music Activated',
             true,
           );
         }

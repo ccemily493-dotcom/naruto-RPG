@@ -53,7 +53,9 @@ export default function App() {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [activeChapterId, setActiveChapterId] = useState<string | undefined>();
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving'>('saved');
-  const [lastSavedTimestamp, setLastSavedTimestamp] = useState<number>(() => getLastSavedTimestamp());
+  const [lastSavedTimestamp, setLastSavedTimestamp] = useState<number>(() =>
+    getLastSavedTimestamp(),
+  );
 
   const abortControllerRef = useRef<AbortController | null>(null);
 
@@ -159,15 +161,23 @@ export default function App() {
       });
   }, []);
 
+  // Trigger initial audio evaluation for current story text on startup
+  useEffect(() => {
+    if (activeStory?.messages && activeStory.messages.length > 0) {
+      const lastMsg = activeStory.messages[activeStory.messages.length - 1];
+      if (lastMsg?.content) {
+        globalAudioEngine.evaluateSceneContext(lastMsg.content, {
+          location: activeStory.rinStats?.tacticalStatus?.location,
+          currentThreat: activeStory.rinStats?.tacticalStatus?.currentThreat,
+        });
+      }
+    }
+  }, [activeStory?.id]);
+
   // Update story helper
-  const updateStoryById = useCallback(
-    (storyId: string, updater: (prev: Story) => Story) => {
-      setStories((prevStories) =>
-        prevStories.map((st) => (st.id === storyId ? updater(st) : st))
-      );
-    },
-    []
-  );
+  const updateStoryById = useCallback((storyId: string, updater: (prev: Story) => Story) => {
+    setStories((prevStories) => prevStories.map((st) => (st.id === storyId ? updater(st) : st)));
+  }, []);
 
   const updateActiveStory = useCallback(
     (updater: (prev: Story) => Story) => {
@@ -175,7 +185,7 @@ export default function App() {
         updateStoryById(activeStory.id, updater);
       }
     },
-    [activeStory?.id, updateStoryById]
+    [activeStory?.id, updateStoryById],
   );
 
   // Background memory synchronization
@@ -266,7 +276,7 @@ export default function App() {
               companions: activeStory.memory.factual?.companions || [],
               locationName: activeStory.memory.atmosphere?.locationName,
               recentEvents: activeStory.memory.episodic || [],
-              currentChapter: activeStory.activeChapterId
+              currentChapter: activeStory.activeChapterId,
             }),
             signal: abortControllerRef.current.signal,
           });
@@ -299,7 +309,9 @@ export default function App() {
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         if (errorData.error === 'OPENAI_KEY_REQUIRED') {
-          setErrorMessage('Se requiere una clave de API de OpenAI para el Game Master. Haz clic abajo para configurarla.');
+          setErrorMessage(
+            'Se requiere una clave de API de OpenAI para el Game Master. Haz clic abajo para configurarla.',
+          );
           setIsSettingsOpen(true);
         } else {
           setErrorMessage(errorData.message || `Error del servidor (${response.status})`);
@@ -345,12 +357,12 @@ export default function App() {
                 const { chaptersFound } = parseMessageForChapters(accumulatedText);
 
                 updateStoryById(currentStoryId, (st) => {
-                  let updatedChapters = [...st.chapters];
+                  const updatedChapters = [...st.chapters];
                   let activeChap = st.activeChapterId;
 
                   chaptersFound.forEach((cf) => {
                     const existing = updatedChapters.find(
-                      (c) => c.numberRoman === cf.roman || c.title === cf.title
+                      (c) => c.numberRoman === cf.roman || c.title === cf.title,
                     );
                     if (!existing) {
                       const newChapter: Chapter = {
@@ -371,7 +383,7 @@ export default function App() {
                     chapters: updatedChapters,
                     activeChapterId: activeChap,
                     messages: st.messages.map((m) =>
-                      m.id === assistantMsgId ? { ...m, content: accumulatedText } : m
+                      m.id === assistantMsgId ? { ...m, content: accumulatedText } : m,
                     ),
                   };
                 });
@@ -469,9 +481,7 @@ export default function App() {
 
   // Rename story
   const handleRenameStory = (id: string, newTitle: string) => {
-    setStories((prev) =>
-      prev.map((s) => (s.id === id ? { ...s, title: newTitle } : s))
-    );
+    setStories((prev) => prev.map((s) => (s.id === id ? { ...s, title: newTitle } : s)));
   };
 
   // Delete story
@@ -516,7 +526,9 @@ export default function App() {
   // Update Rin's Stats
   const handleUpdateRinStats = (newStats: RinDynamicStats) => {
     setStories((prev) =>
-      prev.map((s) => (s.id === activeStory.id ? { ...s, rinStats: newStats, updatedAt: Date.now() } : s))
+      prev.map((s) =>
+        s.id === activeStory.id ? { ...s, rinStats: newStats, updatedAt: Date.now() } : s,
+      ),
     );
   };
 
@@ -542,7 +554,13 @@ export default function App() {
   };
 
   if (!activeStory) {
-    return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>Cargando...</div>;
+    return (
+      <div
+        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}
+      >
+        Cargando...
+      </div>
+    );
   }
 
   return (
@@ -616,10 +634,7 @@ export default function App() {
       />
 
       {/* Modal de la Biblioteca de Audio e Importador yt-dlp */}
-      <AudioLibraryModal
-        isOpen={isAudioLibraryOpen}
-        onClose={() => setIsAudioLibraryOpen(false)}
-      />
+      <AudioLibraryModal isOpen={isAudioLibraryOpen} onClose={() => setIsAudioLibraryOpen(false)} />
 
       {/* Audio Library Setup Wizard Direct Modal */}
       <AudioLibrarySetupModal
