@@ -54,7 +54,8 @@ export const Composer: React.FC<ComposerProps> = ({
 
         <div className="flex items-center justify-between pt-1 border-t border-[#f4f3f0] px-1 mt-1">
           <div className="text-[11px] text-[#9b9a97] select-none hidden sm:block">
-            <span className="font-medium text-[#787774]">Enter</span> para enviar · <span className="font-medium text-[#787774]">Shift + Enter</span> para salto
+            <span className="font-medium text-[#787774]">Enter</span> para enviar ·{' '}
+            <span className="font-medium text-[#787774]">Shift + Enter</span> para salto
           </div>
 
           <div className="flex items-center gap-1.5 ml-auto">

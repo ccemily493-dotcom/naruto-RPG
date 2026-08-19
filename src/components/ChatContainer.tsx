@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Story, Message, RinDynamicStats, CozyAtmosphere } from '../types';
+import { Story, Message, RinDynamicStats, CozyAtmosphere, GMProviderStatus } from '../types';
 import { DEFAULT_RIN_STATS } from '../storage';
 import { ChatMessage } from './ChatMessage';
 import { Composer } from './Composer';
@@ -20,6 +20,7 @@ import {
   CloudRain,
   Sun,
   Moon,
+  Bot,
 } from 'lucide-react';
 
 interface ChatContainerProps {
@@ -38,6 +39,7 @@ interface ChatContainerProps {
   lastSavedTimestamp?: number;
   onOpenRinStatsModal: () => void;
   onOpenJournal?: () => void;
+  gmStatus?: GMProviderStatus;
 }
 
 export const ChatContainer: React.FC<ChatContainerProps> = ({
@@ -56,6 +58,7 @@ export const ChatContainer: React.FC<ChatContainerProps> = ({
   lastSavedTimestamp,
   onOpenRinStatsModal,
   onOpenJournal,
+  gmStatus,
 }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const bottomAnchorRef = useRef<HTMLDivElement>(null);
@@ -124,9 +127,8 @@ export const ChatContainer: React.FC<ChatContainerProps> = ({
   }, [story.messages, isLoading, userHasScrolledUp]);
 
   // Current active chapter
-  const latestChapter = story.chapters && story.chapters.length > 0
-    ? story.chapters[story.chapters.length - 1]
-    : null;
+  const latestChapter =
+    story.chapters && story.chapters.length > 0 ? story.chapters[story.chapters.length - 1] : null;
 
   return (
     <main
@@ -157,6 +159,28 @@ export const ChatContainer: React.FC<ChatContainerProps> = ({
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3" ref={dropdownRef}>
+          {/* GM PROVIDER ROUTER INDICATOR */}
+          <div
+            id="gm-provider-badge"
+            className={`flex items-center gap-1.5 text-[11px] sm:text-xs px-2.5 py-1 rounded-full border transition-all font-mono font-semibold ${
+              gmStatus?.activeProviderId === 'gemini-flash'
+                ? 'bg-amber-50 text-amber-800 border-amber-300'
+                : gmStatus?.activeProviderId === 'qwen-local'
+                  ? 'bg-purple-50 text-purple-800 border-purple-300'
+                  : gmStatus?.activeProviderId === 'offline'
+                    ? 'bg-rose-50 text-rose-800 border-rose-300'
+                    : 'bg-emerald-50 text-emerald-800 border-emerald-300'
+            }`}
+            title={
+              gmStatus?.fallbackReason
+                ? `GM Provider: ${gmStatus.displayText} (${gmStatus.fallbackReason})`
+                : `GM Provider: ${gmStatus?.displayText || 'GM: Gemini Pro'}`
+            }
+          >
+            <Bot className="w-3.5 h-3.5 shrink-0" />
+            <span className="truncate">{gmStatus?.displayText || 'GM: Gemini Pro'}</span>
+          </div>
+
           {/* BOTÓN CUADERNO DE RIN EN HEADER */}
           {onOpenJournal && (
             <button
@@ -364,11 +388,14 @@ export const ChatContainer: React.FC<ChatContainerProps> = ({
             className="flex items-center gap-1 text-[11px] text-[#787774] transition-all"
             title={
               lastSavedTimestamp
-                ? `Guardado automáticamente a las ${new Date(lastSavedTimestamp).toLocaleTimeString([], {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit',
-                  })}`
+                ? `Guardado automáticamente a las ${new Date(lastSavedTimestamp).toLocaleTimeString(
+                    [],
+                    {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      second: '2-digit',
+                    },
+                  )}`
                 : 'Guardado automático activo'
             }
           >
@@ -406,7 +433,9 @@ export const ChatContainer: React.FC<ChatContainerProps> = ({
               key={msg.id}
               message={msg}
               isLast={index === story.messages.length - 1}
-              isStreaming={isLoading && index === story.messages.length - 1 && msg.role === 'assistant'}
+              isStreaming={
+                isLoading && index === story.messages.length - 1 && msg.role === 'assistant'
+              }
               onRegenerate={onRegenerate}
               onEditMessage={onEditMessage}
             />

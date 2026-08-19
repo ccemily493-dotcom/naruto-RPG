@@ -17,7 +17,16 @@ import {
 } from 'lucide-react';
 
 interface SetupProgressData {
-  step: 'init' | 'check' | 'sfx_download' | 'nature_download' | 'ffmpeg_ready' | 'classifying' | 'metadata' | 'complete' | 'error';
+  step:
+    | 'init'
+    | 'check'
+    | 'sfx_download'
+    | 'nature_download'
+    | 'ffmpeg_ready'
+    | 'classifying'
+    | 'metadata'
+    | 'complete'
+    | 'error';
   percent: number;
   message: string;
   details?: {
@@ -205,7 +214,8 @@ export const AudioLibrarySetupModal: React.FC<AudioLibrarySetupModalProps> = ({
               <span>AUDIO LIBRARY SETUP</span>
             </h2>
             <p className="text-xs text-neutral-400">
-              Configuración y organización automática de efectos de sonido (SFX) y paisajes naturales sin descargas manuales.
+              Configuración y organización automática de efectos de sonido (SFX) y paisajes
+              naturales sin descargas manuales.
             </p>
           </div>
           <button
@@ -236,17 +246,17 @@ export const AudioLibrarySetupModal: React.FC<AudioLibrarySetupModalProps> = ({
                   status?.sources?.sfx_cc0?.installed || isDone
                     ? 'text-emerald-400'
                     : isInstalling
-                    ? 'text-amber-400 animate-pulse'
-                    : 'text-neutral-500'
+                      ? 'text-amber-400 animate-pulse'
+                      : 'text-neutral-500'
                 }`}
               >
                 {status?.sources?.sfx_cc0?.installed || isDone
                   ? '✓ Instalada (CC0)'
                   : isInstalling && progress.step.includes('sfx')
-                  ? 'Descargando...'
-                  : isInstalling
-                  ? 'Listo'
-                  : 'Pendiente'}
+                    ? 'Descargando...'
+                    : isInstalling
+                      ? 'Listo'
+                      : 'Pendiente'}
               </span>
             </div>
 
@@ -261,17 +271,17 @@ export const AudioLibrarySetupModal: React.FC<AudioLibrarySetupModalProps> = ({
                   status?.sources?.nature_ambience?.installed || isDone
                     ? 'text-emerald-400'
                     : isInstalling
-                    ? 'text-amber-400 animate-pulse'
-                    : 'text-neutral-500'
+                      ? 'text-amber-400 animate-pulse'
+                      : 'text-neutral-500'
                 }`}
               >
                 {status?.sources?.nature_ambience?.installed || isDone
                   ? '✓ Instalada (CC-BY/GPL)'
                   : isInstalling && progress.step.includes('nature')
-                  ? 'Descargando...'
-                  : isInstalling
-                  ? 'Listo'
-                  : 'Pendiente'}
+                    ? 'Descargando...'
+                    : isInstalling
+                      ? 'Listo'
+                      : 'Pendiente'}
               </span>
             </div>
 
@@ -281,7 +291,9 @@ export const AudioLibrarySetupModal: React.FC<AudioLibrarySetupModalProps> = ({
                 <Sliders className="w-4 h-4 text-amber-400" />
                 <span>FFmpeg Audio Engine</span>
               </div>
-              <span className={`text-[11px] font-bold ${status?.ffmpegReady ? 'text-emerald-400' : 'text-neutral-500'}`}>
+              <span
+                className={`text-[11px] font-bold ${status?.ffmpegReady ? 'text-emerald-400' : 'text-neutral-500'}`}
+              >
                 {status?.ffmpegReady ? '✓ Listo (Loudnorm & Codecs)' : 'No Disponible'}
               </span>
             </div>
@@ -296,20 +308,22 @@ export const AudioLibrarySetupModal: React.FC<AudioLibrarySetupModalProps> = ({
                 className={`text-[11px] font-bold ${
                   isDone || (status?.manifestFileExists && !isInstalling)
                     ? 'text-emerald-400'
-                    : isInstalling && (progress.step === 'classifying' || progress.step === 'metadata')
-                    ? 'Procesando...'
-                    : isInstalling
-                    ? 'Esperando...'
-                    : 'Pendiente'
+                    : isInstalling &&
+                        (progress.step === 'classifying' || progress.step === 'metadata')
+                      ? 'Procesando...'
+                      : isInstalling
+                        ? 'Esperando...'
+                        : 'Pendiente'
                 }`}
               >
                 {isDone || (status?.manifestFileExists && !isInstalling)
                   ? '✓ Generada'
-                  : isInstalling && (progress.step === 'classifying' || progress.step === 'metadata')
-                  ? 'Procesando...'
-                  : isInstalling
-                  ? 'Listo'
-                  : 'Pendiente'}
+                  : isInstalling &&
+                      (progress.step === 'classifying' || progress.step === 'metadata')
+                    ? 'Procesando...'
+                    : isInstalling
+                      ? 'Listo'
+                      : 'Pendiente'}
               </span>
             </div>
 
@@ -363,11 +377,11 @@ export const AudioLibrarySetupModal: React.FC<AudioLibrarySetupModalProps> = ({
                 <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
                 <span>Aviso de Conexión de Audio</span>
               </div>
-              <p className="text-neutral-300 leading-relaxed">
-                {errorMsg}
-              </p>
+              <p className="text-neutral-300 leading-relaxed">{errorMsg}</p>
               <p className="text-[11px] text-neutral-400">
-                * La aplicación continuará funcionando con el <strong>generador procedimental local</strong> de Web Audio API sin bloquear tu partida. Puedes reintentar la instalación cuando tengas conexión.
+                * La aplicación continuará funcionando con el{' '}
+                <strong>generador procedimental local</strong> de Web Audio API sin bloquear tu
+                partida. Puedes reintentar la instalación cuando tengas conexión.
               </p>
             </div>
           )}
@@ -381,15 +395,21 @@ export const AudioLibrarySetupModal: React.FC<AudioLibrarySetupModalProps> = ({
             <div className="space-y-1.5 text-[11px] text-neutral-400 font-mono">
               <div className="flex items-center justify-between">
                 <span className="text-neutral-300">• SFX CC0:</span>
-                <span className="text-neutral-400 truncate max-w-[280px]">github.com/lavenderdotpet/CC0-Public-Domain-Sounds</span>
+                <span className="text-neutral-400 truncate max-w-[280px]">
+                  github.com/lavenderdotpet/CC0-Public-Domain-Sounds
+                </span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-neutral-300">• Ambientes:</span>
-                <span className="text-neutral-400 truncate max-w-[280px]">github.com/Muges/ambientsounds</span>
+                <span className="text-neutral-400 truncate max-w-[280px]">
+                  github.com/Muges/ambientsounds
+                </span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-neutral-300">• OST Naruto:</span>
-                <span className="text-amber-300">audio/music/naruto/ (Gestión Local Independiente)</span>
+                <span className="text-amber-300">
+                  audio/music/naruto/ (Gestión Local Independiente)
+                </span>
               </div>
             </div>
           </div>

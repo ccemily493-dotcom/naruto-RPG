@@ -1,7 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Story, Chapter, OpenAIConfig } from '../types';
+import { Story, Chapter, OpenAIConfig, GMProviderStatus } from '../types';
 import { DEFAULT_RIN_STATS } from '../storage';
-import { Plus, BookOpen, Settings, ChevronRight, Edit3, Trash2, Check, Sparkles, Eye, Zap, Layers, Music, Feather } from 'lucide-react';
+import {
+  Plus,
+  BookOpen,
+  Settings,
+  ChevronRight,
+  Edit3,
+  Trash2,
+  Check,
+  Sparkles,
+  Eye,
+  Zap,
+  Layers,
+  Music,
+  Feather,
+  Bot,
+} from 'lucide-react';
 
 interface SidebarProps {
   stories: Story[];
@@ -19,6 +34,7 @@ interface SidebarProps {
   onOpenRinStats?: () => void;
   onOpenAudioLibrary?: () => void;
   onOpenJournal?: () => void;
+  gmStatus?: GMProviderStatus;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -37,6 +53,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onOpenRinStats,
   onOpenAudioLibrary,
   onOpenJournal,
+  gmStatus,
 }) => {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [editingTitleValue, setEditingTitleValue] = useState(activeStory?.title || '');
@@ -231,7 +248,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <div className="space-y-1 text-[11px] text-[#5a5955]">
               <div className="flex justify-between items-center">
                 <span>Chakra Principal:</span>
-                <span className="font-mono font-bold text-[#1f1f1e]">{rinStats.chakra.primaryCurrent}%</span>
+                <span className="font-mono font-bold text-[#1f1f1e]">
+                  {rinStats.chakra.primaryCurrent}%
+                </span>
               </div>
               <div className="w-full bg-[#e3e2de] h-1.5 rounded-full overflow-hidden">
                 <div
@@ -242,7 +261,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
               <div className="flex justify-between items-center pt-0.5">
                 <span>Segundo Flujo:</span>
-                <span className="font-mono font-bold text-emerald-700">{rinStats.chakra.secondaryCurrent}%</span>
+                <span className="font-mono font-bold text-emerald-700">
+                  {rinStats.chakra.secondaryCurrent}%
+                </span>
               </div>
               <div className="w-full bg-[#e3e2de] h-1.5 rounded-full overflow-hidden">
                 <div
@@ -254,7 +275,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
             <div className="mt-2 pt-1.5 border-t border-[#e3e2de]/60 flex items-center justify-between text-[10px] text-[#787774]">
               <span>Tercer Ojo: {rinStats.perception.thirdEyeMode}</span>
-              <span className="text-[#37352f] group-hover:translate-x-0.5 transition-transform">Ver ficha →</span>
+              <span className="text-[#37352f] group-hover:translate-x-0.5 transition-transform">
+                Ver ficha →
+              </span>
             </div>
           </button>
         </div>
@@ -271,7 +294,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <div className="space-y-1.5" id="chapter-list">
             {activeStory?.chapters && activeStory.chapters.length > 0 ? (
               activeStory.chapters.map((chapter, index) => {
-                const isActive = chapter.id === activeChapterId || (!activeChapterId && index === activeStory.chapters.length - 1);
+                const isActive =
+                  chapter.id === activeChapterId ||
+                  (!activeChapterId && index === activeStory.chapters.length - 1);
                 return (
                   <button
                     key={chapter.id}
@@ -352,6 +377,33 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </span>
             </button>
           )}
+
+          {/* GM PROVIDER ROUTER SIDEBAR INDICATOR */}
+          <div
+            id="sidebar-gm-provider-indicator"
+            className="w-full flex items-center justify-between p-2 rounded-lg text-xs bg-[#f7f6f3] border border-[#e5dfd2] text-[#37352f]"
+            title={
+              gmStatus?.fallbackReason
+                ? `GM Provider: ${gmStatus.displayText} (${gmStatus.fallbackReason})`
+                : `GM Provider: ${gmStatus?.displayText || 'GM: Gemini Pro'}`
+            }
+          >
+            <div className="flex items-center gap-2">
+              <Bot className="w-3.5 h-3.5 text-amber-700" />
+              <span className="font-medium text-[11px] truncate">
+                {gmStatus?.displayText || 'GM: Gemini Pro'}
+              </span>
+            </div>
+            <span
+              className={`text-[9px] font-mono font-bold px-1.5 py-0.5 rounded ${
+                gmStatus?.isFallback
+                  ? 'bg-amber-100 text-amber-800'
+                  : 'bg-emerald-100 text-emerald-800'
+              }`}
+            >
+              {gmStatus?.isFallback ? 'FALLBACK' : 'PRIMARY'}
+            </span>
+          </div>
 
           <button
             id="open-settings-footer-btn"

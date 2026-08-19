@@ -28,7 +28,8 @@ const defaultAtmosphere: CozyAtmosphere = {
   weather: 'lluvia_suave',
   locationName: 'Konohagakure no Sato',
   moodDescription: 'Momento de descompresión y regreso a la aldea tras la intensidad de la misión.',
-  acousticDetails: 'Lluvia suave sobre madera, pasos lejanos en los callejones y aroma a tierra mojada.',
+  acousticDetails:
+    'Lluvia suave sobre madera, pasos lejanos en los callejones y aroma a tierra mojada.',
 };
 
 const weatherIcons: Record<string, React.ReactNode> = {
@@ -56,27 +57,32 @@ const cozyQuickActions = [
   {
     label: 'Tomar té caliente',
     icon: '🍵',
-    prompt: 'Rin se sienta en una mesa de madera a beber un té verde humeante y descansar el cuerpo...',
+    prompt:
+      'Rin se sienta en una mesa de madera a beber un té verde humeante y descansar el cuerpo...',
   },
   {
     label: 'Pasear bajo la lluvia',
     icon: '🌧️',
-    prompt: 'Rin camina despacio por los callejones de Konoha escuchando el repiqueteo de la lluvia en los tejados...',
+    prompt:
+      'Rin camina despacio por los callejones de Konoha escuchando el repiqueteo de la lluvia en los tejados...',
   },
   {
     label: 'Comer en la aldea',
     icon: '🍜',
-    prompt: 'Rin busca un puesto de comida caliente para reponer fuerzas y conversar tranquilamente...',
+    prompt:
+      'Rin busca un puesto de comida caliente para reponer fuerzas y conversar tranquilamente...',
   },
   {
     label: 'Sentarse en el mirador',
     icon: '🌸',
-    prompt: 'Rin sube al banco con vista a los rostros de los Hokage y se sienta a contemplar el horizonte...',
+    prompt:
+      'Rin sube al banco con vista a los rostros de los Hokage y se sienta a contemplar el horizonte...',
   },
   {
     label: 'Regresar a la habitación',
     icon: '🏡',
-    prompt: 'Rin regresa a su habitación privada, se quita las sandalias y ordena sus notas junto a la ventana...',
+    prompt:
+      'Rin regresa a su habitación privada, se quita las sandalias y ordena sus notas junto a la ventana...',
   },
   {
     label: 'Cuidar brotes Mokuton',
@@ -86,7 +92,8 @@ const cozyQuickActions = [
   {
     label: 'Saludar a un conocido',
     icon: '👋',
-    prompt: 'Rin se detiene al cruzarse con un conocido de la aldea e intercambia un saludo cotidiano...',
+    prompt:
+      'Rin se detiene al cruzarse con un conocido de la aldea e intercambia un saludo cotidiano...',
   },
 ];
 
@@ -111,7 +118,9 @@ export const CozyActionsBar: React.FC<CozyActionsBarProps> = ({
             title="Ver detalles del clima y ambiente actual"
           >
             <div className="flex items-center gap-1.5">
-              {weatherIcons[atmosphere.weather] || <CloudRain className="w-3.5 h-3.5 text-sky-500" />}
+              {weatherIcons[atmosphere.weather] || (
+                <CloudRain className="w-3.5 h-3.5 text-sky-500" />
+              )}
               <span className="font-medium text-[#2c2a27]">
                 {timeLabels[atmosphere.timeOfDay] || atmosphere.timeOfDay}
               </span>
@@ -155,7 +164,9 @@ export const CozyActionsBar: React.FC<CozyActionsBarProps> = ({
               {atmosphere.moodDescription}
             </p>
             <p className="text-[11px] text-[#6d6659] leading-relaxed italic">
-              <strong className="font-sans font-medium text-[#4a443b] not-italic">Acústica: </strong>
+              <strong className="font-sans font-medium text-[#4a443b] not-italic">
+                Acústica:{' '}
+              </strong>
               {atmosphere.acousticDetails}
             </p>
           </div>
@@ -174,7 +185,9 @@ export const CozyActionsBar: React.FC<CozyActionsBarProps> = ({
               className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#fdfcf9] hover:bg-[#f3eee3] text-[#4a443b] hover:text-[#1f1e1c] border border-[#e8e2d4] hover:border-[#cfc6b5] transition-all whitespace-nowrap shrink-0 text-xs shadow-2xs disabled:opacity-50 group"
               title={action.prompt}
             >
-              <span className="text-xs group-hover:scale-110 transition-transform">{action.icon}</span>
+              <span className="text-xs group-hover:scale-110 transition-transform">
+                {action.icon}
+              </span>
               <span>{action.label}</span>
             </button>
           ))}

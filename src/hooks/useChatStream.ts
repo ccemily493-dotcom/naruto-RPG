@@ -12,6 +12,7 @@ export function useChatStream(config: OpenAIConfig) {
       onChunk: (chunk: string) => void,
       onDone?: (finalText: string) => void,
       modelOverride?: string,
+      onProviderInfo?: (providerInfo: any) => void,
     ) => {
       if (abortRef.current) abortRef.current.abort();
       setIsLoading(true);
@@ -52,6 +53,9 @@ export function useChatStream(config: OpenAIConfig) {
               if (!dataStr) continue;
               try {
                 const parsed = JSON.parse(dataStr);
+                if (parsed.providerInfo) {
+                  onProviderInfo?.(parsed.providerInfo);
+                }
                 if (parsed.text) {
                   accumulated += parsed.text;
                   onChunk(parsed.text);

@@ -37,11 +37,15 @@ import { analyzeWavFile } from './server/audioAnalyzer';
 import { updateCachedSFXStatus } from './server/audioCache';
 import { WooshSFXProvider } from './server/wooshProvider';
 import { assetizeAudioFile, AssetizeRequest } from './server/audioAssetizer';
+import { GMProviderRouter } from './server/providers/GMProviderRouter';
+import { setMockScenario, getActiveMockScenario } from './server/providers/MockQuotaProvider';
 
 dotenv.config();
 
 const app = express();
 const PORT = 3000;
+
+let gmRouter = new GMProviderRouter(process.env.MOCK_MODE === 'true');
 
 app.use(express.json({ limit: '10mb' }));
 
@@ -73,14 +77,45 @@ function getOpenAIClient(clientKey?: string): OpenAI | null {
 }
 
 // Config endpoint
-app.get('/api/config', (_req: Request, res: Response) => {
-  const envKey = process.env.OPENAI_API_KEY;
-  const hasServerKey = Boolean(envKey && envKey.trim() !== '' && envKey !== 'MY_OPENAI_API_KEY');
-  const defaultModel = process.env.OPENAI_MODEL || 'gpt-4o';
+app.get('/api/config', async (_req: Request, res: Response) => {
+  const envKey = process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY;
+  const hasServerKey = Boolean(envKey && envKey.trim() !== '' && envKey !== 'MY_GEMINI_API_KEY' && envKey !== 'MY_OPENAI_API_KEY');
+  const defaultModel = process.env.GEMINI_PRO_MODEL || process.env.OPENAI_MODEL || 'gemini-1.5-pro';
+  const status = await gmRouter.getStatus();
   res.json({
     hasServerKey,
     defaultModel,
+    freeOnlyMode: gmRouter.isFreeOnlyMode(),
+    gmStatus: status,
   });
+});
+
+// GM Status endpoint
+app.get('/api/gm/status', async (_req: Request, res: Response): Promise<void> => {
+  try {
+    const status = await gmRouter.getStatus();
+    res.json(status);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message || 'Error al obtener estado del GM Router' });
+  }
+});
+
+// GM Mock Config endpoint for testing & simulation
+app.post('/api/gm/mock-config', (req: Request, res: Response): void => {
+  const { scenario, config, useMock } = req.body as {
+    scenario?: any;
+    config?: any;
+    useMock?: boolean;
+  };
+  if (useMock !== undefined) {
+    gmRouter = new GMProviderRouter(Boolean(useMock));
+  }
+  if (scenario) {
+    setMockScenario(scenario);
+  } else if (config) {
+    setMockScenario(config);
+  }
+  res.json({ success: true, scenario: getActiveMockScenario() });
 });
 
 // Audio System Status endpoint
@@ -450,7 +485,7 @@ app.post('/api/audio/generate-woosh-direct', async (req: Request, res: Response)
 });
 
 
-// Chat stream endpoint
+// Chat stream endpoint using GM Provider Router
 app.post('/api/chat', async (req: Request, res: Response): Promise<void> => {
   const { messages, memory, rinStats, chapters, storyTitle, model, apiKey } = req.body as {
     messages: Array<{ role: 'user' | 'assistant' | 'system'; content: string }>;
@@ -465,17 +500,6 @@ app.post('/api/chat', async (req: Request, res: Response): Promise<void> => {
 
   if (!messages || !Array.isArray(messages)) {
     res.status(400).json({ error: 'invalid_request', message: 'messages is required and must be an array' });
-    return;
-  }
-
-  const chosenModel = model || process.env.OPENAI_MODEL || 'gpt-4o';
-  const openai = getOpenAIClient(apiKey);
-
-  if (!openai) {
-    res.status(400).json({
-      error: 'OPENAI_KEY_REQUIRED',
-      message: 'Se requiere una API Key de OpenAI para conectar con el Game Master. Configúrala en la esquina inferior del panel izquierdo o en el archivo .env.'
-    });
     return;
   }
 
@@ -494,35 +518,34 @@ app.post('/api/chat', async (req: Request, res: Response): Promise<void> => {
       npcContext: req.body.npcContext,
     });
 
-    // Format chat history for OpenAI
-    const openAiMessages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
-      { role: 'system', content: systemPrompt },
-      ...messages.map((m) => ({
-        role: m.role as 'user' | 'assistant' | 'system',
-        content: m.content,
-      })),
-    ];
-
-    const stream = await openai.chat.completions.create({
-      model: chosenModel,
-      messages: openAiMessages,
-      temperature: 0.85,
-      stream: true,
-    });
-
-    for await (const chunk of stream) {
-      const delta = chunk.choices[0]?.delta?.content || '';
-      if (delta) {
-        res.write(`data: ${JSON.stringify({ text: delta })}\n\n`);
+    await gmRouter.generateStream(
+      {
+        messages,
+        systemPrompt,
+        temperature: 0.85,
+        apiKey,
+        model,
+      },
+      (text) => {
+        res.write(`data: ${JSON.stringify({ text })}\n\n`);
+      },
+      (meta) => {
+        res.write(`data: ${JSON.stringify({ providerInfo: meta })}\n\n`);
       }
-    }
+    );
 
     res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
     res.end();
   } catch (error: any) {
-    console.error('OpenAI stream error:', error);
-    const errorMessage = error?.message || 'Error al comunicarse con el Game Master de OpenAI.';
-    res.write(`data: ${JSON.stringify({ error: errorMessage })}\n\n`);
+    console.error('[GM Router] Stream error:', error);
+    const errorMessage = error?.message || 'Error al comunicarse con el Game Master.';
+    const offlineMeta = {
+      providerId: 'offline',
+      providerName: 'Offline',
+      isFallback: true,
+      displayText: 'GM: Offline — No provider',
+    };
+    res.write(`data: ${JSON.stringify({ error: errorMessage, providerInfo: offlineMeta })}\n\n`);
     res.end();
   }
 });

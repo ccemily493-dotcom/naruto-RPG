@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Story, Message, Chapter, OpenAIConfig, RinDynamicStats } from './types';
+import {
+  Story,
+  Message,
+  Chapter,
+  OpenAIConfig,
+  RinDynamicStats,
+  GMProviderStatus,
+  PersonalJournal,
+} from './types';
 import {
   loadStories,
   saveStories,
@@ -26,7 +34,6 @@ import { AudioLibrarySetupModal } from './components/AudioLibrarySetupModal';
 import { PersonalJournalModal } from './components/PersonalJournalModal';
 import { AudioTestLab } from './components/AudioTestLab';
 import { globalAudioEngine } from './utils/audioEngine';
-import { PersonalJournal } from './types';
 
 export default function App() {
   if (typeof window !== 'undefined' && window.location.pathname === '/audio-test') {
@@ -45,6 +52,12 @@ export default function App() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [config, setConfig] = useState<OpenAIConfig>(() => loadOpenAIConfig());
   const [hasServerKey, setHasServerKey] = useState(false);
+  const [gmStatus, setGmStatus] = useState<GMProviderStatus>({
+    activeProviderId: 'gemini-pro',
+    activeProviderName: 'Gemini Pro',
+    isFallback: false,
+    displayText: 'GM: Gemini Pro',
+  });
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isRinStatsOpen, setIsRinStatsOpen] = useState(false);
   const [isJournalOpen, setIsJournalOpen] = useState(false);
@@ -144,7 +157,7 @@ export default function App() {
     };
   }, []);
 
-  // Check server configuration for built-in OpenAI Key
+  // Check server configuration for GM Router and Keys
   useEffect(() => {
     fetch('/api/config')
       .then((res) => res.json())
@@ -154,6 +167,9 @@ export default function App() {
         }
         if (data.defaultModel && !config.model) {
           setConfig((prev) => ({ ...prev, model: data.defaultModel }));
+        }
+        if (data.gmStatus) {
+          setGmStatus(data.gmStatus);
         }
       })
       .catch((err) => {
@@ -347,6 +363,9 @@ export default function App() {
 
             try {
               const parsed = JSON.parse(dataStr);
+              if (parsed.providerInfo) {
+                setGmStatus(parsed.providerInfo);
+              }
               if (parsed.error) {
                 setErrorMessage(parsed.error);
               }
@@ -586,6 +605,7 @@ export default function App() {
         onOpenRinStats={() => setIsRinStatsOpen(true)}
         onOpenAudioLibrary={() => setIsAudioLibraryOpen(true)}
         onOpenJournal={() => setIsJournalOpen(true)}
+        gmStatus={gmStatus}
       />
 
       {/* Panel Derecho: Conversación Permanente y Barra de Audio */}
@@ -606,6 +626,7 @@ export default function App() {
           lastSavedTimestamp={lastSavedTimestamp}
           onOpenRinStatsModal={() => setIsRinStatsOpen(true)}
           onOpenJournal={() => setIsJournalOpen(true)}
+          gmStatus={gmStatus}
         />
 
         {/* Barra de Audio Engine Docked */}

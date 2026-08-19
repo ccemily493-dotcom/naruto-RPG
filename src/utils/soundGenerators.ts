@@ -28,8 +28,14 @@ class SoundGeneratorManager {
         this.ambienceGain = this.ctx.createGain();
         this.sfxGain = this.ctx.createGain();
 
-        this.ambienceGain.gain.setValueAtTime(this.isAmbienceMuted ? 0 : this.ambienceVolume, this.ctx.currentTime);
-        this.sfxGain.gain.setValueAtTime(this.isSfxMuted ? 0 : this.sfxVolume, this.ctx.currentTime);
+        this.ambienceGain.gain.setValueAtTime(
+          this.isAmbienceMuted ? 0 : this.ambienceVolume,
+          this.ctx.currentTime,
+        );
+        this.sfxGain.gain.setValueAtTime(
+          this.isSfxMuted ? 0 : this.sfxVolume,
+          this.ctx.currentTime,
+        );
 
         this.ambienceGain.connect(this.ctx.destination);
         this.sfxGain.connect(this.ctx.destination);
@@ -114,20 +120,25 @@ class SoundGeneratorManager {
         console.warn('Error fading out ambience session:', err);
       }
 
-      setTimeout(() => {
-        if (session.dripInterval) {
-          clearTimeout(session.dripInterval);
-        }
-        session.stopCallbacks.forEach((stopFn) => {
+      setTimeout(
+        () => {
+          if (session.dripInterval) {
+            clearTimeout(session.dripInterval);
+          }
+          session.stopCallbacks.forEach((stopFn) => {
+            try {
+              stopFn();
+            } catch {}
+          });
           try {
-            stopFn();
+            session.gainNode.disconnect();
           } catch {}
-        });
-        try {
-          session.gainNode.disconnect();
-        } catch {}
-        this.activeAmbienceSessions = this.activeAmbienceSessions.filter((s) => s.id !== session.id);
-      }, fadeTime * 1000 + 100);
+          this.activeAmbienceSessions = this.activeAmbienceSessions.filter(
+            (s) => s.id !== session.id,
+          );
+        },
+        fadeTime * 1000 + 100,
+      );
     });
 
     this.currentEnvironment = environment;
@@ -188,16 +199,19 @@ class SoundGeneratorManager {
         session.gainNode.gain.setValueAtTime(session.gainNode.gain.value, now);
         session.gainNode.gain.linearRampToValueAtTime(0.0001, now + fadeDuration);
       } catch {}
-      setTimeout(() => {
-        session.stopCallbacks.forEach((stopFn) => {
+      setTimeout(
+        () => {
+          session.stopCallbacks.forEach((stopFn) => {
+            try {
+              stopFn();
+            } catch {}
+          });
           try {
-            stopFn();
+            session.gainNode.disconnect();
           } catch {}
-        });
-        try {
-          session.gainNode.disconnect();
-        } catch {}
-      }, fadeDuration * 1000 + 50);
+        },
+        fadeDuration * 1000 + 50,
+      );
     });
     this.activeAmbienceSessions = [];
   }
@@ -209,7 +223,13 @@ class SoundGeneratorManager {
     const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const data = buffer.getChannelData(0);
 
-    let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+    let b0 = 0,
+      b1 = 0,
+      b2 = 0,
+      b3 = 0,
+      b4 = 0,
+      b5 = 0,
+      b6 = 0;
     let lastOut = 0.0;
 
     for (let i = 0; i < bufferSize; i++) {
@@ -219,10 +239,10 @@ class SoundGeneratorManager {
       } else if (type === 'pink') {
         b0 = 0.99886 * b0 + white * 0.0555179;
         b1 = 0.99332 * b1 + white * 0.0750759;
-        b2 = 0.96900 * b2 + white * 0.1538520;
-        b3 = 0.86650 * b3 + white * 0.3104856;
-        b4 = 0.55000 * b4 + white * 0.5329522;
-        b5 = -0.7616 * b5 - white * 0.0168980;
+        b2 = 0.969 * b2 + white * 0.153852;
+        b3 = 0.8665 * b3 + white * 0.3104856;
+        b4 = 0.55 * b4 + white * 0.5329522;
+        b5 = -0.7616 * b5 - white * 0.016898;
         data[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.04;
         b6 = white * 0.115926;
       } else {
@@ -310,13 +330,16 @@ class SoundGeneratorManager {
     };
 
     const scheduleBirds = () => {
-      session.dripInterval = setTimeout(() => {
-        playBirdChirp();
-        if (Math.random() > 0.4) {
-          setTimeout(playBirdChirp, 160);
-        }
-        scheduleBirds();
-      }, 2200 + Math.random() * 3000) as unknown as number;
+      session.dripInterval = setTimeout(
+        () => {
+          playBirdChirp();
+          if (Math.random() > 0.4) {
+            setTimeout(playBirdChirp, 160);
+          }
+          scheduleBirds();
+        },
+        2200 + Math.random() * 3000,
+      ) as unknown as number;
     };
     scheduleBirds();
 
@@ -384,12 +407,15 @@ class SoundGeneratorManager {
 
     // 3. Periodic water droplets dripping into the cavern with echo
     const scheduleDrip = () => {
-      session.dripInterval = setTimeout(() => {
-        if (this.ctx && !this.isAmbienceMuted) {
-          this.playWaterDrip(session.gainNode);
-        }
-        scheduleDrip();
-      }, 3800 + Math.random() * 2800) as unknown as number;
+      session.dripInterval = setTimeout(
+        () => {
+          if (this.ctx && !this.isAmbienceMuted) {
+            this.playWaterDrip(session.gainNode);
+          }
+          scheduleDrip();
+        },
+        3800 + Math.random() * 2800,
+      ) as unknown as number;
     };
     scheduleDrip();
 
@@ -685,7 +711,7 @@ class SoundGeneratorManager {
 
   private synthKunai(t: number, intensity: number) {
     const ctx = this.ctx!;
-    
+
     // 1. High-speed metallic blade slice (white noise + sharp bandpass filter)
     const noise = ctx.createBufferSource();
     noise.buffer = this.createNoiseBuffer(0.3, 'white');

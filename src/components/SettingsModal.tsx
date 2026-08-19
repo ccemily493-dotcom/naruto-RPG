@@ -11,9 +11,17 @@ interface SettingsModalProps {
 }
 
 const AVAILABLE_MODELS = [
-  { id: 'gpt-4o', name: 'GPT-4o (Recomendado)', desc: 'Máxima capacidad narrativa, coherencia táctica y ritmo' },
+  {
+    id: 'gpt-4o',
+    name: 'GPT-4o (Recomendado)',
+    desc: 'Máxima capacidad narrativa, coherencia táctica y ritmo',
+  },
   { id: 'gpt-4o-mini', name: 'GPT-4o Mini', desc: 'Rápido, ágil y económico' },
-  { id: 'o3-mini', name: 'o3-mini (Razonamiento)', desc: 'Profundidad de análisis táctico y continuidad' },
+  {
+    id: 'o3-mini',
+    name: 'o3-mini (Razonamiento)',
+    desc: 'Profundidad de análisis táctico y continuidad',
+  },
   { id: 'gpt-4-turbo', name: 'GPT-4 Turbo', desc: 'Narrativa clásica de alta fidelidad' },
 ];
 
@@ -48,7 +56,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-xs p-4 animate-in fade-in duration-150">
-      <div 
+      <div
         id="settings-modal"
         className="w-full max-w-md bg-[#ffffff] border border-[#e3e2e0] rounded-xl shadow-xl overflow-hidden text-[#37352f]"
       >
@@ -56,7 +64,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#eeedea]">
           <div className="flex items-center gap-2">
             <Cpu className="w-4 h-4 text-[#787774]" />
-            <h2 className="text-sm font-semibold tracking-tight text-[#1f1f1e]">Configuración del Motor</h2>
+            <h2 className="text-sm font-semibold tracking-tight text-[#1f1f1e]">
+              Configuración del Motor
+            </h2>
           </div>
           <button
             id="close-settings-btn"
@@ -74,7 +84,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             <div className="flex items-start gap-2.5 p-3 rounded-lg bg-[#f7f6f3] border border-[#e9e9e7]">
               <ShieldCheck className="w-4 h-4 text-[#37352f] shrink-0 mt-0.5" />
               <p className="text-[#5a5955] leading-relaxed">
-                <span className="font-medium text-[#1f1f1e]">API Key de servidor activa.</span> El backend ya cuenta con credenciales configuradas en el entorno. Puedes dejar el campo de API Key vacío o introducir una propia.
+                <span className="font-medium text-[#1f1f1e]">API Key de servidor activa.</span> El
+                backend ya cuenta con credenciales configuradas en el entorno. Puedes dejar el campo
+                de API Key vacío o introducir una propia.
               </p>
             </div>
           )}
@@ -99,7 +111,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               type={showKey ? 'text' : 'password'}
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
-              placeholder={hasServerKey ? 'Usando clave del servidor (opcional sobreescribir)' : 'sk-...'}
+              placeholder={
+                hasServerKey ? 'Usando clave del servidor (opcional sobreescribir)' : 'sk-...'
+              }
               className="w-full px-3 py-2 bg-[#ffffff] border border-[#d3d2ce] focus:border-[#37352f] rounded-md outline-none text-xs text-[#1f1f1e] placeholder:text-[#9b9a97] transition-all font-mono"
             />
             <p className="text-[11px] text-[#787774]">
@@ -109,9 +123,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
           {/* OpenAI Model */}
           <div className="space-y-1.5">
-            <label className="font-medium text-[#37352f]">
-              Modelo del Game Master
-            </label>
+            <label className="font-medium text-[#37352f]">Modelo del Game Master</label>
             <div className="space-y-1.5">
               {AVAILABLE_MODELS.map((m) => (
                 <label

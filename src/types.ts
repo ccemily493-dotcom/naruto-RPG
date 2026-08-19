@@ -33,13 +33,7 @@ export interface FactualRecord {
 }
 
 export type TimeOfDay =
-  | 'amanecer'
-  | 'mañana'
-  | 'mediodía'
-  | 'tarde'
-  | 'atardecer'
-  | 'noche'
-  | 'madrugada';
+  'amanecer' | 'mañana' | 'mediodía' | 'tarde' | 'atardecer' | 'noche' | 'madrugada';
 
 export type WeatherType =
   | 'despejado'
@@ -84,7 +78,15 @@ export interface JournalPerson {
 export interface DiscoveredPlace {
   id: string;
   name: string;
-  type: 'banco' | 'tienda' | 'bosque' | 'mirador' | 'casa_de_te' | 'santuario' | 'orilla_rio' | 'rincon';
+  type:
+    | 'banco'
+    | 'tienda'
+    | 'bosque'
+    | 'mirador'
+    | 'casa_de_te'
+    | 'santuario'
+    | 'orilla_rio'
+    | 'rincon';
   locationArea: string;
   description: string;
   sensoryAtmosphere: string;
@@ -141,26 +143,25 @@ export interface StoryMemory {
 // ============ NPC AGENT SYSTEM TYPES ============
 
 export type RelationshipStage =
-  | 'stranger' | 'acquaintance' | 'companion'
-  | 'trusted' | 'strong_bond' | 'deep_relationship';
+  'stranger' | 'acquaintance' | 'companion' | 'trusted' | 'strong_bond' | 'deep_relationship';
 
 export type NPCScheduleSlot = 'dawn' | 'morning' | 'afternoon' | 'evening' | 'night';
 
 export type NPCMemoryType = 'episodic' | 'factual' | 'social' | 'private';
 
 export interface NPCRelationshipVector {
-  trust: number;        // -1.0 to 1.0
-  familiarity: number;  // 0.0 to 1.0
-  respect: number;      // -1.0 to 1.0
-  affinity: number;     // -1.0 to 1.0
-  concern: number;      // 0.0 to 1.0
-  admiration: number;   // 0.0 to 1.0
-  resentment: number;   // 0.0 to 1.0
+  trust: number; // -1.0 to 1.0
+  familiarity: number; // 0.0 to 1.0
+  respect: number; // -1.0 to 1.0
+  affinity: number; // -1.0 to 1.0
+  concern: number; // 0.0 to 1.0
+  admiration: number; // 0.0 to 1.0
+  resentment: number; // 0.0 to 1.0
   emotionalSignificance: number; // 0.0 to 1.0
   stage: RelationshipStage;
   sharedExperiences: string[];
   conflicts: string[];
-  secrets: string[];     // secrets known about the target
+  secrets: string[]; // secrets known about the target
   lastSignificantEvent?: string;
   lastInteractionChapter?: string;
 }
@@ -182,9 +183,9 @@ export interface NPCMemoryEntry {
 }
 
 export interface NPCEmotionState {
-  valence: number;    // -1.0 (negative/distressed) to 1.0 (positive/joyful)
-  arousal: number;    // 0.0 (calm/lethargic) to 1.0 (excited/terrified/furious)
-  dominance: number;  // 0.0 (submissive/helpless) to 1.0 (confident/dominant)
+  valence: number; // -1.0 (negative/distressed) to 1.0 (positive/joyful)
+  arousal: number; // 0.0 (calm/lethargic) to 1.0 (excited/terrified/furious)
+  dominance: number; // 0.0 (submissive/helpless) to 1.0 (confident/dominant)
   primaryMood: string; // e.g. "Sereno", "Furiose", "Melancólico", "Alerta"
 }
 
@@ -227,7 +228,7 @@ export interface NPCIntention {
   target?: string;
   motivation: string;
   urgency: 'low' | 'medium' | 'high';
-  blockedBy?: string;  // what prevents execution
+  blockedBy?: string; // what prevents execution
   createdAt: number;
 }
 
@@ -236,8 +237,8 @@ export interface NPCProfile {
   name: string;
 
   // Core identity
-  personality: string;      // concise personality description
-  goals: string[];          // active goals (simple strings or goal items)
+  personality: string; // concise personality description
+  goals: string[]; // active goals (simple strings or goal items)
   goalStack?: NPCGoalItem[]; // structured goal items for GOAP
   fears: string[];
   values: string[];
@@ -245,7 +246,7 @@ export interface NPCProfile {
   behaviorPatterns: string[];
 
   // Knowledge & memory
-  knowledge: string[];        // things this NPC knows
+  knowledge: string[]; // things this NPC knows
   forbiddenKnowledge: string[]; // things this NPC explicitly does NOT know
   memories: NPCMemoryEntry[];
 
@@ -261,7 +262,7 @@ export interface NPCProfile {
   currentLocation: string;
   currentActivity: string;
   currentMood: string;
-  physicalState: string;    // injuries, fatigue, etc.
+  physicalState: string; // injuries, fatigue, etc.
   schedule: NPCScheduleEntry[];
   intentions: NPCIntention[];
   longTermObjectives: string[];
@@ -270,8 +271,8 @@ export interface NPCProfile {
   lastInternalThought?: string;
 
   // Meta
-  isPresent: boolean;   // currently in the scene
-  isActive: boolean;    // has active objectives requiring evaluation
+  isPresent: boolean; // currently in the scene
+  isActive: boolean; // has active objectives requiring evaluation
   lastUpdatedChapter?: string;
   lastUpdatedTimestamp: number;
 }
@@ -282,7 +283,7 @@ export interface RelationshipEvent {
   target: string;
   event: string;
   significance: number; // 0.0 to 1.0
-  change: string;       // description of what changed
+  change: string; // description of what changed
   memoryCreated: boolean;
   timestamp: number;
   chapter?: string;
@@ -319,7 +320,6 @@ export interface NPCWorldState {
   villageTension?: number; // 0 to 100
   lastEvaluatedTimestamp: number;
 }
-
 
 export interface RinDynamicStats {
   chakra: {
@@ -390,6 +390,22 @@ export interface Story {
   memory: StoryMemory;
   rinStats?: RinDynamicStats;
   activeChapterId?: string;
+}
+
+export type GMProviderId = 'gemini-pro' | 'gemini-flash' | 'qwen-local' | 'mock-quota' | 'offline';
+
+export interface GMProviderStatus {
+  activeProviderId: GMProviderId;
+  activeProviderName: string;
+  isFallback: boolean;
+  fallbackReason?: string;
+  displayText:
+    | 'GM: Gemini Pro'
+    | 'GM: Gemini Flash — Fallback'
+    | 'GM: Qwen Local — Fallback'
+    | 'GM: Offline — No provider'
+    | string;
+  availableProviders?: GMProviderId[];
 }
 
 export interface OpenAIConfig {
@@ -473,7 +489,8 @@ export interface AudioMusicIntent {
 }
 
 export interface AudioAmbienceIntent {
-  environment: 'forest' | 'forest_night' | 'village' | 'cave' | 'rain' | 'ruins' | 'silence' | string;
+  environment:
+    'forest' | 'forest_night' | 'village' | 'cave' | 'rain' | 'ruins' | 'silence' | string;
   intensity: number; // 0.0 to 1.0
 }
 
@@ -509,5 +526,3 @@ export interface AudioEngineMatchResult {
   alternatives?: AudioTrack[];
   intent?: AudioDirectorIntent;
 }
-
-

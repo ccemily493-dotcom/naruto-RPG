@@ -127,7 +127,7 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
     onUpdateJournal((prev) => ({
       ...prev,
       memories: (prev.memories || []).map((m) =>
-        m.id === memoryId ? { ...m, userReflection: reflectionText.trim() } : m
+        m.id === memoryId ? { ...m, userReflection: reflectionText.trim() } : m,
       ),
     }));
     setEditingReflectionId(null);
@@ -223,7 +223,9 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
           >
             <Compass className="w-3.5 h-3.5 text-emerald-700" />
             <span>Rincones de la Aldea</span>
-            <span className="text-[10px] opacity-70">({currentJournal.discoveredPlaces?.length || 0})</span>
+            <span className="text-[10px] opacity-70">
+              ({currentJournal.discoveredPlaces?.length || 0})
+            </span>
           </button>
 
           <button
@@ -287,7 +289,8 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
                     Aún no se han asentado recuerdos cotidianos en este filtro.
                   </p>
                   <p className="text-xs text-[#8d8576]">
-                    A medida que Rin regrese a la aldea, comparta té o camine bajo la lluvia, se irán escribiendo aquí.
+                    A medida que Rin regrese a la aldea, comparta té o camine bajo la lluvia, se
+                    irán escribiendo aquí.
                   </p>
                 </div>
               ) : (
@@ -378,14 +381,16 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
                               className="text-[#7d7567] hover:text-amber-800 transition-colors flex items-center gap-1"
                             >
                               <Feather className="w-3 h-3" />
-                              <span>{memory.userReflection ? 'Editar nota' : 'Añadir reflexión'}</span>
+                              <span>
+                                {memory.userReflection ? 'Editar nota' : 'Añadir reflexión'}
+                              </span>
                             </button>
 
                             {onSelectActionPrompt && (
                               <button
                                 onClick={() => {
                                   onSelectActionPrompt(
-                                    `Rin recuerda el momento de "${memory.title}" mientras contempla el entorno...`
+                                    `Rin recuerda el momento de "${memory.title}" mientras contempla el entorno...`,
                                   );
                                   onClose();
                                 }}
@@ -434,9 +439,7 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
                         </span>
                       </div>
 
-                      <p className="text-xs text-[#524c43] leading-relaxed">
-                        {person.attitude}
-                      </p>
+                      <p className="text-xs text-[#524c43] leading-relaxed">{person.attitude}</p>
 
                       {person.memorableQuote && (
                         <div className="p-2.5 rounded-lg bg-[#fbf9f4] border-l-2 border-[#b59d74] text-xs text-[#4a443b] font-serif italic">
@@ -452,7 +455,9 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
                           </span>
                           <ul className="text-xs text-[#5d564a] space-y-0.5 list-disc list-inside">
                             {person.sharedMoments.map((moment, idx) => (
-                              <li key={idx} className="leading-snug">{moment}</li>
+                              <li key={idx} className="leading-snug">
+                                {moment}
+                              </li>
                             ))}
                           </ul>
                         </div>
@@ -464,7 +469,7 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
                         <button
                           onClick={() => {
                             onSelectActionPrompt(
-                              `Rin busca a ${person.name} para compartir un momento tranquilo o una conversación sin misiones...`
+                              `Rin busca a ${person.name} para compartir un momento tranquilo o una conversación sin misiones...`,
                             );
                             onClose();
                           }}
@@ -506,14 +511,15 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
                             <span>{place.locationArea}</span>
                           </div>
                         </div>
-                        <div className="flex items-center gap-0.5 text-amber-500 text-xs" title="Nivel de calma">
+                        <div
+                          className="flex items-center gap-0.5 text-amber-500 text-xs"
+                          title="Nivel de calma"
+                        >
                           {'★'.repeat(place.peaceRating || 5)}
                         </div>
                       </div>
 
-                      <p className="text-xs text-[#524c43] leading-relaxed">
-                        {place.description}
-                      </p>
+                      <p className="text-xs text-[#524c43] leading-relaxed">{place.description}</p>
 
                       <div className="p-2 rounded-lg bg-[#f5f8f5] border border-[#d6e3d6] text-xs text-[#355235]">
                         <span className="font-semibold text-[10px] uppercase block text-[#264226]">
@@ -528,7 +534,7 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
                         <button
                           onClick={() => {
                             onSelectActionPrompt(
-                              `Rin camina con paso pausado hacia ${place.name} para sentarse y descansar un rato...`
+                              `Rin camina con paso pausado hacia ${place.name} para sentarse y descansar un rato...`,
                             );
                             onClose();
                           }}
@@ -550,7 +556,8 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
             <div className="space-y-4">
               <div className="text-xs text-[#7d7567] border-b border-[#e8e3d8] pb-2">
                 <span>
-                  El espacio privado de Rin: donde se guardan los objetos, las semillas y el silencio
+                  El espacio privado de Rin: donde se guardan los objetos, las semillas y el
+                  silencio
                 </span>
               </div>
 
@@ -564,7 +571,9 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
 
                   <ul className="text-xs text-[#524c43] space-y-1.5 list-disc list-inside">
                     {currentJournal.room?.deskItems?.map((item, idx) => (
-                      <li key={idx} className="leading-relaxed">{item}</li>
+                      <li key={idx} className="leading-relaxed">
+                        {item}
+                      </li>
                     ))}
                   </ul>
 
@@ -575,7 +584,9 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
                     </h4>
                     <ul className="text-xs text-[#524c43] space-y-1 list-disc list-inside">
                       {currentJournal.room?.herbsAndPlants?.map((plant, idx) => (
-                        <li key={idx} className="leading-relaxed">{plant}</li>
+                        <li key={idx} className="leading-relaxed">
+                          {plant}
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -618,7 +629,7 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
                       <button
                         onClick={() => {
                           onSelectActionPrompt(
-                            'Rin regresa a su habitación, cierra la puerta con calma, enciende una taza de té y se sienta junto a la ventana...'
+                            'Rin regresa a su habitación, cierra la puerta con calma, enciende una taza de té y se sienta junto a la ventana...',
                           );
                           onClose();
                         }}
@@ -638,7 +649,10 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
           {activeTab === 'write' && (
             <div className="space-y-6">
               {/* Write Form */}
-              <form onSubmit={handleSaveCustomEntry} className="bg-[#ffffff] rounded-xl p-4 border border-[#e5dfd2] shadow-2xs space-y-3">
+              <form
+                onSubmit={handleSaveCustomEntry}
+                className="bg-[#ffffff] rounded-xl p-4 border border-[#e5dfd2] shadow-2xs space-y-3"
+              >
                 <div className="flex items-center justify-between border-b border-[#f4eee3] pb-2">
                   <h3 className="text-sm font-bold font-serif text-[#23211e] flex items-center gap-1.5">
                     <Feather className="w-4 h-4 text-amber-700" />
@@ -705,7 +719,7 @@ export const PersonalJournalModal: React.FC<PersonalJournalModalProps> = ({
                   Entradas Escritas Anteriores ({currentJournal.customEntries?.length || 0})
                 </h4>
 
-                {(!currentJournal.customEntries || currentJournal.customEntries.length === 0) ? (
+                {!currentJournal.customEntries || currentJournal.customEntries.length === 0 ? (
                   <p className="text-xs text-[#8d8576] italic font-serif">
                     No has escrito ninguna reflexión personalizada todavía.
                   </p>

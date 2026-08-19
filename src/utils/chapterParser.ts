@@ -11,14 +11,16 @@ export interface ParsedSegment {
 }
 
 // Regex to capture [[CAPÍTULO: <Roman> | <Title> | <Synopsis>]] or variations like [[CAPITULO: ...]]
-const CHAPTER_REGEX = /\[\[\s*CAP[ÍI]TULO:\s*([IVXLCDM0-9]+)\s*\|\s*([^|\]]+)\s*(?:\|\s*([^\]]*))?\]\]/gi;
+const CHAPTER_REGEX =
+  /\[\[\s*CAP[ÍI]TULO:\s*([IVXLCDM0-9]+)\s*\|\s*([^|\]]+)\s*(?:\|\s*([^\]]*))?\]\]/gi;
 
 export function parseMessageForChapters(text: string): {
   cleanText: string;
   chaptersFound: Array<{ roman: string; title: string; synopsis: string }>;
   segments: ParsedSegment[];
 } {
-  if (!text) return { cleanText: '', chaptersFound: [], segments: [{ type: 'text' as const, content: '' }] };
+  if (!text)
+    return { cleanText: '', chaptersFound: [], segments: [{ type: 'text' as const, content: '' }] };
   const chaptersFound: Array<{ roman: string; title: string; synopsis: string }> = [];
   const segments: ParsedSegment[] = [];
 

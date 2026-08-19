@@ -48,12 +48,45 @@ export const RinStatsPanel: React.FC<RinStatsPanelProps> = ({
   if (!isOpen) return null;
 
   if (!stats) return null;
-  const safeChakra = stats.chakra || { primaryCurrent: 100, primaryMax: 100, secondaryCurrent: 100, secondaryMax: 100, flowState: 'balanced' as const };
-  const safeVitality = stats.vitality || { healthCurrent: 100, healthMax: 100, fatigueLevel: 'none' as const, regenArmorActive: false };
-  const safePerception = stats.perception || { thirdEyeActive: false, thirdEyeMode: 'reposo' as const, remoteRangeMeters: 100, phantomNodesCount: 0, spatialAnchorActive: false };
-  const safeMokuton = stats.mokuton || { activeRootsDensity: 0, putrefactionCycleActive: false, storedBioEnergy: 0, explosiveFruits: 0, sleepSporesVials: 0, clonesActive: 0 };
-  const safeSpiritAllies = stats.spiritAllies || { kaliSummoned: false, kaliSpiritualAbsorption: false, kaliAccumulatedInton: 0, shivaConditionalSealLocked: true };
-  const safeTacticalStatus = stats.tacticalStatus || { location: 'Desconocido', currentThreat: 'Ninguna', ecosystemHealth: 100 };
+  const safeChakra = stats.chakra || {
+    primaryCurrent: 100,
+    primaryMax: 100,
+    secondaryCurrent: 100,
+    secondaryMax: 100,
+    flowState: 'balanced' as const,
+  };
+  const safeVitality = stats.vitality || {
+    healthCurrent: 100,
+    healthMax: 100,
+    fatigueLevel: 'none' as const,
+    regenArmorActive: false,
+  };
+  const safePerception = stats.perception || {
+    thirdEyeActive: false,
+    thirdEyeMode: 'reposo' as const,
+    remoteRangeMeters: 100,
+    phantomNodesCount: 0,
+    spatialAnchorActive: false,
+  };
+  const safeMokuton = stats.mokuton || {
+    activeRootsDensity: 0,
+    putrefactionCycleActive: false,
+    storedBioEnergy: 0,
+    explosiveFruits: 0,
+    sleepSporesVials: 0,
+    clonesActive: 0,
+  };
+  const safeSpiritAllies = stats.spiritAllies || {
+    kaliSummoned: false,
+    kaliSpiritualAbsorption: false,
+    kaliAccumulatedInton: 0,
+    shivaConditionalSealLocked: true,
+  };
+  const safeTacticalStatus = stats.tacticalStatus || {
+    location: 'Desconocido',
+    currentThreat: 'Ninguna',
+    ecosystemHealth: 100,
+  };
 
   const updateChakra = (fields: Partial<RinDynamicStats['chakra']>) => {
     onUpdateStats({
@@ -374,7 +407,8 @@ export const RinStatsPanel: React.FC<RinStatsPanelProps> = ({
                       value={safeVitality.fatigueLevel}
                       onChange={(e) =>
                         updateVitality({
-                          fatigueLevel: e.target.value as RinDynamicStats['vitality']['fatigueLevel'],
+                          fatigueLevel: e.target
+                            .value as RinDynamicStats['vitality']['fatigueLevel'],
                         })
                       }
                       className="text-xs bg-[#f7f6f3] border border-[#d3d1cb] rounded px-2 py-1 text-[#37352f] focus:outline-none"
@@ -462,12 +496,15 @@ export const RinStatsPanel: React.FC<RinStatsPanelProps> = ({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-[#37352f]">Modo de Percepción:</label>
+                    <label className="text-xs font-medium text-[#37352f]">
+                      Modo de Percepción:
+                    </label>
                     <select
                       value={safePerception.thirdEyeMode}
                       onChange={(e) =>
                         updatePerception({
-                          thirdEyeMode: e.target.value as RinDynamicStats['perception']['thirdEyeMode'],
+                          thirdEyeMode: e.target
+                            .value as RinDynamicStats['perception']['thirdEyeMode'],
                         })
                       }
                       className="w-full text-xs bg-[#f7f6f3] border border-[#d3d1cb] rounded px-3 py-1.5 text-[#37352f] focus:outline-none"
@@ -503,8 +540,12 @@ export const RinStatsPanel: React.FC<RinStatsPanelProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   <div className="p-3 bg-[#f7f6f3] rounded border border-[#eeedea] flex items-center justify-between">
                     <div>
-                      <div className="text-xs font-medium text-[#37352f]">Nodos de Red Fantasma</div>
-                      <div className="text-[10px] text-[#787774]">Puntos de resonancia para infiltración</div>
+                      <div className="text-xs font-medium text-[#37352f]">
+                        Nodos de Red Fantasma
+                      </div>
+                      <div className="text-[10px] text-[#787774]">
+                        Puntos de resonancia para infiltración
+                      </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <button
@@ -536,7 +577,9 @@ export const RinStatsPanel: React.FC<RinStatsPanelProps> = ({
                   <div className="p-3 bg-[#f7f6f3] rounded border border-[#eeedea] flex items-center justify-between">
                     <div>
                       <div className="text-xs font-medium text-[#37352f]">Anclaje Perceptivo</div>
-                      <div className="text-[10px] text-[#787774]">Distorsión espacial en el entorno</div>
+                      <div className="text-[10px] text-[#787774]">
+                        Distorsión espacial en el entorno
+                      </div>
                     </div>
                     <button
                       onClick={() =>
@@ -633,7 +676,9 @@ export const RinStatsPanel: React.FC<RinStatsPanelProps> = ({
                       min="0"
                       max="100"
                       value={safeMokuton.activeRootsDensity}
-                      onChange={(e) => updateMokuton({ activeRootsDensity: Number(e.target.value) })}
+                      onChange={(e) =>
+                        updateMokuton({ activeRootsDensity: Number(e.target.value) })
+                      }
                       className="w-full accent-[#37352f]"
                     />
                   </div>
@@ -765,14 +810,13 @@ export const RinStatsPanel: React.FC<RinStatsPanelProps> = ({
                         Kālī (Intōn / Mokuton)
                       </h3>
                       <p className="text-[11px] text-[#787774]">
-                        Cuerpo de Mokuton · 6 Brazos · Miles de voces · Vínculo espiritual voluntario
+                        Cuerpo de Mokuton · 6 Brazos · Miles de voces · Vínculo espiritual
+                        voluntario
                       </p>
                     </div>
                   </div>
                   <button
-                    onClick={() =>
-                      updateSpirits({ kaliSummoned: !safeSpiritAllies.kaliSummoned })
-                    }
+                    onClick={() => updateSpirits({ kaliSummoned: !safeSpiritAllies.kaliSummoned })}
                     className={`px-3 py-1 rounded text-xs font-medium ${
                       safeSpiritAllies.kaliSummoned
                         ? 'bg-purple-700 text-white'
@@ -786,7 +830,9 @@ export const RinStatsPanel: React.FC<RinStatsPanelProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="p-3 bg-[#f7f6f3] rounded border border-[#eeedea] space-y-2">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="font-medium text-[#37352f]">Alimentación Pasiva (500m):</span>
+                      <span className="font-medium text-[#37352f]">
+                        Alimentación Pasiva (500m):
+                      </span>
                       <button
                         onClick={() =>
                           updateSpirits({
@@ -803,7 +849,8 @@ export const RinStatsPanel: React.FC<RinStatsPanelProps> = ({
                       </button>
                     </div>
                     <p className="text-[10px] text-[#787774]">
-                      Absorbe progresivamente energía espiritual ambiental para mantener sus técnicas.
+                      Absorbe progresivamente energía espiritual ambiental para mantener sus
+                      técnicas.
                     </p>
                   </div>
 
@@ -922,23 +969,21 @@ export const RinStatsPanel: React.FC<RinStatsPanelProps> = ({
                           tech.era === 'past'
                             ? 'bg-blue-50 text-blue-700 border border-blue-200'
                             : tech.era === 'present'
-                            ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                            : 'bg-purple-50 text-purple-700 border border-purple-200'
+                              ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                              : 'bg-purple-50 text-purple-700 border border-purple-200'
                         }`}
                       >
                         {tech.era === 'past'
                           ? 'PASADO'
                           : tech.era === 'present'
-                          ? 'PRESENTE'
-                          : 'FUTURO'}
+                            ? 'PRESENTE'
+                            : 'FUTURO'}
                       </span>
                     </div>
                     <div className="text-[11px] text-[#787774] flex items-center gap-2">
                       <span>{tech.type}</span>
                       <span>·</span>
-                      <span className="font-medium text-[#5a5955]">
-                        Estado: {tech.mastery}
-                      </span>
+                      <span className="font-medium text-[#5a5955]">Estado: {tech.mastery}</span>
                     </div>
                     {tech.notes && (
                       <p className="text-[11px] text-[#37352f] bg-[#f7f6f3] p-2 rounded border border-[#eeedea] leading-relaxed">

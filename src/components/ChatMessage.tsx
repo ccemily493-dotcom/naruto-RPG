@@ -106,7 +106,9 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
               <span className="text-[10px] text-[#9b9a97]">
                 {(() => {
                   const d = new Date(message.timestamp);
-                  return isNaN(d.getTime()) ? '' : d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                  return isNaN(d.getTime())
+                    ? ''
+                    : d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                 })()}
               </span>
             </div>
@@ -159,13 +161,20 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
                   className="flex items-center gap-1 px-2 py-1 rounded text-[11px] text-[#787774] hover:text-[#1f1f1e] hover:bg-[#f1f1ef] transition-colors"
                   title="Copiar mensaje"
                 >
-                  {copied ? <Check className="w-3 h-3 text-green-700" /> : <Copy className="w-3 h-3" />}
+                  {copied ? (
+                    <Check className="w-3 h-3 text-green-700" />
+                  ) : (
+                    <Copy className="w-3 h-3" />
+                  )}
                   <span>{copied ? 'Copiado' : 'Copiar'}</span>
                 </button>
 
                 {isUser && onEditMessage && (
                   <button
-                    onClick={() => { setEditValue(message.content); setIsEditing(true); }}
+                    onClick={() => {
+                      setEditValue(message.content);
+                      setIsEditing(true);
+                    }}
                     className="flex items-center gap-1 px-2 py-1 rounded text-[11px] text-[#787774] hover:text-[#1f1f1e] hover:bg-[#f1f1ef] transition-colors"
                     title="Editar tu último mensaje"
                   >
