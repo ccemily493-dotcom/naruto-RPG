@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { StoryMemory, RinDynamicStats, Chapter } from '../src/types';
+import { retrieveRinCanonContext } from './rinCanonRetriever';
 
 const PROMPT_DIR = path.join(process.cwd(), 'prompts');
 
@@ -22,15 +23,20 @@ export interface PromptContextParams {
   chapters?: Chapter[];
   storyTitle?: string;
   npcContext?: string;
+  playerAction?: string;
+  recentScene?: string;
+  recentMessages?: Array<{ role: string; content: string }>;
 }
 
 export function buildSystemPrompt(params?: StoryMemory | PromptContextParams): string {
-  // Support both legacy StoryMemory passing and new PromptContextParams object
   let memory: StoryMemory | undefined;
   let rinStats: RinDynamicStats | undefined;
   let chapters: Chapter[] | undefined;
   let storyTitle: string | undefined;
   let npcContext: string | undefined;
+  let playerAction: string | undefined;
+  let recentScene: string | undefined;
+  let recentMessages: Array<{ role: string; content: string }> | undefined;
 
   if (params && ('episodic' in params || 'factual' in params || 'techniques' in params)) {
     memory = params as StoryMemory;
@@ -41,10 +47,20 @@ export function buildSystemPrompt(params?: StoryMemory | PromptContextParams): s
     chapters = p.chapters;
     storyTitle = p.storyTitle;
     npcContext = p.npcContext;
+    playerAction = p.playerAction;
+    recentScene = p.recentScene;
+    recentMessages = p.recentMessages;
   }
 
-  const rinBible = readPromptFile('rin_bible.md');
-  const continuity = readPromptFile('continuity.md');
+  // Retrieve dynamic Rin Canon Context
+  const retrieval = retrieveRinCanonContext({
+    playerAction: playerAction || (recentMessages && recentMessages.length > 0 ? recentMessages[recentMessages.length - 1].content : ''),
+    recentScene: recentScene || '',
+    recentMessages: recentMessages || [],
+    currentLocation: memory?.factual?.village || 'Konohagakure',
+    mentionedCharacters: memory?.factual?.companions || [],
+  });
+
   const core = readPromptFile('core.md');
   const narrative = readPromptFile('narrative.md');
   const canon = readPromptFile('canon.md');
@@ -54,10 +70,8 @@ export function buildSystemPrompt(params?: StoryMemory | PromptContextParams): s
   const memoryDoc = readPromptFile('memory.md');
   const chaptersDoc = readPromptFile('chapters.md');
   const consequences = readPromptFile('consequences.md');
-  const audioDirection = readPromptFile('audio_direction.md');
-  const cozy = readPromptFile('cozy.md');
 
-  // Build LAST_ROLLPLAY_STATE block
+  // Build LAST_ROLLPLAY_STATE block (PRIORITY 1)
   const latestChapter = chapters && chapters.length > 0 ? chapters[chapters.length - 1] : undefined;
   const chapterName = latestChapter ? `Capítulo ${latestChapter.numberRoman}: ${latestChapter.title}` : 'Capítulo Activo';
 
@@ -81,45 +95,34 @@ export function buildSystemPrompt(params?: StoryMemory | PromptContextParams): s
     ? memory.world.timelineDeviations.map(d => `- ${d}`).join('\n')
     : 'Canon estándar en este momento.';
 
-  // Atmosphere & Cozy Layer context
   const atmosphereStr = memory?.atmosphere
     ? `- MOMENTO DEL DÍA: ${(memory.atmosphere.timeOfDay || '').toUpperCase()} | CLIMA: ${(memory.atmosphere.weather || '').toUpperCase()}
-- UBICACIÓN Y AMBIENTE: ${memory.atmosphere.locationName} (${memory.atmosphere.moodDescription})
-- PAISAJE SONORO / ACÚSTICO: ${memory.atmosphere.acousticDetails}`
+- UBICACIÓN Y AMBIENTE: ${memory.atmosphere.locationName} (${memory.atmosphere.moodDescription})`
     : '- ATMÓSFERA: Tarde templada en Konohagakure; ambiente cotidiano sereno tras la misión.';
 
-  const recentMemoriesStr = memory?.journal?.memories && memory.journal.memories.length > 0
-    ? memory.journal.memories.slice(-3).map(m => `- "${m.title}" (${m.location}, ${m.timeOfDay}): ${m.snippet}`).join('\n')
-    : 'Sin recuerdos cotidianos previos registrados.';
-
-  // Format Rin's Realtime Stats if present
   let rinStatsSummary = '';
   if (rinStats) {
     rinStatsSummary = `
-- CHAKRA PRINCIPAL: ${rinStats.chakra?.primaryCurrent ?? 100}% / ${rinStats.chakra?.primaryMax ?? 100}% (Estado de flujo: ${rinStats.chakra?.flowState ?? 'estable'})
-- SEGUNDO FLUJO (RESERVA YŪREI): ${rinStats.chakra?.secondaryCurrent ?? 0}% / ${rinStats.chakra?.secondaryMax ?? 100}%
-- VITALIDAD Y FATIGA: Salud ${rinStats.vitality?.healthCurrent ?? 100}%, Nivel de Fatiga: ${rinStats.vitality?.fatigueLevel ?? 'ninguno'}
-- DŌJUTSU (TERCER OJO): Modo actual "${rinStats.perception?.thirdEyeMode ?? 'reposo'}" (Activo: ${rinStats.perception?.thirdEyeActive ? 'SÍ' : 'NO'}, Rango: ${rinStats.perception?.remoteRangeMeters ?? 0}m)
-- MOKUTON Y BIO-ARSENAL: Frutos explosivos: ${rinStats.mokuton?.explosiveFruits ?? 0}, Viales de esporas: ${rinStats.mokuton?.sleepSporesVials ?? 0}, Clones activos: ${rinStats.mokuton?.clonesActive ?? 0}
-- AMENAZA TÁCTICA ACTIVA: ${rinStats.tacticalStatus?.currentThreat || 'Ninguna inmediata detectada'}`;
+- CHAKRA PRINCIPAL: ${rinStats.chakra?.primaryCurrent ?? 100}% / ${rinStats.chakra?.primaryMax ?? 100}%
+- SEGUNDO FLUJO: ${rinStats.chakra?.secondaryCurrent ?? 0}% / ${rinStats.chakra?.secondaryMax ?? 100}%
+- DŌJUTSU: Tercer ojo modo "${rinStats.perception?.thirdEyeMode ?? 'reposo'}" (Activo: ${rinStats.perception?.thirdEyeActive ? 'SÍ' : 'NO'})`;
   } else {
     rinStatsSummary = `
-- CHAKRA & VITALIDAD: Estado estándar de Genin / Yūrei no Keimyaku latente
-- ESTADO FÍSICO: ${memory?.factual?.currentStatus || 'En buen estado físico'}`;
+- CHAKRA & VITALIDAD: Estado de Shippuden tras 3 años de entrenamiento / Yūrei no Keimyaku latente`;
   }
 
   const lastRollplayState = `
 ════════════════════════════════════════════════════════════
-ESTADO ACTUAL DE LA PARTIDA [LAST_ROLLPLAY_STATE]
+ESTADO ACTUAL DE LA PARTIDA [LAST_ROLLPLAY_STATE - PRIORIDAD ABSOLUTA 1]
 ════════════════════════════════════════════════════════════
 [HISTORIA]: ${storyTitle || 'Crónicas Shinobi'}
 [CAPÍTULO ACTUAL]: ${chapterName}
-[UBICACIÓN EXACTA]: ${memory?.factual?.village || 'Konohagakure'} / Enclaves de misión o bosque circundante
+[UBICACIÓN EXACTA]: ${memory?.factual?.village || 'Konohagakure'} / Enclaves de misión
 [PERSONAJES PRESENTES]: ${memory?.factual?.companions?.join(', ') || 'Rin (jugador)'}
-[ATMÓSFERA Y CLIMA ACTUAL]:
+[ATMÓSFERA Y CLIMA]:
 ${atmosphereStr}
 [ESTADO DE RIN]:${rinStatsSummary}
-[EQUIPAMIENTO / INVENTARIO]: ${memory?.factual?.inventory?.join(', ') || 'Bolsa ninja estándar con kunais, shurikens y alambre de acero'}
+[EQUIPAMIENTO / INVENTARIO]: ${memory?.factual?.inventory?.join(', ') || 'Bolsa ninja estándar'}
 
 [REGISTRO Y CONTINUIDAD DE TÉCNICAS DE RIN]:
 ${techniquesStr}
@@ -128,9 +131,6 @@ ${techniquesStr}
 ${relationsStr}
 
 ${npcContext ? npcContext + '\n' : ''}
-[RECUERDOS COTIDIANOS Y VIVENCIAS SIGNIFICATIVAS]:
-${recentMemoriesStr}
-
 [ACONTECIMIENTOS INMEDIATAMENTE ANTERIORES]:
 ${episodicStr}
 
@@ -139,17 +139,13 @@ ${deviationsStr}
 
 [CRONOLOGÍA RECIENTE]:
 ${timelineStr}
-
-[SITUACIÓN EXACTA DE CONTINUACIÓN]:
-Continúa la narración exactamente desde el último instante del último mensaje del jugador o de la escena, sin reiniciar la situación, respetando el ritmo de descompresión tras momentos intensos, sin olvidar las heridas o gastos de chakra y sin revelar información que los personajes aún no hayan descubierto.
 ════════════════════════════════════════════════════════════
-`;
+`.trim();
 
+  // STRUCTURED PROMPT BUILDER (A -> G ORDER)
   return `
-${rinBible}
-
----
-${continuity}
+[A. REGLAS PERMANENTES DEL GAME MASTER]
+${retrieval.permanentCore}
 
 ---
 ${core}
@@ -164,31 +160,32 @@ ${canon}
 ${realism}
 
 ---
-${npc}
-
----
-${readPromptFile('npc_agents.md')}
-
----
-${combat}
-
----
-${cozy}
-
----
-${memoryDoc}
-
----
-${chaptersDoc}
-
----
-${consequences}
-
----
-${audioDirection}
-
----
+[B. ESTADO ACTUAL DE LA PARTIDA - PRIORIDAD 1]
 ${lastRollplayState}
+
+---
+[C. CONTEXTO CANÓNICO RELEVANTE DE RIN - PRIORIDAD 2]
+${retrieval.retrievedContext}
+
+---
+[D. CAPA 1 — CONOCIMIENTO DE RIN (RIN_KNOWLEDGE)]
+${retrieval.rinKnowledge.length > 0 ? retrieval.rinKnowledge.join('\n\n') : 'Rin opera con su conocimiento de Shippuden y técnicas investigadas.'}
+
+---
+[E. CAPA 2 — CONOCIMIENTO DE NPCS (NPC_KNOWLEDGE)]
+${retrieval.npcKnowledge.length > 0 ? retrieval.npcKnowledge.join('\n\n') : 'Los NPCs reaccionan según sus observaciones directas de la escena.'}
+
+---
+[F. CAPA 3 — SECRETOS EXCLUSIVOS DEL GM (GM_SECRET - OMNISCIENCIA DE DIRECCIÓN)]
+⚠️ REGLA EPISTÉMICA CRÍTICA: Los siguientes secretos son de uso EXCLUSIVO para la dirección del mundo/NPCs. NUNCA hacer que Rin piense, hable o actúe conociendo esta información:
+${retrieval.gmSecrets.length > 0 ? retrieval.gmSecrets.join('\n\n') : 'Sin secretos de dirección específicos requeridos para esta escena.'}
+
+---
+[G. MENSAJES RECIENTES Y REGLAS ADICIONALES]
+${npc}
+${combat}
+${memoryDoc}
+${chaptersDoc}
+${consequences}
 `.trim();
 }
-
