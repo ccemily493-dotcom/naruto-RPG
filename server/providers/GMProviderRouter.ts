@@ -72,35 +72,20 @@ export class GMProviderRouter {
    * Logs provider availability status at server startup without exposing secrets
    */
   public async logStartupStatus(): Promise<void> {
+    const geminiProv = this.providers.find((p) => p.id === 'gemini-pro') as GeminiProProvider | undefined;
+    const qwenProv = this.providers.find((p) => p.id === 'qwen-local') as QwenLocalProvider | undefined;
+
+    const geminiKeySet = geminiProv ? Boolean(geminiProv.getApiKey()) : false;
+    const qwenEndpointOk = qwenProv ? await qwenProv.isAvailable().catch(() => false) : false;
+    const qwenModelName = qwenProv ? qwenProv.getModelName() : 'UNSET';
+    const qwenModelAvail = qwenProv ? await qwenProv.isModelAvailable(qwenModelName).catch(() => false) : false;
+
     console.log('==================================================');
-    console.log('🤖 GAME MASTER PROVIDER STATUS AT STARTUP:');
-
-    for (const p of this.providers) {
-      const avail = await p.isAvailable().catch(() => false);
-      const statusText = avail ? '✅ DISPONIBLE' : '❌ NO DISPONIBLE';
-      let details = '';
-
-      if (p.id === 'gemini-pro') {
-        const proProv = p as GeminiProProvider;
-        const hasKey = Boolean(proProv.getApiKey());
-        details = hasKey
-          ? `(Modelo: ${proProv.getModelName()})`
-          : '(Falta GEMINI_API_KEY en .env)';
-      } else if (p.id === 'gemini-flash') {
-        const flashProv = p as GeminiFlashProvider;
-        const hasKey = Boolean(flashProv.getApiKey());
-        details = hasKey
-          ? `(Modelo: ${flashProv.getModelName()})`
-          : '(Falta GEMINI_API_KEY en .env)';
-      } else if (p.id === 'qwen-local') {
-        const qwenProv = p as QwenLocalProvider;
-        details = `(URL: ${qwenProv.getBaseUrl()} / Modelo: ${qwenProv.getModelName()})`;
-      }
-
-      console.log(`- ${p.name.padEnd(14)}: ${statusText} ${details}`);
-    }
-
-    console.log(`- Modo Gratuito  : FREE_ONLY_MODE=${this.isFreeOnlyMode()}`);
+    console.log('🤖 DIAGNÓSTICO DE PROVEEDORES GM AL INICIAR:');
+    console.log(`Gemini API key: ${geminiKeySet ? 'CONFIGURADA' : 'AUSENTE'}`);
+    console.log(`Qwen endpoint: ${qwenEndpointOk ? 'OK' : 'ERROR'}`);
+    console.log(`Qwen model: ${qwenModelName}`);
+    console.log(`Qwen model disponible: ${qwenModelAvail ? 'SÍ' : 'NO'}`);
     console.log('==================================================');
   }
 

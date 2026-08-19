@@ -32,7 +32,7 @@ describe('GM Provider Router & Provider Configuration Test Suite', () => {
         { messages: [{ role: 'user', content: 'hola' }], systemPrompt: 'sys' },
         () => {}
       )
-    ).rejects.toThrow('GEMINI_PRO_UNAVAILABLE: Configuración incompleta. Falta GEMINI_API_KEY en archivo .env.');
+    ).rejects.toThrow('GEMINI_PRO_UNAVAILABLE: Configuración incompleta. Falta GEMINI_API_KEY en .env');
   });
 
   it('2. Gemini with valid API key configuration returns isAvailable() = true', async () => {

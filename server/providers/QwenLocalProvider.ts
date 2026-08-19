@@ -21,40 +21,77 @@ export class QwenLocalProvider implements IGMProvider {
       return envModel.trim();
     }
 
-    // Default fallback if no env variable is specified
+    // Default fallback: qwen3:8b (exact installed model)
     return 'qwen3:8b';
   }
 
   /**
-   * Pings the local LLM server (Ollama / LM Studio) and verifies backend availability
+   * Fetches installed models from local LLM backend (Ollama / LM Studio)
    */
-  public async isAvailable(): Promise<boolean> {
+  public async getInstalledModels(): Promise<string[]> {
     const baseUrl = this.getBaseUrl();
+    const rawBase = baseUrl.replace(/\/v1\/?$/, '');
+
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 2000);
-      
-      // Ping OpenAI-compatible models endpoint or Ollama tags endpoint
-      const rawBase = baseUrl.replace(/\/v1\/?$/, '');
+
+      // Try Ollama native /api/tags
+      const tagsRes = await fetch(`${rawBase}/api/tags`, {
+        signal: controller.signal,
+      }).catch(() => null);
+
+      if (tagsRes && tagsRes.ok) {
+        const data = (await tagsRes.json().catch(() => ({}))) as any;
+        clearTimeout(timeoutId);
+        if (Array.isArray(data.models)) {
+          return data.models.map((m: any) => m.name || m.model);
+        }
+      }
+
+      // Try OpenAI /v1/models
       const modelsRes = await fetch(`${rawBase}/v1/models`, {
         signal: controller.signal,
       }).catch(() => null);
 
       clearTimeout(timeoutId);
-
       if (modelsRes && modelsRes.ok) {
-        return true;
+        const data = (await modelsRes.json().catch(() => ({}))) as any;
+        if (Array.isArray(data.data)) {
+          return data.data.map((m: any) => m.id);
+        }
       }
-
-      // Secondary check: ping Ollama native /api/tags
-      const tagsRes = await fetch(`${rawBase}/api/tags`, {
-        signal: controller.signal,
-      }).catch(() => null);
-
-      return Boolean(tagsRes && tagsRes.ok);
     } catch {
-      return false;
+      // Return empty array if backend is unreachable
     }
+
+    return [];
+  }
+
+  /**
+   * Pings the local LLM server (Ollama / LM Studio)
+   */
+  public async isAvailable(): Promise<boolean> {
+    const installed = await this.getInstalledModels();
+    return installed.length > 0;
+  }
+
+  /**
+   * Checks if configured QWEN_MODEL is actually installed on the local server
+   */
+  public async isModelAvailable(targetModel?: string): Promise<boolean> {
+    const modelToMatch = targetModel || this.getModelName();
+    const installed = await this.getInstalledModels();
+
+    if (installed.length === 0) return false;
+
+    // Check exact match or fuzzy prefix match (e.g. qwen3:8b vs qwen3)
+    return installed.some(
+      (m) =>
+        m.toLowerCase() === modelToMatch.toLowerCase() ||
+        m.toLowerCase().startsWith(`${modelToMatch.toLowerCase()}:`) ||
+        modelToMatch.toLowerCase().startsWith(`${m.toLowerCase()}:`)
+    );
   }
 
   public async generateStream(
@@ -98,7 +135,7 @@ export class QwenLocalProvider implements IGMProvider {
       }
       const msg = err?.message || String(err);
       if (msg.includes('404') || msg.includes('not found')) {
-        const error = new Error(`Qwen Local Error: 404 modelo '${model}' no encontrado en el servidor local LLM (${baseUrl}). Configura QWEN_MODEL en .env con un modelo instalado.`);
+        const error = new Error(`Qwen: Modelo configurado '${model}' no está instalado`);
         (error as any).code = 'QWEN_MODEL_NOT_FOUND';
         throw error;
       }
