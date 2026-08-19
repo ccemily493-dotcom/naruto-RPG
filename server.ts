@@ -35,10 +35,9 @@ import { evaluateAIAudioDirector } from './server/aiAudioDirector';
 import { getSFXProvider } from './server/sfxProvider';
 import { analyzeWavFile } from './server/audioAnalyzer';
 import { updateCachedSFXStatus } from './server/audioCache';
-import { WooshSFXProvider } from './server/wooshProvider';
-import { assetizeAudioFile, AssetizeRequest } from './server/audioAssetizer';
 import { GMProviderRouter } from './server/providers/GMProviderRouter';
 import { setMockScenario, getActiveMockScenario } from './server/providers/MockQuotaProvider';
+import { persistentShinobiState } from './server/simulation/persistentStateManager';
 
 dotenv.config();
 
@@ -824,20 +823,58 @@ app.get('/api/jutsus/:id', (req: Request, res: Response): void => {
   }
 });
 
+// GET /api/simulation/state
+app.get('/api/simulation/state', (_req: Request, res: Response): void => {
+  res.json({ success: true, persistentState: persistentShinobiState.getState() });
+});
+
+// POST /api/simulation/turn
+app.post('/api/simulation/turn', (_req: Request, res: Response): void => {
+  const maintenanceResult = persistentShinobiState.processTurnMaintenance();
+  res.json({ success: true, ...maintenanceResult });
+});
+
+// POST /api/simulation/rest
+app.post('/api/simulation/rest', (req: Request, res: Response): void => {
+  const { minutes } = req.body || {};
+  const updatedState = persistentShinobiState.rest(minutes || 15);
+  res.json({ success: true, persistentState: updatedState });
+});
+
+// POST /api/simulation/reset
+app.post('/api/simulation/reset', (_req: Request, res: Response): void => {
+  const resetState = persistentShinobiState.resetToDefault();
+  res.json({ success: true, persistentState: resetState });
+});
+
 // POST /api/simulation/resolve
 app.post('/api/simulation/resolve', (req: Request, res: Response): void => {
   try {
     const { techniqueQuery, intensity, targetEnemy, chakraState, physicalState, combatState, seed } = req.body;
+    const currentState = persistentShinobiState.getState();
+
+    const activeChakra = chakraState || currentState.chakraState;
+    const activePhysical = physicalState || currentState.physicalState;
+    const activeCombat = combatState || currentState.combatState;
+
     const result = executeTechniqueSimulation({
       techniqueQuery,
       intensity,
       targetEnemy,
-      chakraState: chakraState || INITIAL_RIN_CHAKRA_STATE,
-      physicalState,
-      combatState,
+      chakraState: activeChakra,
+      physicalState: activePhysical,
+      combatState: activeCombat,
       seed,
     });
-    res.json({ success: true, simulationResult: result });
+
+    const tech = getTechniqueByIdOrName(techniqueQuery);
+    const updatedPersistentState = persistentShinobiState.applySimulationResult(result, tech);
+
+    res.json({
+      success: true,
+      simulationResult: result,
+      persistentState: updatedPersistentState,
+    });
   } catch (err: any) {
     res.status(500).json({ error: err.message || 'Error al ejecutar simulación determinista' });
   }
@@ -847,6 +884,11 @@ app.post('/api/simulation/resolve', (req: Request, res: Response): void => {
 app.post('/api/simulation/queue', (req: Request, res: Response): void => {
   try {
     const { action, techniqueId, target, intensity, chakraState, physicalState, combatState, seed } = req.body;
+    const currentState = persistentShinobiState.getState();
+
+    const activeChakra = chakraState || currentState.chakraState;
+    const activePhysical = physicalState || currentState.physicalState;
+    const activeCombat = combatState || currentState.combatState;
 
     if (action === 'enqueue') {
       const item = globalActionQueue.enqueueAction(techniqueId, target, intensity);
@@ -862,13 +904,26 @@ app.post('/api/simulation/queue', (req: Request, res: Response): void => {
 
     if (action === 'resolveNext') {
       const { resolvedItem, simulationResult, remainingQueue } = globalActionQueue.resolveNextAction(
-        chakraState || INITIAL_RIN_CHAKRA_STATE,
-        physicalState,
-        combatState,
+        activeChakra,
+        activePhysical,
+        activeCombat,
         target,
         seed
       );
-      res.json({ success: true, resolvedItem, simulationResult, remainingQueue });
+
+      let updatedPersistentState = currentState;
+      if (simulationResult && resolvedItem) {
+        const tech = getTechniqueByIdOrName(resolvedItem.techniqueId);
+        updatedPersistentState = persistentShinobiState.applySimulationResult(simulationResult, tech);
+      }
+
+      res.json({
+        success: true,
+        resolvedItem,
+        simulationResult,
+        remainingQueue,
+        persistentState: updatedPersistentState,
+      });
       return;
     }
 
