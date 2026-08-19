@@ -38,13 +38,18 @@ export function useChatStream(config: OpenAIConfig) {
         if (!reader) throw new Error('No readable stream');
         const decoder = new TextDecoder();
         let accumulated = '';
+        let sseBuffer = '';
 
         while (true) {
           const { value, done } = await reader.read();
           if (done) break;
           const chunk = decoder.decode(value, { stream: true });
+          sseBuffer += chunk;
 
-          const lines = chunk.split('\n');
+          const lines = sseBuffer.split('\n');
+          // Keep the last incomplete line in the buffer
+          sseBuffer = lines.pop() || '';
+
           for (const line of lines) {
             const trimmed = line.trim();
             if (!trimmed) continue;

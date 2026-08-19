@@ -49,10 +49,10 @@ export const RinStatsPanel: React.FC<RinStatsPanelProps> = ({
 
   if (!stats) return null;
   const safeChakra = stats.chakra || {
-    primaryCurrent: 100,
-    primaryMax: 100,
-    secondaryCurrent: 100,
-    secondaryMax: 100,
+    primaryCurrent: 1000,
+    primaryMax: 1000,
+    secondaryCurrent: 300,
+    secondaryMax: 300,
     flowState: 'balanced' as const,
   };
   const safeVitality = stats.vitality || {

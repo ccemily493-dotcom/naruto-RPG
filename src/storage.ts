@@ -16,10 +16,10 @@ export const DEFAULT_OPENAI_CONFIG: OpenAIConfig = {
 
 export const DEFAULT_RIN_STATS: RinDynamicStats = {
   chakra: {
-    primaryCurrent: 64,
-    primaryMax: 100,
-    secondaryCurrent: 85,
-    secondaryMax: 100,
+    primaryCurrent: 1000,
+    primaryMax: 1000,
+    secondaryCurrent: 300,
+    secondaryMax: 300,
     flowState: 'balanced',
   },
   vitality: {
