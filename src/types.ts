@@ -540,6 +540,8 @@ export type ExperimentOutcome =
 
 export type StrategyOutcome = 'SUCCESS' | 'PARTIAL_SUCCESS' | 'FAILURE' | 'COUNTERED';
 
+export type TechniqueValueSource = 'CANON_DOCUMENTED' | 'DERIVED' | 'UNSET';
+
 export interface TechniqueDefinition {
   id: string;
   name: string;
@@ -560,6 +562,9 @@ export interface TechniqueDefinition {
   isExecutableJutsu?: boolean;
   effectiveRangeMeters?: number;
   maxRangeMeters?: number;
+  valueSource?: TechniqueValueSource;
+  balanceNotes?: string;
+  fatigueCoefficient?: number;
 }
 
 export interface QuantifiedShinobiStats {

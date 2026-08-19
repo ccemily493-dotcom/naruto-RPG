@@ -794,7 +794,19 @@ app.get('/api/jutsus', (req: Request, res: Response): void => {
       list = list.filter((t) => t.isExecutableJutsu !== false);
     }
 
-    res.json({ success: true, count: list.length, jutsus: list });
+    const formattedList = list.map((t) => ({
+      id: t.id,
+      name: t.name,
+      category: t.category,
+      mastery: t.mastery,
+      chakraCost: t.chakraCostBase === undefined ? 'UNSET (No cuantificado)' : t.chakraCostBase,
+      basePower: t.basePower === undefined ? 'UNSET (No cuantificado)' : t.basePower,
+      rangeMeters: t.effectiveRangeMeters !== undefined ? `${t.effectiveRangeMeters}m (Max: ${t.maxRangeMeters || t.effectiveRangeMeters}m)` : '0m / Personal',
+      executionTimeSeconds: `${t.executionTimeSeconds}s`,
+      valueSource: t.valueSource || (t.basePower === undefined ? 'UNSET' : 'CANON_DOCUMENTED'),
+    }));
+
+    res.json({ success: true, count: formattedList.length, jutsus: formattedList, rawJutsus: list });
   } catch (err: any) {
     res.status(500).json({ error: err.message || 'Error al obtener jutsus' });
   }
@@ -811,10 +823,15 @@ app.get('/api/jutsus/:id', (req: Request, res: Response): void => {
 
     const formattedJutsu = {
       ...jutsu,
+      valueSource: jutsu.valueSource || (jutsu.basePower === undefined ? 'UNSET' : 'CANON_DOCUMENTED'),
       chakraCostFormatted: jutsu.chakraCostBase === undefined ? 'UNSET (No cuantificado)' : jutsu.chakraCostBase,
       basePowerFormatted: jutsu.basePower === undefined ? 'UNSET (No cuantificado)' : jutsu.basePower,
       maxSafePowerFormatted: jutsu.maxSafePower === undefined ? 'UNSET (No cuantificado)' : jutsu.maxSafePower,
-      maintenanceFormatted: jutsu.maintenanceCostPerTurn === undefined ? 'UNSET (No requiere mantenimiento)' : jutsu.maintenanceCostPerTurn,
+      maintenanceFormatted: jutsu.maintenanceCostPerTurn === undefined ? 'UNSET (No requiere mantenimiento)' : `${jutsu.maintenanceCostPerTurn} chakra/turno`,
+      fatigueFormatted: jutsu.fatigueCoefficient ? `Coeficiente ${jutsu.fatigueCoefficient}x` : 'Estándar (1.0x)',
+      rangeFormatted: jutsu.effectiveRangeMeters !== undefined ? `Efectivo: ${jutsu.effectiveRangeMeters}m, Máx: ${jutsu.maxRangeMeters}m` : 'Personal / Rango 0m',
+      requirementsFormatted: jutsu.requirements.length > 0 ? jutsu.requirements.join(', ') : 'Ninguno',
+      balanceNotes: jutsu.balanceNotes || 'Sin observaciones específicas.',
     };
 
     res.json({ success: true, jutsu: formattedJutsu, initialChakraState: INITIAL_RIN_CHAKRA_STATE });

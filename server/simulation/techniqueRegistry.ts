@@ -1,9 +1,8 @@
 import { TechniqueDefinition } from '../../src/types';
 
 /**
- * MASTER TECHNIQUE REGISTRY FOR RIN KAGEHIRA
- * Pre-populated with the exact Master Technique Table (46 techniques).
- * Generic capabilities are explicitly marked with `isExecutableJutsu: false`.
+ * MASTER TECHNIQUE REGISTRY FOR RIN KAGEHIRA (46 TECHNIQUES)
+ * Explicitly tracks valueSource: CANON_DOCUMENTED | DERIVED | UNSET.
  * Values marked as UNSET in the official prompt remain strictly `undefined`.
  */
 export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
@@ -20,7 +19,10 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 10,
     executionTimeSeconds: 1.0,
     knownByRin: true,
-    isExecutableJutsu: false, // Generic capability
+    isExecutableJutsu: false,
+    valueSource: 'DERIVED',
+    balanceNotes: 'Capacidad pasiva del linaje Yūrei no Keimyaku. Modificador de visión y percepción.',
+    fatigueCoefficient: 1.0,
     requirements: ['Yūrei no Keimyaku linaje'],
   },
   {
@@ -36,7 +38,10 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     executionTimeSeconds: 0.5,
     maintenanceCostPerTurn: 2,
     knownByRin: true,
-    isExecutableJutsu: false, // Generic capability
+    isExecutableJutsu: false,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Visión sensorial avanzada de chakra. Potencia ofensiva NO aplicable (UNSET).',
+    fatigueCoefficient: 0.8,
     requirements: ['Yūrei no Keimyaku'],
   },
   {
@@ -52,7 +57,10 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     executionTimeSeconds: 1.5,
     maintenanceCostPerTurn: 4,
     knownByRin: true,
-    isExecutableJutsu: false, // Generic capability
+    isExecutableJutsu: false,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Extensión sensorial de largo alcance. Potencia ofensiva UNSET.',
+    fatigueCoefficient: 1.2,
     requirements: ['Tercer Ojo'],
   },
   {
@@ -67,7 +75,10 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: undefined,
     executionTimeSeconds: 1.0,
     knownByRin: true,
-    isExecutableJutsu: false, // Generic capability
+    isExecutableJutsu: false,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Fijación perceptiva sobre objetivos. Requisito previo para Genjutsu.',
+    fatigueCoefficient: 1.0,
     requirements: ['Red perceptiva'],
   },
   {
@@ -83,7 +94,10 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     executionTimeSeconds: 1.0,
     maintenanceCostPerTurn: 3,
     knownByRin: true,
-    isExecutableJutsu: false, // Generic capability
+    isExecutableJutsu: false,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Supresión de presencia y rastro de chakra. Potencia ofensiva UNSET.',
+    fatigueCoefficient: 1.1,
     requirements: ['Control de chakra'],
   },
 
@@ -103,6 +117,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 25,
+    valueSource: 'DERIVED',
+    balanceNotes: 'Dōjutsu paralizante instantáneo a corta/media distancia.',
+    fatigueCoefficient: 1.2,
     requirements: ['Tercer Ojo'],
   },
   {
@@ -120,6 +137,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 30,
+    valueSource: 'DERIVED',
+    balanceNotes: 'Proyección de miedo mediante resonancia Yūrei.',
+    fatigueCoefficient: 1.3,
     requirements: ['Anclaje perceptivo'],
   },
   {
@@ -137,6 +157,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 20,
     maxRangeMeters: 35,
+    valueSource: 'DERIVED',
+    balanceNotes: 'Ilusión espacial concéntrica de múltiples geometrías.',
+    fatigueCoefficient: 1.5,
     requirements: ['Anclaje perceptivo avanzado'],
   },
   {
@@ -154,6 +177,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 25,
+    valueSource: 'DERIVED',
+    balanceNotes: 'Desestructuración perceptiva del objetivo.',
+    fatigueCoefficient: 1.4,
     requirements: ['Kali Mudra'],
   },
   {
@@ -171,6 +197,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 25,
+    valueSource: 'DERIVED',
+    balanceNotes: 'Ilusión visceral de colapso orgánico.',
+    fatigueCoefficient: 1.6,
     requirements: ['Intōn de Información'],
   },
   {
@@ -188,6 +217,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 25,
+    valueSource: 'DERIVED',
+    balanceNotes: 'Explotación somática de memorias y dolor pasados.',
+    fatigueCoefficient: 1.7,
     requirements: ['Muerte Súbita'],
   },
   {
@@ -205,6 +237,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 25,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Bucle perceptivo de repetición temporal en la víctima.',
+    fatigueCoefficient: 1.8,
     requirements: ['Anclaje perceptivo', 'Yin avanzado'],
   },
   {
@@ -222,6 +257,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 25,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Bucle perceptivo dinámico. Inestable y de alto riesgo (EXPERIMENTAL).',
+    fatigueCoefficient: 2.0,
     requirements: ['Loop Temporal Simple'],
   },
   {
@@ -237,6 +275,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     executionTimeSeconds: 4.0,
     knownByRin: true,
     isExecutableJutsu: true,
+    valueSource: 'UNSET',
+    balanceNotes: 'Fase de estudio y fundamentos canónicos. Coste y potencia UNSET.',
+    fatigueCoefficient: 2.2,
     requirements: ['Modo Yin', 'Kuishōmoden'],
   },
 
@@ -256,6 +297,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 30,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Comando vocal imperativo. Ejecución ultra-rápida (0.5s).',
+    fatigueCoefficient: 1.3,
     requirements: ['Resonancia vocal'],
   },
   {
@@ -273,6 +317,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 30,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Orden vocal de interrupción de tenketsu (usado canónicamente vs Deidara).',
+    fatigueCoefficient: 1.5,
     requirements: ['Discurso Maldito'],
   },
 
@@ -293,6 +340,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 20,
     maxRangeMeters: 40,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Clon sólido de madera con mantenimiento por turno.',
+    fatigueCoefficient: 1.2,
     requirements: ['Mokuton básico'],
   },
   {
@@ -310,6 +360,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 30,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Raíces emergentes para contención y aproximación.',
+    fatigueCoefficient: 1.1,
     requirements: ['Mokuton básico'],
   },
   {
@@ -327,6 +380,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 10,
     maxRangeMeters: 20,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Escudo defensivo de madera reforzada.',
+    fatigueCoefficient: 1.3,
     requirements: ['Raíces'],
   },
   {
@@ -345,6 +401,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 0,
     maxRangeMeters: 0,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Armadura dérmica sostenida de madera.',
+    fatigueCoefficient: 1.2,
     requirements: ['Barrera de madera'],
   },
   {
@@ -362,6 +421,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 25,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Raíces móviles serpenteantes para atadura.',
+    fatigueCoefficient: 1.4,
     requirements: ['Raíces'],
   },
   {
@@ -379,6 +441,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 20,
     maxRangeMeters: 35,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Semillas/frutos botánicos con detonación de chakra.',
+    fatigueCoefficient: 1.5,
     requirements: ['Raíces', 'Chakra infundido'],
   },
   {
@@ -396,6 +461,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 25,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Gas sedante botánico derivado de Mokuton + Suiton.',
+    fatigueCoefficient: 1.4,
     requirements: ['Suiton', 'Mokuton'],
   },
   {
@@ -414,6 +482,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 40,
     maxRangeMeters: 60,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Técnica de área masiva con drenaje/absorción constante de chakra.',
+    fatigueCoefficient: 2.0,
     requirements: ['Raíces avanzadas', 'Intōn'],
   },
   {
@@ -431,6 +502,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 25,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Encerramiento rígido de madera para compresión.',
+    fatigueCoefficient: 1.6,
     requirements: ['Barrera de madera', 'Serpientes Cazadoras'],
   },
 
@@ -450,6 +524,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 25,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Fase I del Ataúd Divino. Enfriamiento y supresión perceptiva.',
+    fatigueCoefficient: 2.0,
     requirements: ['Ataúd de madera', 'Genjutsu perceptivo'],
   },
   {
@@ -467,6 +544,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 25,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Fase II del Ataúd Divino. Dominio completo de madera.',
+    fatigueCoefficient: 2.3,
     requirements: ['Ataúd de la Muerte — Velo'],
   },
   {
@@ -484,6 +564,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 25,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Fase III. Técnica destructiva máxima de alto riesgo de backlash.',
+    fatigueCoefficient: 2.5,
     requirements: ['Ataúd de la Muerte — Último Dios'],
   },
 
@@ -500,7 +583,10 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: undefined,
     executionTimeSeconds: 1.0,
     knownByRin: true,
-    isExecutableJutsu: false, // Generic capability
+    isExecutableJutsu: false,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Extracción y estructuración conceptual de memorias.',
+    fatigueCoefficient: 1.2,
     requirements: ['Yūrei no Keimyaku'],
   },
   {
@@ -515,7 +601,10 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: undefined,
     executionTimeSeconds: 1.5,
     knownByRin: true,
-    isExecutableJutsu: false, // Generic capability
+    isExecutableJutsu: false,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Interfaz sensorial para evitar sobrecarga cerebral.',
+    fatigueCoefficient: 1.4,
     requirements: ['Intōn de Información'],
   },
   {
@@ -530,7 +619,10 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: undefined,
     executionTimeSeconds: 4.0,
     knownByRin: true,
-    isExecutableJutsu: false, // Generic capability
+    isExecutableJutsu: false,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Ancla física de estudio e integración conceptual suprema.',
+    fatigueCoefficient: 2.0,
     requirements: ['Kuishōmoden', 'Yin/Yang'],
   },
   {
@@ -548,6 +640,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 10,
     maxRangeMeters: 20,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Degradación celular biológica mediante Yin + Mokuton.',
+    fatigueCoefficient: 1.8,
     requirements: ['Raíces', 'Pergamino de Orochimaru'],
   },
   {
@@ -565,6 +660,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 10,
     maxRangeMeters: 20,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Conversión biológica de energía botánica a salud (máx 75% eficiencia).',
+    fatigueCoefficient: 1.6,
     requirements: ['Mokuton/Intōn: Putrefacción'],
   },
   {
@@ -582,6 +680,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 5,
     maxRangeMeters: 10,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Transfusión de energía a un aliado a corta distancia.',
+    fatigueCoefficient: 1.5,
     requirements: ['Estilo Vitalidad'],
   },
 
@@ -601,6 +702,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 5,
     maxRangeMeters: 15,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Ataque relámpago penetrante. Requiere aproximación táctica.',
+    fatigueCoefficient: 1.6,
     requirements: ['Raiton', 'Velocidad de carga'],
   },
   {
@@ -618,6 +722,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 8,
     maxRangeMeters: 15,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Señuelo de descarga eléctrica con clon.',
+    fatigueCoefficient: 1.4,
     requirements: ['Chidori', 'Mokubunshin'],
   },
   {
@@ -635,6 +742,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 10,
     maxRangeMeters: 20,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Proyectil de chakra helicoidal perforante.',
+    fatigueCoefficient: 1.4,
     requirements: ['Control de chakra'],
   },
   {
@@ -652,6 +762,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 15,
     maxRangeMeters: 25,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Ráfaga de 7 helicoides concentradas.',
+    fatigueCoefficient: 1.8,
     requirements: ['Espiral Maldita'],
   },
   {
@@ -669,6 +782,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 25,
     maxRangeMeters: 40,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Técnica de desplazamiento táctico (acorta 20m de distancia).',
+    fatigueCoefficient: 1.2,
     requirements: ['Desplazamiento'],
   },
   {
@@ -686,6 +802,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 20,
     maxRangeMeters: 35,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Intercambio posicional instantáneo.',
+    fatigueCoefficient: 1.5,
     requirements: ['Tamushaki'],
   },
 
@@ -706,6 +825,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 10,
     maxRangeMeters: 15,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Barrera defensiva omnidireccional anti-Genjutsu.',
+    fatigueCoefficient: 1.3,
     requirements: ['Dominio Simple'],
   },
   {
@@ -724,6 +846,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 8,
     maxRangeMeters: 12,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Barrera defensiva ardiente para repelencia física.',
+    fatigueCoefficient: 1.6,
     requirements: ['Dominio Simple: Percepción'],
   },
 
@@ -743,6 +868,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 2,
     maxRangeMeters: 3,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Golpe cortante de Taijutsu a ultra-corta distancia.',
+    fatigueCoefficient: 0.8,
     requirements: ['Estilo Mantis'],
   },
   {
@@ -760,6 +888,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 2,
     maxRangeMeters: 3,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Golpe de precisión anatómica a tenketsu.',
+    fatigueCoefficient: 0.9,
     requirements: ['Garras de Mantis'],
   },
   {
@@ -777,6 +908,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 3,
     maxRangeMeters: 5,
+    valueSource: 'CANON_DOCUMENTED',
+    balanceNotes: 'Manifestación espectral de múltiples brazos de Kali.',
+    fatigueCoefficient: 1.5,
     requirements: ['Invocación de Kali'],
   },
   {
@@ -794,6 +928,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     isExecutableJutsu: true,
     effectiveRangeMeters: 10,
     maxRangeMeters: 20,
+    valueSource: 'UNSET',
+    balanceNotes: 'Invocación espiritual de Kali. Potencia ofensiva estática UNSET.',
+    fatigueCoefficient: 1.4,
     requirements: ['Contrato de Kali'],
   },
 ];
