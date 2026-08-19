@@ -567,6 +567,57 @@ export interface TechniqueDefinition {
   fatigueCoefficient?: number;
 }
 
+export type ProposalStatus = 'PROPOSED' | 'VALIDATED' | 'SIMULATED' | 'RESOLVED' | 'REJECTED';
+
+export interface ProposedAction {
+  techniqueId?: string;
+  actionType: 'jutsu' | 'movement' | 'perception' | 'defense' | 'taiJutsu' | 'special';
+  targetName?: string;
+  intensity?: number;
+  targetPositionMeters?: number;
+  tacticalGoal?: string;
+}
+
+export interface ActionProposal {
+  id: string;
+  actor: 'rin' | 'npc' | 'environment';
+  intentDescription: string;
+  proposedActions: ProposedAction[];
+  claimedAssumptions?: string[];
+  status: ProposalStatus;
+  rejectionReason?: string;
+  validationDetails?: {
+    chakraAvailable: boolean;
+    rangeValid: boolean;
+    cooldownValid: boolean;
+    fatigueAcceptable: boolean;
+  };
+}
+
+export interface PerceptionResult {
+  visible: boolean;
+  chakraSignatureDetected: boolean;
+  approximateDirection?: string;
+  distanceMeters: number;
+  confidenceScore: number; // 0.0 - 1.0
+  tercerOjoActive: boolean;
+  ocultacionActive: boolean;
+  perceptionProseHint: string;
+}
+
+export interface NPCTacticalState {
+  npcId: string;
+  npcName: string;
+  chakraCurrent: number;
+  reactionSpeedMs: number;
+  positionMeters: number;
+  exposedKnowledge: Record<string, number>; // techniqueId -> knowledge ratio (0.0 to 1.0)
+  perceivedRinState: {
+    chakraLevel: 'high' | 'medium' | 'low' | 'depleted';
+    fatigueLevel: 'fresh' | 'moderate' | 'exhausted';
+  };
+}
+
 export interface QuantifiedShinobiStats {
   chakraControl: number; // 0-100
   precision: number; // 0-100

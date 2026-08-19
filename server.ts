@@ -38,6 +38,8 @@ import { updateCachedSFXStatus } from './server/audioCache';
 import { GMProviderRouter } from './server/providers/GMProviderRouter';
 import { setMockScenario, getActiveMockScenario } from './server/providers/MockQuotaProvider';
 import { persistentShinobiState } from './server/simulation/persistentStateManager';
+import { extractActionProposalFromText } from './server/ai/intentExtractor';
+import { processActionProposalPipeline } from './server/simulation/actionProposalPipeline';
 
 dotenv.config();
 
@@ -509,12 +511,23 @@ app.post('/api/chat', async (req: Request, res: Response): Promise<void> => {
   res.flushHeaders();
 
   try {
+    // Extract ActionProposal from last user message or playerAction
+    const lastUserMessage = messages.filter((m) => m.role === 'user').pop();
+    const actionInput = req.body.playerAction || (lastUserMessage ? lastUserMessage.content : '');
+
+    const proposal = extractActionProposalFromText(actionInput);
+    const pipelineResult = processActionProposalPipeline(proposal);
+    const lastSimResult = pipelineResult.simulationResults.length > 0
+      ? pipelineResult.simulationResults[pipelineResult.simulationResults.length - 1]
+      : undefined;
+
     const systemPrompt = buildSystemPrompt({
       memory,
       rinStats,
       chapters,
       storyTitle,
       npcContext: req.body.npcContext,
+      simulationResult: lastSimResult,
     });
 
     await gmRouter.generateStream(
