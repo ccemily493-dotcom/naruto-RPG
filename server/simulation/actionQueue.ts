@@ -6,13 +6,16 @@ import { executeTechniqueSimulation } from './shinobiSimulationEngine';
 export class ActionQueueManager {
   private queue: ActionQueueItem[] = [];
 
+  private actionCounter = 0;
+
   public getQueue(): ActionQueueItem[] {
     return [...this.queue];
   }
 
   public enqueueAction(techniqueId: string, target?: string, intensity?: any): ActionQueueItem {
+    this.actionCounter += 1;
     const item: ActionQueueItem = {
-      id: `action_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+      id: `action_seq_${this.actionCounter}_${techniqueId}`,
       techniqueId,
       target,
       intensity,

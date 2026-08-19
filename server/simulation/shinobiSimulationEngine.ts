@@ -26,7 +26,7 @@ export interface ExecuteTechniqueParams {
 }
 
 export function executeTechniqueSimulation(params: ExecuteTechniqueParams): SimulationResult {
-  const rng = new DeterministicRNG(params.seed || `seed_${Date.now()}`);
+  const rng = new DeterministicRNG(params.seed || 'seed_rin_default_simulation');
   const stats = params.stats || INITIAL_RIN_QUANTIFIED_STATS;
   const physical = params.physicalState || INITIAL_RIN_PHYSICAL_STATE;
   const combat = params.combatState || INITIAL_RIN_COMBAT_STATE;
@@ -195,41 +195,53 @@ export function executeTechniqueSimulation(params: ExecuteTechniqueParams): Simu
     60 + (params.targetEnemy ? params.targetEnemy.reaction * 0.2 : 0)
   );
 
-  // 6. OUTCOME DEGREE DETERMINATION
+  // STAGE B: Execution Score & Execution Quality Calculation
+  let executionQuality = 0;
+  const scoreDiff = finalExecutionScore - difficultyThreshold;
+
+  if (scoreDiff >= 20) {
+    executionQuality = Math.min(100, 80 + Math.round(scoreDiff * 0.5));
+  } else if (scoreDiff >= 0) {
+    executionQuality = Math.min(85, 65 + scoreDiff);
+  } else {
+    executionQuality = Math.max(0, 50 + scoreDiff);
+  }
+
+  // STAGE C: Target Reach & Defense Evaluation (Separates Execution from Impact)
   let success = false;
   let degree: ExperimentOutcome | StrategyOutcome = 'FAILURE';
-  let executionQuality = 0;
   const failures: string[] = [];
 
-  const scoreDiff = finalExecutionScore - difficultyThreshold;
+  const targetReaction = params.targetEnemy ? params.targetEnemy.reaction : 50;
+  const targetCover = combat.coverLevel;
 
   if (technique.mastery === 'EXPERIMENTAL' && intensity === 'OVERLOAD') {
     success = false;
     degree = scoreDiff >= 10 ? 'UNSTABLE_SUCCESS' : 'BACKLASH';
     executionQuality = 40;
     failures.push('INESTABILIDAD_POR_TECNICA_EXPERIMENTAL_Y_SOBRECARGA');
+  } else if (params.targetEnemy && targetReaction > 85 && targetCover > 50 && scoreDiff < 25) {
+    // Enemy high defense/cover counters or evades despite high execution!
+    success = false;
+    degree = 'COUNTERED';
+    failures.push('ENEMIGO_EVADIO_O_CONTRARRESTO_GRACIAS_A_COBERTURA_Y_REACCION');
   } else if (scoreDiff >= 20) {
     success = true;
     degree = 'SUCCESS';
-    executionQuality = Math.min(100, 80 + Math.round(scoreDiff * 0.5));
   } else if (scoreDiff >= 0) {
     success = true;
     degree = 'SUCCESS';
-    executionQuality = Math.min(85, 65 + scoreDiff);
   } else if (scoreDiff >= -15) {
     success = false;
     degree = technique.mastery === 'EXPERIMENTAL' ? 'UNSTABLE_SUCCESS' : 'PARTIAL_SUCCESS';
-    executionQuality = Math.max(30, 50 + scoreDiff);
     failures.push('EJECUCION_IMPERFECTA_O_DESVIADA');
   } else if (intensity === 'OVERLOAD' || technique.mastery === 'EXPERIMENTAL') {
     success = false;
     degree = 'BACKLASH';
-    executionQuality = 10;
     failures.push('BACKLASH_POR_SOBRECARGA_O_INEXPERIENCIA');
   } else {
     success = false;
     degree = 'FAILURE';
-    executionQuality = 0;
     failures.push('EJECUCION_FALLIDA_POR_DIFICULTAD');
   }
 
