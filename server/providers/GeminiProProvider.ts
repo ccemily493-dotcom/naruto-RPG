@@ -16,7 +16,7 @@ export class GeminiProProvider implements IGMProvider {
   }
 
   public getModelName(params?: GMGenerateParams): string {
-    return params?.model || process.env.GEMINI_PRO_MODEL || 'gemini-1.5-pro';
+    return params?.model || process.env.GEMINI_PRO_MODEL || 'gemini-3.1-pro-preview';
   }
 
   public async isAvailable(params?: GMGenerateParams): Promise<boolean> {

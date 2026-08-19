@@ -16,7 +16,7 @@ export class GeminiFlashProvider implements IGMProvider {
   }
 
   public getModelName(params?: GMGenerateParams): string {
-    return params?.model || process.env.GEMINI_FLASH_MODEL || 'gemini-1.5-flash';
+    return params?.model || process.env.GEMINI_FLASH_MODEL || 'gemini-3.6-flash';
   }
 
   public async isAvailable(params?: GMGenerateParams): Promise<boolean> {

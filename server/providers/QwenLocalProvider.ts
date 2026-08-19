@@ -99,7 +99,12 @@ export class QwenLocalProvider implements IGMProvider {
     onChunk: (text: string) => void
   ): Promise<void> {
     const baseUrl = this.getBaseUrl();
-    const model = params.model || this.getModelName();
+    
+    // Ignore proprietary model names sent from frontend (e.g. gpt-4o) for local provider
+    let model = params.model || this.getModelName();
+    if (model.toLowerCase().includes('gpt-') || model.toLowerCase().includes('claude')) {
+      model = this.getModelName();
+    }
 
     const openai = new OpenAI({
       baseURL: baseUrl,
