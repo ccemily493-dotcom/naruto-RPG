@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { StoryMemory, RinDynamicStats, Chapter } from '../src/types';
+import { StoryMemory, RinDynamicStats, Chapter, SimulationResult } from '../src/types';
 import { retrieveRinCanonContext } from './rinCanonRetriever';
 
 const PROMPT_DIR = path.join(process.cwd(), 'prompts');
@@ -26,6 +26,7 @@ export interface PromptContextParams {
   playerAction?: string;
   recentScene?: string;
   recentMessages?: Array<{ role: string; content: string }>;
+  simulationResult?: SimulationResult;
 }
 
 export function buildSystemPrompt(params?: StoryMemory | PromptContextParams): string {
@@ -37,6 +38,7 @@ export function buildSystemPrompt(params?: StoryMemory | PromptContextParams): s
   let playerAction: string | undefined;
   let recentScene: string | undefined;
   let recentMessages: Array<{ role: string; content: string }> | undefined;
+  let simulationResult: SimulationResult | undefined;
 
   if (params && ('episodic' in params || 'factual' in params || 'techniques' in params)) {
     memory = params as StoryMemory;
@@ -50,6 +52,7 @@ export function buildSystemPrompt(params?: StoryMemory | PromptContextParams): s
     playerAction = p.playerAction;
     recentScene = p.recentScene;
     recentMessages = p.recentMessages;
+    simulationResult = p.simulationResult;
   }
 
   // Retrieve dynamic Rin Canon Context
@@ -142,10 +145,36 @@ ${timelineStr}
 ════════════════════════════════════════════════════════════
 `.trim();
 
+  let simBlock = '';
+  if (simulationResult) {
+    simBlock = `
+════════════════════════════════════════════════════════════
+[DETERMINISTIC SIMULATION RESULT — RESULTADO INVIOLABLE DEL MOTOR]
+════════════════════════════════════════════════════════════
+ÉXITO DE LA ACCIÓN: ${simulationResult.success ? 'SÍ' : 'NO'} (Grado: ${simulationResult.degree} / Calidad de ejecución: ${simulationResult.executionQuality}%)
+CHAKRA CONSUMIDO: ${simulationResult.chakraSpent} (Stamina consumida: ${simulationResult.staminaSpent})
+CAMBIOS DE SALUD/VITALIDAD: ${simulationResult.vitalityChange}
+DESGLOSE DE PUNTUACIÓN (Score Final: ${simulationResult.calculationBreakdown.finalExecutionScore} vs Umbral: ${simulationResult.calculationBreakdown.difficultyThreshold}):
+- Bonus Control Chakra: +${simulationResult.calculationBreakdown.chakraControlBonus}
+- Penalización Fatiga: -${simulationResult.calculationBreakdown.fatiguePenalty}
+- Penalización Heridas: -${simulationResult.calculationBreakdown.injuryPenalty}
+EFECTOS ACTIVADOS: ${simulationResult.triggeredEffects.join(', ') || 'Ninguno'}
+FALLOS / ALERTAS: ${simulationResult.failures.join(', ') || 'Ninguno'}
+BACKLASH / RETROALIMENTACIÓN: ${simulationResult.backlash || 'Sin backlash'}
+VENTANA DE REACCIÓN ENEMIGA: ${simulationResult.enemyReactionWindowMs} ms
+SEMILLA DE SIMULACIÓN DETERMINISTA: "${simulationResult.seed}"
+
+⚠️ INSTRUCCIÓN OBLIGATORIA E INVIOLABLE AL GAME MASTER:
+El motor determinista Node.js ha resuelto esta acción. Debes NARRAR este resultado EXACTO. Está estrictamente PROHIBIDO cambiar el éxito/fracaso, devolver el chakra gastado, ignorar el backlash o modificar la reacción calculada.
+════════════════════════════════════════════════════════════
+`;
+  }
+
   // STRUCTURED PROMPT BUILDER (A -> G ORDER)
   return `
 [A. REGLAS PERMANENTES DEL GAME MASTER]
 ${retrieval.permanentCore}
+${simBlock}
 
 ---
 ${core}

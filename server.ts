@@ -768,6 +768,104 @@ app.post('/api/npc/context', (req: Request, res: Response) => {
   }
 });
 
+// SIMULATION ENGINE ENDPOINTS
+import { RIN_MASTER_TECHNIQUES, getTechniqueByIdOrName, getTechniquesByCategory } from './server/simulation/techniqueRegistry';
+import { executeTechniqueSimulation } from './server/simulation/shinobiSimulationEngine';
+import { INITIAL_RIN_CHAKRA_STATE } from './server/simulation/chakraEngine';
+import { ActionQueueManager } from './server/simulation/actionQueue';
+
+const globalActionQueue = new ActionQueueManager();
+
+// GET /api/jutsus
+app.get('/api/jutsus', (req: Request, res: Response): void => {
+  try {
+    const category = req.query.category as string | undefined;
+    const filter = req.query.filter as string | undefined;
+
+    let list = RIN_MASTER_TECHNIQUES;
+    if (category) {
+      list = getTechniquesByCategory(category);
+    }
+
+    if (filter === 'combat_only') {
+      // Exclude generic non-combat capabilities
+      list = list.filter((t) => t.category !== 'Kekkei Genkai' && t.category !== 'Percepción');
+    }
+
+    res.json({ success: true, count: list.length, jutsus: list });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message || 'Error al obtener jutsus' });
+  }
+});
+
+// GET /api/jutsus/:id
+app.get('/api/jutsus/:id', (req: Request, res: Response): void => {
+  try {
+    const jutsu = getTechniqueByIdOrName(req.params.id);
+    if (!jutsu) {
+      res.status(404).json({ error: 'Técnica no encontrada o no registrada' });
+      return;
+    }
+    res.json({ success: true, jutsu, initialChakraState: INITIAL_RIN_CHAKRA_STATE });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message || 'Error al obtener información del jutsu' });
+  }
+});
+
+// POST /api/simulation/resolve
+app.post('/api/simulation/resolve', (req: Request, res: Response): void => {
+  try {
+    const { techniqueQuery, intensity, targetEnemy, chakraState, physicalState, combatState, seed } = req.body;
+    const result = executeTechniqueSimulation({
+      techniqueQuery,
+      intensity,
+      targetEnemy,
+      chakraState: chakraState || INITIAL_RIN_CHAKRA_STATE,
+      physicalState,
+      combatState,
+      seed,
+    });
+    res.json({ success: true, simulationResult: result });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message || 'Error al ejecutar simulación determinista' });
+  }
+});
+
+// POST /api/simulation/queue
+app.post('/api/simulation/queue', (req: Request, res: Response): void => {
+  try {
+    const { action, techniqueId, target, intensity, chakraState, physicalState, combatState, seed } = req.body;
+
+    if (action === 'enqueue') {
+      const item = globalActionQueue.enqueueAction(techniqueId, target, intensity);
+      res.json({ success: true, item, queue: globalActionQueue.getQueue() });
+      return;
+    }
+
+    if (action === 'clear') {
+      globalActionQueue.clearQueue();
+      res.json({ success: true, queue: [] });
+      return;
+    }
+
+    if (action === 'resolveNext') {
+      const { resolvedItem, simulationResult, remainingQueue } = globalActionQueue.resolveNextAction(
+        chakraState || INITIAL_RIN_CHAKRA_STATE,
+        physicalState,
+        combatState,
+        target,
+        seed
+      );
+      res.json({ success: true, resolvedItem, simulationResult, remainingQueue });
+      return;
+    }
+
+    res.json({ success: true, queue: globalActionQueue.getQueue() });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message || 'Error en la cola de acciones' });
+  }
+});
+
 // Serve frontend: In dev mode use Vite middleware, in prod serve dist
 async function setupFrontend() {
   if (process.env.NODE_ENV !== 'production') {

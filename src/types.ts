@@ -526,3 +526,147 @@ export interface AudioEngineMatchResult {
   alternatives?: AudioTrack[];
   intent?: AudioDirectorIntent;
 }
+
+// DETERMINISTIC SHINOBI SIMULATION ENGINE TYPES
+export type UNSET_VALUE = undefined;
+
+export type TechniqueStatus =
+  'KNOWN' | 'STUDIED' | 'EXPERIMENTAL' | 'USED' | 'LEARNED' | 'CONFIRMED' | 'MASTERED';
+
+export type IntensityLevel = 'MINIMAL' | 'LOW' | 'NORMAL' | 'HIGH' | 'MAX_SAFE' | 'OVERLOAD';
+
+export type ExperimentOutcome =
+  'SUCCESS' | 'PARTIAL_SUCCESS' | 'FAILURE' | 'UNSTABLE_SUCCESS' | 'BACKLASH';
+
+export type StrategyOutcome = 'SUCCESS' | 'PARTIAL_SUCCESS' | 'FAILURE' | 'COUNTERED';
+
+export interface TechniqueDefinition {
+  id: string;
+  name: string;
+  category: string;
+  element?: string;
+  mastery: TechniqueStatus;
+  chakraCostBase: number | UNSET_VALUE;
+  chakraCostMin?: number | UNSET_VALUE;
+  chakraCostMax?: number | UNSET_VALUE;
+  complexityMultiplier: number;
+  powerMultiplier: number;
+  basePower: number | UNSET_VALUE;
+  maxSafePower: number | UNSET_VALUE;
+  executionTimeSeconds: number;
+  maintenanceCostPerTurn?: number | UNSET_VALUE;
+  knownByRin: boolean;
+  requirements: string[];
+}
+
+export interface QuantifiedShinobiStats {
+  chakraControl: number; // 0-100
+  precision: number; // 0-100
+  concentration: number; // 0-100
+  perception: number; // 0-100
+  reactionSpeed: number; // 0-100
+  coordination: number; // 0-100
+  physicalPower: number; // 0-100
+  physicalSpeed: number; // 0-100
+  physicalEndurance: number; // 0-100
+  mentalEndurance: number; // 0-100
+  adaptability: number; // 0-100
+  analysis: number; // 0-100
+  combatExperience: number; // 0-100
+  technicalKnowledge: number; // 0-100
+  mokutonAffinity: number; // 0-100
+  yinAffinity: number; // 0-100
+  yinYangAffinity: number; // 0-100
+}
+
+export interface PhysicalStateQuantified {
+  healthCurrent: number;
+  healthMax: number;
+  staminaCurrent: number;
+  staminaMax: number;
+  fatigueLevel: number; // 0-100
+  painPenalty: number;
+  injuriesPenalty: number;
+  mobilityRating: number; // 0-100
+  concentrationLevel: number; // 0-100
+  chakraControlRating: number; // 0-100
+  stressLevel: number; // 0-100
+  bodyDamage: number; // 0-100
+  chakraDistortion: number; // 0-100
+}
+
+export interface CombatStateQuantified {
+  position: { x: number; y: number; z: number };
+  distanceMeters: number;
+  heightMeters: number;
+  velocityMetersPerSec: number;
+  facingDirection: string;
+  visibilityRating: number; // 0-100
+  terrainType: string;
+  coverLevel: number; // 0-100
+  activeEffects: string[];
+  activeJutsu: string[];
+  cooldowns: Record<string, number>;
+  initiativeScore: number;
+  reactionWindowMs: number;
+}
+
+export interface EnemyStatsQuantified {
+  name: string;
+  health: number;
+  maxHealth: number;
+  chakra: number;
+  maxChakra: number;
+  stamina: number;
+  speed: number;
+  reaction: number;
+  perception: number;
+  chakraControl: number;
+  techniqueMastery: number;
+  knowledgeOfRin: number;
+  injuries: number;
+  fatigue: number;
+  activeEffects: string[];
+}
+
+export interface ActionQueueItem {
+  id: string;
+  techniqueId: string;
+  target?: string;
+  intensity?: IntensityLevel;
+  status: 'pending' | 'executing' | 'completed' | 'failed' | 'countered' | 'invalidated';
+  result?: SimulationResult;
+}
+
+export interface SimulationResult {
+  success: boolean;
+  degree: ExperimentOutcome | StrategyOutcome;
+  executionQuality: number; // 0-100
+  chakraSpent: number;
+  staminaSpent: number;
+  vitalityChange: number;
+  healthChange: number;
+  stateChanges: Record<string, any>;
+  triggeredEffects: string[];
+  failures: string[];
+  backlash?: string;
+  overflow?: number;
+  saturation?: number;
+  enemyReactionWindowMs: number;
+  seed: string;
+  calculationBreakdown: {
+    skillScore: number;
+    chakraControlBonus: number;
+    experienceBonus: number;
+    concentrationBonus: number;
+    fatiguePenalty: number;
+    injuryPenalty: number;
+    complexityPenalty: number;
+    environmentPenalty: number;
+    masteryModifier: number;
+    intensityModifier: number;
+    compatibilityModifier: number;
+    finalExecutionScore: number;
+    difficultyThreshold: number;
+  };
+}
