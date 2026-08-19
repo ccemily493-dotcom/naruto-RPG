@@ -36,14 +36,14 @@ export class GMProviderRouter {
 
   public isFreeOnlyMode(): boolean {
     const val = process.env.FREE_ONLY_MODE;
-    return val === 'true' || val === '1' || val === undefined; // Default to free-only for safety
+    return val === 'true' || val === '1' || val === undefined;
   }
 
   public getDisplayText(providerId: GMProviderId, isFallback: boolean): string {
     if (providerId === 'offline') return 'GM: Offline — No provider';
-    if (providerId === 'gemini-pro') return 'GM: Gemini Pro';
+    if (providerId === 'gemini-pro') return isFallback ? 'GM: Gemini Pro — Fallback' : 'GM: Gemini Pro';
     if (providerId === 'gemini-flash') return 'GM: Gemini Flash — Fallback';
-    if (providerId === 'qwen-local') return isFallback ? 'GM: Qwen Local — Fallback' : 'GM: Qwen Local';
+    if (providerId === 'qwen-local') return 'GM: Qwen Local — Fallback';
     return `GM: ${providerId}`;
   }
 
@@ -69,9 +69,10 @@ export class GMProviderRouter {
   }
 
   /**
-   * Main Router Generator:
-   * Sequentially executes Gemini Pro -> Gemini Flash -> Qwen Local
-   * Guarantees 100% identical narrative context to all providers.
+   * Main Router Generator (Per-Request Recovery Chain):
+   * ALWAYS starts by trying Gemini Pro on every new request.
+   * Order: Gemini Pro -> Gemini Flash -> Qwen Local -> Offline
+   * Fallback is strictly temporary per-request and resets on every new turn.
    */
   public async generateStream(
     params: GMGenerateParams,
@@ -86,10 +87,18 @@ export class GMProviderRouter {
     const freeOnly = this.isFreeOnlyMode();
     const errorsEncountered: Array<{ provider: string; error: string }> = [];
 
+    // Reset per-request fallback state: ALWAYS start clean with Gemini Pro (index 0)
     let isFallback = false;
     let fallbackReason: string | undefined = undefined;
 
-    for (const provider of this.providers) {
+    for (let i = 0; i < this.providers.length; i++) {
+      const provider = this.providers[i];
+
+      // If we are on index > 0, we are in a fallback state for this request
+      if (i > 0) {
+        isFallback = true;
+      }
+
       // Cost Safeguard: Skip non-free/non-local providers if FREE_ONLY_MODE=true
       if (freeOnly && !provider.isFree && !provider.isLocal) {
         console.warn(
@@ -105,10 +114,11 @@ export class GMProviderRouter {
           provider: provider.name,
           error: `${provider.name} unavailable (API Key or endpoint missing)`,
         });
-        isFallback = true;
         fallbackReason = `${provider.name} no disponible`;
         continue;
       }
+
+      let hasEmittedChunk = false;
 
       try {
         this.lastActiveProviderId = provider.id;
@@ -126,26 +136,35 @@ export class GMProviderRouter {
           });
         }
 
-        // Execute provider streaming with exact identical params (system prompt, messages, memory, rules)
-        await provider.generateStream(params, onChunk);
+        // Execute provider streaming
+        await provider.generateStream(params, (chunkText: string) => {
+          hasEmittedChunk = true;
+          onChunk(chunkText);
+        });
 
-        // Success! Failover chain terminates successfully.
+        // Success! Failover chain terminates successfully for this turn.
         return;
       } catch (err: any) {
         const errorMsg = err?.message || String(err);
         console.warn(
-          `[GMProviderRouter] ${provider.name} failed with error: ${errorMsg}. Attempting failover...`
+          `[GMProviderRouter] ${provider.name} failed with error: ${errorMsg}.`
         );
         errorsEncountered.push({ provider: provider.name, error: errorMsg });
 
+        // Rule 10: If a provider fails AFTER having already started streaming,
+        // DO NOT switch providers mid-stream. Throw immediately to end request gracefully.
+        if (hasEmittedChunk) {
+          console.error(
+            `[GMProviderRouter] ${provider.name} failed MID-STREAM. Aborting mid-stream failover to avoid mixing provider outputs.`
+          );
+          throw new Error(`[Mid-Stream Error - ${provider.name}]: ${errorMsg}`);
+        }
+
+        // Before streaming started: failover to next provider in chain
+        fallbackReason = `${provider.name} error/quota: ${errorMsg}`;
         if (isRecoverableFailoverError(err)) {
-          isFallback = true;
-          fallbackReason = `${provider.name} cuota/límite agotado (${errorMsg})`;
           continue;
         } else {
-          // Unrecoverable non-quota error: log and try next provider in chain
-          isFallback = true;
-          fallbackReason = `${provider.name} error: ${errorMsg}`;
           continue;
         }
       }
