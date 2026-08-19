@@ -326,7 +326,7 @@ export default function App() {
         const errorData = await response.json().catch(() => ({}));
         if (errorData.error === 'OPENAI_KEY_REQUIRED') {
           setErrorMessage(
-            'Se requiere una clave de API de OpenAI para el Game Master. Haz clic abajo para configurarla.',
+            'Se requiere una clave de API válida para el Game Master. Haz clic abajo para configurarla.',
           );
           setIsSettingsOpen(true);
         } else {
@@ -348,13 +348,17 @@ export default function App() {
 
       const decoder = new TextDecoder();
       let accumulatedText = '';
+      let sseBuffer = '';
 
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
 
         const chunk = decoder.decode(value, { stream: true });
-        const lines = chunk.split('\n');
+        sseBuffer += chunk;
+
+        const lines = sseBuffer.split('\n');
+        sseBuffer = lines.pop() || '';
 
         for (const line of lines) {
           if (line.startsWith('data: ')) {
@@ -556,11 +560,27 @@ export default function App() {
     handleUpdateRinStats(JSON.parse(JSON.stringify(DEFAULT_RIN_STATS)));
   };
 
+  // Default empty journal structure
+  const DEFAULT_EMPTY_JOURNAL: PersonalJournal = {
+    memories: [],
+    people: [],
+    discoveredPlaces: [],
+    room: {
+      deskItems: [],
+      herbsAndPlants: [],
+      souvenirs: [],
+      windowView: '',
+      roomAtmosphere: '',
+      notes: [],
+    },
+    customEntries: [],
+  };
+
   // Update Rin's Personal Journal
   const handleUpdateJournal = (updater: (prev: PersonalJournal) => PersonalJournal) => {
     updateActiveStory((st) => {
       const currentMemory = st.memory || INITIAL_DEFAULT_MEMORY;
-      const currentJournal = currentMemory.journal || INITIAL_DEFAULT_MEMORY.journal!;
+      const currentJournal = currentMemory.journal || DEFAULT_EMPTY_JOURNAL;
       const updatedJournal = updater(currentJournal);
       return {
         ...st,

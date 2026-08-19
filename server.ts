@@ -576,12 +576,6 @@ app.post('/api/memory/sync', async (req: Request, res: Response): Promise<void> 
     return;
   }
 
-  const openai = getOpenAIClient(apiKey);
-  if (!openai) {
-    res.status(400).json({ error: 'No OpenAI client available' });
-    return;
-  }
-
   try {
     const lastExchanges = messages.slice(-4).map(m => `${m.role.toUpperCase()}: ${m.content}`).join('\n\n');
     
@@ -604,19 +598,8 @@ INSTRUCCIONES DE ACTUALIZACIÓN:
 5. timeline: Añade una entrada si hubo avance temporal significativo.
 6. world: Añade a timelineDeviations si los eventos se alejaron del canon original.
 7. atmosphere: Actualiza timeOfDay ('amanecer'|'mañana'|'mediodía'|'tarde'|'atardecer'|'noche'|'madrugada'), weather ('despejado'|'lluvia_suave'|'lluvia_torrencial'|'nublado'|'viento_calido'|'nieve'|'niebla'|'tormenta'), locationName, moodDescription y acousticDetails según el fluir de la narración.
-8. journal: Conserva y enriquece las memorias cotidianas, las personas registradas con frases memorables, lugares descubiertos y estado de la habitación si se interactuó con ellos.
-9. npcUpdates: Si un NPC estuvo presente o fue mencionado, actualiza su estado.
 
-Para npcUpdates, extrae:
-- profileUpdates: Diccionario por ID de NPC (ej. "naruto", "sasuke", "sakura", "kakashi", "orochimaru")
-  - Para cada uno, actualiza "currentMood", "physicalState", "currentActivity" si cambiaron.
-  - "knowledgeGained": lista de secretos o información nueva que aprendió.
-  - "intentionsUpdate": lista de objetos { action, target, motivation, urgency }.
-  - "relationshipChanges": Diccionario por targetId de cambios en las métricas (ej. { "rin": { "trust": 0.1, "respect": -0.1 } })
-  - "newMemory": { event, emotionalSignificance (0.0 a 1.0) } si hubo una experiencia significativa.
-- relationshipEvents: Lista de eventos si hubo un cambio profundo en una relación (npc, target, event, significance (0.0-1.0), change).
-
-FORMATO DE SALIDA (SOLO JSON):
+FORMATO DE SALIDA (SOLO JSON VÁLIDO):
 {
   "factual": { "character": "...", "village": "...", "clan": "...", "rank": "...", "companions": [], "inventory": [], "currentStatus": "..." },
   "episodic": [ ... ],
@@ -625,51 +608,41 @@ FORMATO DE SALIDA (SOLO JSON):
   "knowledge": { "secrets": [], "publicKnowledge": [], "falseBeliefs": [] },
   "world": { "currentVillageState": "...", "activeAlliances": [], "timelineDeviations": [] },
   "timeline": [ { "time": "...", "description": "..." } ],
-  "atmosphere": { "timeOfDay": "...", "weather": "...", "locationName": "...", "moodDescription": "...", "acousticDetails": "..." },
-  "journal": {
-    "memories": [ { "id": "...", "title": "...", "snippet": "...", "location": "...", "timeOfDay": "...", "weather": "...", "emotionalTone": "...", "charactersInvolved": [], "userReflection": "...", "timestamp": 0 } ],
-    "people": [ { "name": "...", "relationship": "...", "attitude": "...", "memorableQuote": "...", "sharedMoments": [], "lastInteraction": "..." } ],
-    "discoveredPlaces": [ { "id": "...", "name": "...", "type": "...", "locationArea": "...", "description": "...", "sensoryAtmosphere": "...", "peaceRating": 5, "discoveredAt": 0 } ],
-    "room": { "deskItems": [], "herbsAndPlants": [], "souvenirs": [], "windowView": "...", "roomAtmosphere": "...", "notes": [] },
-    "customEntries": [ { "id": "...", "title": "...", "content": "...", "timestamp": 0, "tags": [] } ]
-  },
-  "npcUpdates": {
-    "profileUpdates": {
-      "npcId_ejemplo": {
-        "currentMood": "...",
-        "physicalState": "...",
-        "currentActivity": "...",
-        "knowledgeGained": ["..."],
-        "intentionsUpdate": [{"action": "...", "target": "...", "motivation": "...", "urgency": "low|medium|high"}],
-        "relationshipChanges": { "targetId": { "trust": 0.05 } },
-        "newMemory": { "event": "...", "emotionalSignificance": 0.8 }
-      }
-    },
-    "relationshipEvents": [ { "npc": "...", "target": "...", "event": "...", "significance": 0.8, "change": "..." } ]
-  }
+  "atmosphere": { "timeOfDay": "...", "weather": "...", "locationName": "...", "moodDescription": "...", "acousticDetails": "..." }
 }
 `;
 
-    const completion = await openai.chat.completions.create({
-      model: model || process.env.OPENAI_MODEL || 'gpt-4o-mini',
-      messages: [{ role: 'user', content: extractionPrompt }],
-      response_format: { type: 'json_object' },
-      temperature: 0.2,
-    });
-
-    const content = completion.choices[0]?.message?.content;
+    let content = '';
+    await gmRouter.generateStream(
+      {
+        messages: [{ role: 'user', content: extractionPrompt }],
+        systemPrompt: 'Devuelve EXCLUSIVAMENTE un objeto JSON válido.',
+        temperature: 0.2,
+        apiKey,
+        model,
+      },
+      (chunk) => { content += chunk; }
+    );
     if (content) {
-      const parsed = JSON.parse(content);
-      
-      // Update memory structure safely preserving npcWorld
-      const updatedMemory = { ...currentMemory, ...parsed };
-      
-      if (parsed.npcUpdates) {
-        updatedMemory.npcUpdates = parsed.npcUpdates;
+      try {
+        const cleanContent = content
+          .replace(/```json/gi, '')
+          .replace(/```/g, '')
+          .trim();
+        const parsed = JSON.parse(cleanContent);
+        
+        // Update memory structure safely preserving npcWorld
+        const updatedMemory = { ...currentMemory, ...parsed };
+        
+        if (parsed.npcUpdates) {
+          updatedMemory.npcUpdates = parsed.npcUpdates;
+        }
+        
+        res.json({ success: true, memory: updatedMemory });
+        return;
+      } catch (parseErr) {
+        console.warn('Silent memory sync JSON parse warning (falling back to current memory):', parseErr);
       }
-      
-      res.json({ success: true, memory: updatedMemory });
-      return;
     }
 
     res.json({ success: false, memory: currentMemory });

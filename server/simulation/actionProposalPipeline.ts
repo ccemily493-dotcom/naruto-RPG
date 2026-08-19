@@ -20,6 +20,10 @@ export function processActionProposalPipeline(proposal: ActionProposal): Proposa
   const currentState = persistentShinobiState.getState();
   const simulationResults: SimulationResult[] = [];
 
+  if (!proposal || !proposal.proposedActions || !Array.isArray(proposal.proposedActions)) {
+    return { proposal, simulationResults };
+  }
+
   // Stage 1 -> Stage 2: PROPOSED -> VALIDATED check
   for (const pAction of proposal.proposedActions) {
     if (!pAction.techniqueId) continue;
