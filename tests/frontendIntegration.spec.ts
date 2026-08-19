@@ -39,14 +39,14 @@ describe('Frontend Integration & Storage Validation', () => {
 
   it('4. parseMessageForChapters detects chapter headers correctly in GM responses', () => {
     const messageContent = `
-# CAPÍTULO 2: El Despertar del Mokuton
+[[CAPÍTULO: II | El Despertar del Mokuton | Rin despierta su habilidad vegetal]]
 
 Rin siente la vibración de la tierra bajo sus pies mientras el chakra fluye.
     `;
 
-    const chapters = parseMessageForChapters(messageContent, 'msg_100', 1);
+    const parsed = parseMessageForChapters(messageContent);
 
-    expect(chapters.length).toBe(1);
-    expect(chapters[0].title).toBe('CAPÍTULO 2: El Despertar del Mokuton');
+    expect(parsed.chaptersFound.length).toBe(1);
+    expect(parsed.chaptersFound[0].title).toBe('El Despertar del Mokuton');
   });
 });
