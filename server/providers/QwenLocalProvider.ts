@@ -7,24 +7,51 @@ export class QwenLocalProvider implements IGMProvider {
   public isFree = true;
   public isLocal = true;
 
-  private getBaseUrl(): string {
-    return process.env.QWEN_LOCAL_URL || 'http://localhost:11434/v1';
+  public getBaseUrl(): string {
+    return process.env.QWEN_LOCAL_URL || process.env.LOCAL_LLM_URL || 'http://localhost:11434/v1';
   }
 
-  private getModelName(): string {
-    return process.env.QWEN_LOCAL_MODEL || 'qwen2.5';
+  public getModelName(): string {
+    const envModel =
+      process.env.QWEN_MODEL ||
+      process.env.QWEN_LOCAL_MODEL ||
+      process.env.LOCAL_LLM_MODEL;
+
+    if (envModel && envModel.trim()) {
+      return envModel.trim();
+    }
+
+    // Default fallback if no env variable is specified
+    return 'qwen3:8b';
   }
 
+  /**
+   * Pings the local LLM server (Ollama / LM Studio) and verifies backend availability
+   */
   public async isAvailable(): Promise<boolean> {
     const baseUrl = this.getBaseUrl();
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 1500);
-      const res = await fetch(`${baseUrl.replace(/\/v1\/?$/, '')}/v1/models`, {
+      const timeoutId = setTimeout(() => controller.abort(), 2000);
+      
+      // Ping OpenAI-compatible models endpoint or Ollama tags endpoint
+      const rawBase = baseUrl.replace(/\/v1\/?$/, '');
+      const modelsRes = await fetch(`${rawBase}/v1/models`, {
         signal: controller.signal,
       }).catch(() => null);
+
       clearTimeout(timeoutId);
-      return Boolean(res && res.ok);
+
+      if (modelsRes && modelsRes.ok) {
+        return true;
+      }
+
+      // Secondary check: ping Ollama native /api/tags
+      const tagsRes = await fetch(`${rawBase}/api/tags`, {
+        signal: controller.signal,
+      }).catch(() => null);
+
+      return Boolean(tagsRes && tagsRes.ok);
     } catch {
       return false;
     }
@@ -35,11 +62,12 @@ export class QwenLocalProvider implements IGMProvider {
     onChunk: (text: string) => void
   ): Promise<void> {
     const baseUrl = this.getBaseUrl();
-    const model = this.getModelName();
+    const model = params.model || this.getModelName();
 
     const openai = new OpenAI({
       baseURL: baseUrl,
-      apiKey: 'local-qwen-key', // Local servers like Ollama/LMStudio accept dummy key
+      apiKey: 'local-qwen-key', // Local servers accept dummy key
+      dangerouslyAllowBrowser: true,
     });
 
     try {
@@ -69,6 +97,11 @@ export class QwenLocalProvider implements IGMProvider {
         throw err;
       }
       const msg = err?.message || String(err);
+      if (msg.includes('404') || msg.includes('not found')) {
+        const error = new Error(`Qwen Local Error: 404 modelo '${model}' no encontrado en el servidor local LLM (${baseUrl}). Configura QWEN_MODEL en .env con un modelo instalado.`);
+        (error as any).code = 'QWEN_MODEL_NOT_FOUND';
+        throw error;
+      }
       const error = new Error(`Qwen Local Error: ${msg}`);
       (error as any).code = err?.code || 'QWEN_LOCAL_FAILED';
       throw error;

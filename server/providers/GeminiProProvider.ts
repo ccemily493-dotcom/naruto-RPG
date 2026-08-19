@@ -7,7 +7,7 @@ export class GeminiProProvider implements IGMProvider {
   public isFree = true;
   public isLocal = false;
 
-  private getApiKey(params?: GMGenerateParams): string | null {
+  public getApiKey(params?: GMGenerateParams): string | null {
     const key =
       params?.apiKey ||
       process.env.GEMINI_API_KEY ||
@@ -16,6 +16,10 @@ export class GeminiProProvider implements IGMProvider {
       return null;
     }
     return key.trim();
+  }
+
+  public getModelName(params?: GMGenerateParams): string {
+    return params?.model || process.env.GEMINI_PRO_MODEL || 'gemini-1.5-pro';
   }
 
   public async isAvailable(params?: GMGenerateParams): Promise<boolean> {
@@ -28,10 +32,10 @@ export class GeminiProProvider implements IGMProvider {
   ): Promise<void> {
     const apiKey = this.getApiKey(params);
     if (!apiKey) {
-      throw new Error('GEMINI_PRO_UNAVAILABLE: No Gemini API Key configured in env or request.');
+      throw new Error('GEMINI_PRO_UNAVAILABLE: Configuración incompleta. Falta GEMINI_API_KEY en archivo .env.');
     }
 
-    const modelName = params.model || process.env.GEMINI_PRO_MODEL || 'gemini-1.5-pro';
+    const modelName = this.getModelName(params);
 
     try {
       const ai = new GoogleGenAI({ apiKey });
@@ -61,7 +65,6 @@ export class GeminiProProvider implements IGMProvider {
       if (isRecoverableFailoverError(err)) {
         throw err;
       }
-      // Wrap in recoverable error if status/msg indicates quota or rate limit
       const msg = err?.message || String(err);
       if (msg.includes('429') || msg.includes('quota') || msg.includes('RESOURCE_EXHAUSTED')) {
         const error = new Error(`Gemini Pro Quota/Rate Limit Exhausted: ${msg}`);

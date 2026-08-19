@@ -69,6 +69,42 @@ export class GMProviderRouter {
   }
 
   /**
+   * Logs provider availability status at server startup without exposing secrets
+   */
+  public async logStartupStatus(): Promise<void> {
+    console.log('==================================================');
+    console.log('🤖 GAME MASTER PROVIDER STATUS AT STARTUP:');
+
+    for (const p of this.providers) {
+      const avail = await p.isAvailable().catch(() => false);
+      const statusText = avail ? '✅ DISPONIBLE' : '❌ NO DISPONIBLE';
+      let details = '';
+
+      if (p.id === 'gemini-pro') {
+        const proProv = p as GeminiProProvider;
+        const hasKey = Boolean(proProv.getApiKey());
+        details = hasKey
+          ? `(Modelo: ${proProv.getModelName()})`
+          : '(Falta GEMINI_API_KEY en .env)';
+      } else if (p.id === 'gemini-flash') {
+        const flashProv = p as GeminiFlashProvider;
+        const hasKey = Boolean(flashProv.getApiKey());
+        details = hasKey
+          ? `(Modelo: ${flashProv.getModelName()})`
+          : '(Falta GEMINI_API_KEY en .env)';
+      } else if (p.id === 'qwen-local') {
+        const qwenProv = p as QwenLocalProvider;
+        details = `(URL: ${qwenProv.getBaseUrl()} / Modelo: ${qwenProv.getModelName()})`;
+      }
+
+      console.log(`- ${p.name.padEnd(14)}: ${statusText} ${details}`);
+    }
+
+    console.log(`- Modo Gratuito  : FREE_ONLY_MODE=${this.isFreeOnlyMode()}`);
+    console.log('==================================================');
+  }
+
+  /**
    * Main Router Generator (Per-Request Recovery Chain):
    * ALWAYS starts by trying Gemini Pro on every new request.
    * Order: Gemini Pro -> Gemini Flash -> Qwen Local -> Offline
@@ -112,7 +148,7 @@ export class GMProviderRouter {
       if (!available) {
         errorsEncountered.push({
           provider: provider.name,
-          error: `${provider.name} unavailable (API Key or endpoint missing)`,
+          error: `${provider.name} no disponible (Falta API Key o endpoint/modelo no encontrado)`,
         });
         fallbackReason = `${provider.name} no disponible`;
         continue;

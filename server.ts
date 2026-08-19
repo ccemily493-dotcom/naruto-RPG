@@ -982,6 +982,7 @@ function serveStatic() {
 setupFrontend().then(() => {
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`Naruto RPG server running on http://0.0.0.0:${PORT}`);
+    gmRouter.logStartupStatus().catch(() => {});
   });
 });
 
