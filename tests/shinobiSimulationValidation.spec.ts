@@ -15,7 +15,7 @@ describe('Validation Phase — 12 Critical Scenarios Suite', () => {
     });
 
     expect(res.success).toBe(true);
-    expect(res.chakraSpent).toBe(22);
+    expect(res.chakraSpent).toBe(32);
     expect(res.failures.length).toBe(0);
   });
 

@@ -557,6 +557,9 @@ export interface TechniqueDefinition {
   maintenanceCostPerTurn?: number | UNSET_VALUE;
   knownByRin: boolean;
   requirements: string[];
+  isExecutableJutsu?: boolean;
+  effectiveRangeMeters?: number;
+  maxRangeMeters?: number;
 }
 
 export interface QuantifiedShinobiStats {

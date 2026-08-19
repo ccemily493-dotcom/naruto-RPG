@@ -3,10 +3,11 @@ import { TechniqueDefinition } from '../../src/types';
 /**
  * MASTER TECHNIQUE REGISTRY FOR RIN KAGEHIRA
  * Pre-populated with the exact Master Technique Table (46 techniques).
+ * Generic capabilities are explicitly marked with `isExecutableJutsu: false`.
  * Values marked as UNSET in the official prompt remain strictly `undefined`.
  */
 export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
-  // 1. KEKKEI GENKAI & PERCEPTION (CAPABILITIES / SPELLS)
+  // 1. KEKKEI GENKAI & PERCEPTION (GENERIC CAPABILITIES / MODIFIERS)
   {
     id: 'yurei_no_keimyaku',
     name: 'Yūrei no Keimyaku',
@@ -19,6 +20,7 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 10,
     executionTimeSeconds: 1.0,
     knownByRin: true,
+    isExecutableJutsu: false, // Generic capability
     requirements: ['Yūrei no Keimyaku linaje'],
   },
   {
@@ -27,13 +29,14 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     category: 'Percepción',
     mastery: 'MASTERED',
     chakraCostBase: 8,
-    basePower: undefined, // UNSET power for non-offensive perception
+    basePower: undefined, // UNSET
     complexityMultiplier: 1.2,
     powerMultiplier: 1.0,
     maxSafePower: undefined,
     executionTimeSeconds: 0.5,
     maintenanceCostPerTurn: 2,
     knownByRin: true,
+    isExecutableJutsu: false, // Generic capability
     requirements: ['Yūrei no Keimyaku'],
   },
   {
@@ -42,13 +45,14 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     category: 'Percepción',
     mastery: 'CONFIRMED',
     chakraCostBase: 15,
-    basePower: undefined,
+    basePower: undefined, // UNSET
     complexityMultiplier: 1.35,
     powerMultiplier: 1.0,
     maxSafePower: undefined,
     executionTimeSeconds: 1.5,
     maintenanceCostPerTurn: 4,
     knownByRin: true,
+    isExecutableJutsu: false, // Generic capability
     requirements: ['Tercer Ojo'],
   },
   {
@@ -57,12 +61,13 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     category: 'Percepción',
     mastery: 'CONFIRMED',
     chakraCostBase: 12,
-    basePower: undefined,
+    basePower: undefined, // UNSET
     complexityMultiplier: 1.3,
     powerMultiplier: 1.0,
     maxSafePower: undefined,
     executionTimeSeconds: 1.0,
     knownByRin: true,
+    isExecutableJutsu: false, // Generic capability
     requirements: ['Red perceptiva'],
   },
   {
@@ -71,17 +76,18 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     category: 'Percepción',
     mastery: 'CONFIRMED',
     chakraCostBase: 15,
-    basePower: undefined,
+    basePower: undefined, // UNSET
     complexityMultiplier: 1.35,
     powerMultiplier: 1.0,
     maxSafePower: undefined,
     executionTimeSeconds: 1.0,
     maintenanceCostPerTurn: 3,
     knownByRin: true,
+    isExecutableJutsu: false, // Generic capability
     requirements: ['Control de chakra'],
   },
 
-  // 2. DŌJUTSU & GENJUTSU
+  // 2. DŌJUTSU & GENJUTSU (EXECUTABLE COMBAT JUTSUS)
   {
     id: 'mirada_paralizante',
     name: 'Mirada Paralizante',
@@ -94,6 +100,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 45,
     executionTimeSeconds: 0.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 25,
     requirements: ['Tercer Ojo'],
   },
   {
@@ -108,6 +117,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 60,
     executionTimeSeconds: 1.0,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 30,
     requirements: ['Anclaje perceptivo'],
   },
   {
@@ -122,6 +134,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 80,
     executionTimeSeconds: 2.0,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 20,
+    maxRangeMeters: 35,
     requirements: ['Anclaje perceptivo avanzado'],
   },
   {
@@ -136,6 +151,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 85,
     executionTimeSeconds: 1.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 25,
     requirements: ['Kali Mudra'],
   },
   {
@@ -150,6 +168,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 90,
     executionTimeSeconds: 2.0,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 25,
     requirements: ['Intōn de Información'],
   },
   {
@@ -164,6 +185,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 95,
     executionTimeSeconds: 2.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 25,
     requirements: ['Muerte Súbita'],
   },
   {
@@ -178,6 +202,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 90,
     executionTimeSeconds: 3.0,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 25,
     requirements: ['Anclaje perceptivo', 'Yin avanzado'],
   },
   {
@@ -192,6 +219,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 100,
     executionTimeSeconds: 3.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 25,
     requirements: ['Loop Temporal Simple'],
   },
   {
@@ -206,6 +236,7 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: undefined,
     executionTimeSeconds: 4.0,
     knownByRin: true,
+    isExecutableJutsu: true,
     requirements: ['Modo Yin', 'Kuishōmoden'],
   },
 
@@ -222,6 +253,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 70,
     executionTimeSeconds: 0.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 30,
     requirements: ['Resonancia vocal'],
   },
   {
@@ -236,6 +270,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 85,
     executionTimeSeconds: 0.8,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 30,
     requirements: ['Discurso Maldito'],
   },
 
@@ -253,6 +290,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     executionTimeSeconds: 1.0,
     maintenanceCostPerTurn: 5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 20,
+    maxRangeMeters: 40,
     requirements: ['Mokuton básico'],
   },
   {
@@ -267,6 +307,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 50,
     executionTimeSeconds: 1.0,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 30,
     requirements: ['Mokuton básico'],
   },
   {
@@ -281,6 +324,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 65,
     executionTimeSeconds: 1.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 10,
+    maxRangeMeters: 20,
     requirements: ['Raíces'],
   },
   {
@@ -296,6 +342,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     executionTimeSeconds: 0.8,
     maintenanceCostPerTurn: 3,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 0,
+    maxRangeMeters: 0,
     requirements: ['Barrera de madera'],
   },
   {
@@ -310,6 +359,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 70,
     executionTimeSeconds: 1.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 25,
     requirements: ['Raíces'],
   },
   {
@@ -324,6 +376,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 85,
     executionTimeSeconds: 2.0,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 20,
+    maxRangeMeters: 35,
     requirements: ['Raíces', 'Chakra infundido'],
   },
   {
@@ -338,6 +393,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 65,
     executionTimeSeconds: 2.0,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 25,
     requirements: ['Suiton', 'Mokuton'],
   },
   {
@@ -353,6 +411,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     executionTimeSeconds: 4.0,
     maintenanceCostPerTurn: 15,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 40,
+    maxRangeMeters: 60,
     requirements: ['Raíces avanzadas', 'Intōn'],
   },
   {
@@ -367,6 +428,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 80,
     executionTimeSeconds: 2.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 25,
     requirements: ['Barrera de madera', 'Serpientes Cazadoras'],
   },
 
@@ -383,6 +447,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 95,
     executionTimeSeconds: 3.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 25,
     requirements: ['Ataúd de madera', 'Genjutsu perceptivo'],
   },
   {
@@ -397,6 +464,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 110,
     executionTimeSeconds: 4.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 25,
     requirements: ['Ataúd de la Muerte — Velo'],
   },
   {
@@ -411,6 +481,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 120,
     executionTimeSeconds: 5.0,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 25,
     requirements: ['Ataúd de la Muerte — Último Dios'],
   },
 
@@ -421,12 +494,13 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     category: 'Yin',
     mastery: 'CONFIRMED',
     chakraCostBase: 15,
-    basePower: undefined,
+    basePower: undefined, // UNSET
     complexityMultiplier: 1.4,
     powerMultiplier: 1.0,
     maxSafePower: undefined,
     executionTimeSeconds: 1.0,
     knownByRin: true,
+    isExecutableJutsu: false, // Generic capability
     requirements: ['Yūrei no Keimyaku'],
   },
   {
@@ -435,12 +509,13 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     category: 'Yin',
     mastery: 'CONFIRMED',
     chakraCostBase: 25,
-    basePower: undefined,
+    basePower: undefined, // UNSET
     complexityMultiplier: 1.55,
     powerMultiplier: 1.0,
     maxSafePower: undefined,
     executionTimeSeconds: 1.5,
     knownByRin: true,
+    isExecutableJutsu: false, // Generic capability
     requirements: ['Intōn de Información'],
   },
   {
@@ -449,12 +524,13 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     category: 'Yin/Yang',
     mastery: 'USED',
     chakraCostBase: 50,
-    basePower: undefined,
+    basePower: undefined, // UNSET
     complexityMultiplier: 1.9,
     powerMultiplier: 1.0,
     maxSafePower: undefined,
     executionTimeSeconds: 4.0,
     knownByRin: true,
+    isExecutableJutsu: false, // Generic capability
     requirements: ['Kuishōmoden', 'Yin/Yang'],
   },
   {
@@ -469,6 +545,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 90,
     executionTimeSeconds: 2.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 10,
+    maxRangeMeters: 20,
     requirements: ['Raíces', 'Pergamino de Orochimaru'],
   },
   {
@@ -483,6 +562,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 60,
     executionTimeSeconds: 2.0,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 10,
+    maxRangeMeters: 20,
     requirements: ['Mokuton/Intōn: Putrefacción'],
   },
   {
@@ -497,6 +579,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 50,
     executionTimeSeconds: 2.0,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 5,
+    maxRangeMeters: 10,
     requirements: ['Estilo Vitalidad'],
   },
 
@@ -513,6 +598,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 95,
     executionTimeSeconds: 1.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 5,
+    maxRangeMeters: 15,
     requirements: ['Raiton', 'Velocidad de carga'],
   },
   {
@@ -527,6 +615,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 70,
     executionTimeSeconds: 1.0,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 8,
+    maxRangeMeters: 15,
     requirements: ['Chidori', 'Mokubunshin'],
   },
   {
@@ -541,6 +632,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 75,
     executionTimeSeconds: 1.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 10,
+    maxRangeMeters: 20,
     requirements: ['Control de chakra'],
   },
   {
@@ -555,6 +649,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 100,
     executionTimeSeconds: 2.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 15,
+    maxRangeMeters: 25,
     requirements: ['Espiral Maldita'],
   },
   {
@@ -569,6 +666,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 65,
     executionTimeSeconds: 0.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 25,
+    maxRangeMeters: 40,
     requirements: ['Desplazamiento'],
   },
   {
@@ -583,6 +683,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 85,
     executionTimeSeconds: 0.8,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 20,
+    maxRangeMeters: 35,
     requirements: ['Tamushaki'],
   },
 
@@ -600,6 +703,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     executionTimeSeconds: 1.0,
     maintenanceCostPerTurn: 5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 10,
+    maxRangeMeters: 15,
     requirements: ['Dominio Simple'],
   },
   {
@@ -615,6 +721,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     executionTimeSeconds: 1.5,
     maintenanceCostPerTurn: 8,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 8,
+    maxRangeMeters: 12,
     requirements: ['Dominio Simple: Percepción'],
   },
 
@@ -624,13 +733,16 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     name: 'Garras de Mantis',
     category: 'Taijutsu',
     mastery: 'MASTERED',
-    chakraCostBase: 5, // Range 0-5
+    chakraCostBase: 5,
     basePower: 35,
     complexityMultiplier: 1.2,
     powerMultiplier: 1.2,
     maxSafePower: 50,
     executionTimeSeconds: 0.3,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 2,
+    maxRangeMeters: 3,
     requirements: ['Estilo Mantis'],
   },
   {
@@ -645,6 +757,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 60,
     executionTimeSeconds: 0.4,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 2,
+    maxRangeMeters: 3,
     requirements: ['Garras de Mantis'],
   },
   {
@@ -659,6 +774,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: 90,
     executionTimeSeconds: 1.5,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 3,
+    maxRangeMeters: 5,
     requirements: ['Invocación de Kali'],
   },
   {
@@ -673,6 +791,9 @@ export const RIN_MASTER_TECHNIQUES: TechniqueDefinition[] = [
     maxSafePower: undefined,
     executionTimeSeconds: 2.0,
     knownByRin: true,
+    isExecutableJutsu: true,
+    effectiveRangeMeters: 10,
+    maxRangeMeters: 20,
     requirements: ['Contrato de Kali'],
   },
 ];

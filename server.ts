@@ -780,6 +780,7 @@ const globalActionQueue = new ActionQueueManager();
 app.get('/api/jutsus', (req: Request, res: Response): void => {
   try {
     const category = req.query.category as string | undefined;
+    const type = req.query.type as string | undefined;
     const filter = req.query.filter as string | undefined;
 
     let list = RIN_MASTER_TECHNIQUES;
@@ -787,9 +788,11 @@ app.get('/api/jutsus', (req: Request, res: Response): void => {
       list = getTechniquesByCategory(category);
     }
 
-    if (filter === 'combat_only') {
-      // Exclude generic non-combat capabilities
-      list = list.filter((t) => t.category !== 'Kekkei Genkai' && t.category !== 'Percepción');
+    if (type === 'capacidades' || filter === 'capacidades') {
+      list = list.filter((t) => t.isExecutableJutsu === false);
+    } else {
+      // Default: Executable combat jutsus only
+      list = list.filter((t) => t.isExecutableJutsu !== false);
     }
 
     res.json({ success: true, count: list.length, jutsus: list });
@@ -806,7 +809,16 @@ app.get('/api/jutsus/:id', (req: Request, res: Response): void => {
       res.status(404).json({ error: 'Técnica no encontrada o no registrada' });
       return;
     }
-    res.json({ success: true, jutsu, initialChakraState: INITIAL_RIN_CHAKRA_STATE });
+
+    const formattedJutsu = {
+      ...jutsu,
+      chakraCostFormatted: jutsu.chakraCostBase === undefined ? 'UNSET (No cuantificado)' : jutsu.chakraCostBase,
+      basePowerFormatted: jutsu.basePower === undefined ? 'UNSET (No cuantificado)' : jutsu.basePower,
+      maxSafePowerFormatted: jutsu.maxSafePower === undefined ? 'UNSET (No cuantificado)' : jutsu.maxSafePower,
+      maintenanceFormatted: jutsu.maintenanceCostPerTurn === undefined ? 'UNSET (No requiere mantenimiento)' : jutsu.maintenanceCostPerTurn,
+    };
+
+    res.json({ success: true, jutsu: formattedJutsu, initialChakraState: INITIAL_RIN_CHAKRA_STATE });
   } catch (err: any) {
     res.status(500).json({ error: err.message || 'Error al obtener información del jutsu' });
   }

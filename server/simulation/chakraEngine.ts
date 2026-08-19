@@ -56,20 +56,24 @@ export const INITIAL_RIN_CHAKRA_STATE: ChakraState = {
 };
 
 /**
- * Calculates final cost of a technique based on real state variables
+ * Calculates final cost of a technique based on real state variables.
+ * Enforces maximum control discount of 25% (control / 400).
  */
 export function calculateCost(params: ChakraCostParams): number {
   if (params.baseCost === undefined) {
     return 0; // UNSET base cost defaults to 0 extra
   }
 
-  const controlBonus = params.chakraControl / 100;
-  const fatiguePenalty = params.fatigueLevel * 0.2;
-  const injuryPenalty = params.injuriesPenalty * 0.3;
+  // Max 25% discount for control (control = 100 -> 0.25 discount; Rin control = 88 -> 0.22 discount)
+  const controlDiscount = Math.min(0.25, params.chakraControl / 400);
+  const fatiguePenalty = params.fatigueLevel * 0.25;
+  const injuryPenalty = params.injuriesPenalty * 0.35;
 
   const rawCost =
-    (params.baseCost * params.powerMultiplier * params.complexityMultiplier) /
-    (1 + controlBonus);
+    params.baseCost *
+    (1 - controlDiscount) *
+    params.powerMultiplier *
+    params.complexityMultiplier;
 
   const finalCost = Math.max(1, Math.round(rawCost + fatiguePenalty + injuryPenalty));
   return finalCost;

@@ -48,7 +48,16 @@ export function convertResource(
 
   // Cap conversion to safe limit to prevent infinite loops
   const amountToConvert = Math.min(params.amount, params.maxSafeConversion);
-  const efficiency = Math.max(0.1, Math.min(0.9, params.efficiency)); // Max 90% efficiency
+  
+  // Biological conversions (vitality/health/bioEnergy) have a maximum efficiency of 75% (minimum 25% loss)
+  const isBiological =
+    params.sourceType === 'vitality' ||
+    params.sourceType === 'bioEnergy' ||
+    params.destinationType === 'vitality' ||
+    params.destinationType === 'health';
+
+  const maxEfficiencyAllowed = isBiological ? 0.75 : 0.85;
+  const efficiency = Math.max(0.1, Math.min(maxEfficiencyAllowed, params.efficiency));
 
   const actualReceived = Math.round(amountToConvert * efficiency);
   const loss = amountToConvert - actualReceived;

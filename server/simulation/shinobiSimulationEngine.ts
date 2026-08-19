@@ -214,14 +214,28 @@ export function executeTechniqueSimulation(params: ExecuteTechniqueParams): Simu
 
   const targetReaction = params.targetEnemy ? params.targetEnemy.reaction : 50;
   const targetCover = combat.coverLevel;
+  const isMovementTechnique =
+    technique.id === 'tamushaki' || technique.id === 'tamushaki_inverso' || technique.id === 'raices';
 
-  if (technique.mastery === 'EXPERIMENTAL' && intensity === 'OVERLOAD') {
+  const attemptedPower = technique.basePower ? technique.basePower * intensityPowerMultiplier : undefined;
+  const isOverloadedExceedingSafe =
+    attemptedPower !== undefined &&
+    technique.maxSafePower !== undefined &&
+    attemptedPower > technique.maxSafePower;
+
+  // 1. Check Range Limit
+  if (!isMovementTechnique && technique.maxRangeMeters !== undefined && combat.distanceMeters > technique.maxRangeMeters) {
+    success = false;
+    degree = 'COUNTERED';
+    failures.push('OUT_OF_RANGE_OBJETIVO_FUERA_DE_ALCANCE');
+  } else if (isOverloadedExceedingSafe || (technique.mastery === 'EXPERIMENTAL' && intensity === 'OVERLOAD')) {
+    // Exceeding maxSafePower triggers mandatory instability/backlash regardless of high chakraControl!
     success = false;
     degree = scoreDiff >= 10 ? 'UNSTABLE_SUCCESS' : 'BACKLASH';
-    executionQuality = 40;
-    failures.push('INESTABILIDAD_POR_TECNICA_EXPERIMENTAL_Y_SOBRECARGA');
-  } else if (params.targetEnemy && targetReaction > 85 && targetCover > 50 && scoreDiff < 25) {
-    // Enemy high defense/cover counters or evades despite high execution!
+    executionQuality = Math.min( executionQuality, 40 );
+    failures.push('SOBRECARGA_EXCEDE_CAPACIDAD_SEGURA_RIESGO_BACKLASH');
+  } else if (params.targetEnemy && targetReaction >= 90 && targetCover >= 60 && scoreDiff < 35) {
+    // High boss-level reaction (>=90) and high cover (>=60) counters/evades unless Rin has overwhelming scoreDiff >= 35!
     success = false;
     degree = 'COUNTERED';
     failures.push('ENEMIGO_EVADIO_O_CONTRARRESTO_GRACIAS_A_COBERTURA_Y_REACCION');
@@ -247,8 +261,13 @@ export function executeTechniqueSimulation(params: ExecuteTechniqueParams): Simu
 
   let backlashText: string | undefined = undefined;
   if (degree === 'BACKLASH') {
-    backlashText = `Retroalimentación negativa por sobrecarga de chakra en ${technique.name}. Rin sufre 15 pts de fatiga y distorsión leve de chakra.`;
+    backlashText = `Retroalimentación negativa por sobrecarga de chakra en ${technique.name}. Rin sufre fatiga y distorsión de chakra.`;
   }
+
+  // Cumulative Fatigue Formula: fatigueDelta = Math.round(finalCost / 8) + Math.round(complexity * 2)
+  const calculatedFatigueDelta = Math.round(finalCost / 8) + Math.round(technique.complexityMultiplier * 2);
+
+  const newDistance = isMovementTechnique ? Math.max(0, combat.distanceMeters - 20) : combat.distanceMeters;
 
   const breakdown = {
     skillScore,
@@ -271,11 +290,12 @@ export function executeTechniqueSimulation(params: ExecuteTechniqueParams): Simu
     degree,
     executionQuality,
     chakraSpent: consumeResult.actualPaid,
-    staminaSpent: Math.round(finalCost * 0.1),
-    vitalityChange: degree === 'BACKLASH' ? -10 : 0,
-    healthChange: degree === 'BACKLASH' ? -10 : 0,
+    staminaSpent: Math.round(finalCost * 0.15),
+    vitalityChange: degree === 'BACKLASH' ? -15 : 0,
+    healthChange: degree === 'BACKLASH' ? -15 : 0,
     stateChanges: {
-      fatigueDelta: degree === 'BACKLASH' ? 15 : Math.round(finalCost * 0.05),
+      fatigueDelta: degree === 'BACKLASH' ? calculatedFatigueDelta + 15 : calculatedFatigueDelta,
+      newDistanceMeters: newDistance,
     },
     triggeredEffects: success ? [`EFECTO_ACTIVO_${technique.id.toUpperCase()}`] : [],
     failures,
